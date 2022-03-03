@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-03-2022 a las 15:54:45
+-- Tiempo de generación: 03-03-2022 a las 16:46:46
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.24
 
@@ -33,6 +33,14 @@ CREATE TABLE `tbl_etiquetas` (
   `fk_lugar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `tbl_etiquetas`
+--
+
+INSERT INTO `tbl_etiquetas` (`id`, `nombre`, `fk_lugar`) VALUES
+(1, 'feo', 5),
+(2, 'estruendoso', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -41,10 +49,17 @@ CREATE TABLE `tbl_etiquetas` (
 
 CREATE TABLE `tbl_etiqueta_usuario` (
   `id` int(11) NOT NULL,
-  `fav` enum('si','no') NOT NULL,
   `fk_usuario` int(11) NOT NULL,
   `fk_etiqueta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tbl_etiqueta_usuario`
+--
+
+INSERT INTO `tbl_etiqueta_usuario` (`id`, `fk_usuario`, `fk_etiqueta`) VALUES
+(1, 2, 2),
+(2, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -92,8 +107,19 @@ CREATE TABLE `tbl_lugares` (
   `nombre` varchar(30) NOT NULL,
   `longitud` decimal(10,8) NOT NULL,
   `latitud` decimal(10,8) NOT NULL,
-  `foto` varchar(100) NOT NULL
+  `foto` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tbl_lugares`
+--
+
+INSERT INTO `tbl_lugares` (`id`, `nombre`, `longitud`, `latitud`, `foto`) VALUES
+(1, 'hotel W', '41.37359770', '2.18727150', NULL),
+(2, 'Restaurante Barceloneta', '41.37618790', '2.18315070', NULL),
+(3, 'Museo historia', '41.37850650', '2.18594020', NULL),
+(4, 'Bar leo', '41.38056230', '2.18807750', NULL),
+(5, 'Sant Miquel', '41.37581250', '2.19030910', NULL);
 
 -- --------------------------------------------------------
 
@@ -122,6 +148,35 @@ CREATE TABLE `tbl_users` (
   `pwd` varchar(50) NOT NULL,
   `tipo_usu` enum('administrador','usuario') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tbl_users`
+--
+
+INSERT INTO `tbl_users` (`id`, `nombre`, `email`, `pwd`, `tipo_usu`) VALUES
+(1, 'raul', 'raul@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'administrador'),
+(2, 'user1', 'user1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'usuario'),
+(3, 'user2', 'user2@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'usuario');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_usuario_lugar_favoritos`
+--
+
+CREATE TABLE `tbl_usuario_lugar_favoritos` (
+  `id` int(11) NOT NULL,
+  `fk_usuario` int(11) NOT NULL,
+  `fk_lugar` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tbl_usuario_lugar_favoritos`
+--
+
+INSERT INTO `tbl_usuario_lugar_favoritos` (`id`, `fk_usuario`, `fk_lugar`) VALUES
+(1, 2, 4),
+(2, 2, 3);
 
 --
 -- Índices para tablas volcadas
@@ -183,6 +238,14 @@ ALTER TABLE `tbl_users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tbl_usuario_lugar_favoritos`
+--
+ALTER TABLE `tbl_usuario_lugar_favoritos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_favorito_fk` (`fk_usuario`),
+  ADD KEY `lugar_favorito_fk` (`fk_lugar`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -190,13 +253,13 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT de la tabla `tbl_etiquetas`
 --
 ALTER TABLE `tbl_etiquetas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_etiqueta_usuario`
 --
 ALTER TABLE `tbl_etiqueta_usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_gincana`
@@ -220,7 +283,7 @@ ALTER TABLE `tbl_grupo_usuario`
 -- AUTO_INCREMENT de la tabla `tbl_lugares`
 --
 ALTER TABLE `tbl_lugares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_punto_control`
@@ -232,7 +295,13 @@ ALTER TABLE `tbl_punto_control`
 -- AUTO_INCREMENT de la tabla `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_usuario_lugar_favoritos`
+--
+ALTER TABLE `tbl_usuario_lugar_favoritos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -270,6 +339,13 @@ ALTER TABLE `tbl_grupo_usuario`
 ALTER TABLE `tbl_punto_control`
   ADD CONSTRAINT `punto_control_gincana_fk` FOREIGN KEY (`fk_gincana`) REFERENCES `tbl_gincana` (`id`),
   ADD CONSTRAINT `punto_control_lugar_fk` FOREIGN KEY (`fk_lugar`) REFERENCES `tbl_lugares` (`id`);
+
+--
+-- Filtros para la tabla `tbl_usuario_lugar_favoritos`
+--
+ALTER TABLE `tbl_usuario_lugar_favoritos`
+  ADD CONSTRAINT `lugar_favorito_fk` FOREIGN KEY (`fk_lugar`) REFERENCES `tbl_lugares` (`id`),
+  ADD CONSTRAINT `usuario_favorito_fk` FOREIGN KEY (`fk_usuario`) REFERENCES `tbl_users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
