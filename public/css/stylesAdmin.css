@@ -1,0 +1,107 @@
+* {
+    margin: 0%;
+    font-family: 'Open Sans', sans-serif;
+    color: #333333;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #666666;
+}
+
+.admin-logout {
+    position: absolute;
+    top: 4vh;
+    right: 5vh;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.admin-logo {
+    position: absolute;
+    top: 1vh;
+    left: 2vh;
+    cursor: pointer;
+}
+
+.admin-cpanel {
+    position: absolute;
+    top: 5vh;
+    left: 20vh;
+}
+
+.admin-cpanel h3 {
+    color: white;
+    font-weight: bold;
+}
+
+.admin-logo img {
+    width: 18vh;
+    height: 13vh;
+    margin: 0%;
+}
+
+.admin-menu-top {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 15%;
+    background-color: #333333;
+}
+
+.admin-boton-administrar-users {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+}
+
+.admin-boton-administrar-mapas {
+    position: absolute;
+    top: 40%;
+    left: 45%;
+}
+
+.admin-boton-administrar-gincanas {
+    position: absolute;
+    top: 40%;
+    left: 70%;
+}
+
+.admin-boton-administrar-users,
+.admin-boton-administrar-mapas,
+.admin-boton-administrar-gincanas {
+    margin: 0%;
+    transition: 0.3s;
+    cursor: pointer;
+    transform: scale(1.3);
+}
+
+.admin-boton-administrar-users:hover,
+.admin-boton-administrar-mapas:hover,
+.admin-boton-administrar-gincanas:hover {
+    transform: scale(1.4);
+    transition: 0.3s;
+}
+
+.admin-boton-administrar-img {
+    width: 100%;
+    height: 70%;
+}
+
+.admin-boton-administrar-img img {
+    width: 30vh;
+    height: 30vh;
+    border-radius: 3%;
+    border: 3px solid #333333;
+}
+
+.admin-boton-administrar-texto {
+    width: 100%;
+    height: 30%;
+    text-align: center;
+    margin-top: 4%;
+}

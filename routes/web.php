@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\lugarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/admin',[lugarController::class,'admin']);
+Route::get('/logout',[lugarController::class,'logout']);
+Route::get('/admin/usuarios',[lugarController::class,'adminUsuarios']);
+Route::get('/admin/mapas',[lugarController::class,'adminMapas']);
+Route::get('/admin/gincanas',[lugarController::class,'adminGincanas']);

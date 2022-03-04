@@ -1,0 +1,82 @@
+* {
+    margin: 0%;
+    font-family: 'Open Sans', sans-serif;
+    color: #333333;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #666666;
+}
+
+.admin-logout {
+    position: absolute;
+    top: 5vh;
+    right: 5vh;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.admin-logo {
+    position: absolute;
+    top: 1vh;
+    left: 2vh;
+    cursor: pointer;
+}
+
+.admin-cpanel {
+    position: absolute;
+    top: 5vh;
+    left: 20vh;
+}
+
+.admin-cpanel h3 {
+    color: white;
+    font-weight: bold;
+}
+
+.admin-logo img {
+    width: 18vh;
+    height: 13vh;
+    margin: 0%;
+}
+
+.admin-cpanel-crear {
+    position: absolute;
+    top: 5vh;
+    left: 60vh;
+}
+
+.admin-menu-top {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 15%;
+    background-color: #333333;
+}
+
+.admin-table {
+    float: left;
+    width: 90%;
+    margin-top: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.admin-table th,
+td {
+    text-align: center;
+}
+
+.admin-table th {
+    font-weight: bold;
+    font-size: 3vh;
+}
+
+.admin-table td {
+    color: white;
+}
