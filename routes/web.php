@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LugarController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Animal;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('index',[LugarController::class, 'index']);
+
+Route::post('login', [LugarController::class, 'login']);
+
+Route::get('logout', [LugarController::class, 'logout']);
+
+Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
+
+Route::get('adminUsuarios',[LugarController::class, 'adminUsuarios']);

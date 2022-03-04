@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lugar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LugarController extends Controller
 {
@@ -14,7 +15,7 @@ class LugarController extends Controller
      */
     public function index()
     {
-        //
+        return view('index');
     }
 
     /**
@@ -81,5 +82,34 @@ class LugarController extends Controller
     public function destroy(Lugar $lugar)
     {
         //
+    }
+
+    public function login(Request $request){
+        $datos= $request->except('_token','_method');
+        $user=DB::table("tbl_users")->select('*')->where('email', '=', $datos['correo_user'])->where('pwd', '=', $datos['pass_user'])->first();
+         if($user->tipo_usu=='administrador'){
+           $request->session()->put('nombre_admin',$request->correo_user);
+           return redirect('cPanelAdmin');
+        }if($user->tipo_usu=='usuario'){
+            $request->session()->put('nombre_user',$request->correo_user);
+            return redirect('');
+        }
+        return redirect(''); 
+    }
+
+    public function cPanelAdmin(){
+        return view('cPanelAdmin');
+    }
+
+    public function logout(Request $request){
+        $request->session()->forget('nombre_admin');
+        $request->session()->forget('nombre_user');
+        $request->session()->flush();
+        return redirect('index');
+    }
+
+    public function adminUsuarios(){
+        $users=DB::table('tbl_users')->select('*')->get();
+        return view('adminUsuarios', compact('users'));
     }
 }
