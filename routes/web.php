@@ -23,4 +23,10 @@ Route::get('logout', [LugarController::class, 'logout']);
 
 Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
 
-Route::get('adminUsuarios',[LugarController::class, 'adminUsuarios']);
+Route::post('adminUsuarios',[LugarController::class, 'adminUsuarios']);
+
+Route::get('adminUsuariosvista',[LugarController::class, 'adminUsuariosvista']);
+
+Route::put('modificar',[LugarController::class, 'modificar']);
+
+Route::delete('eliminar',[LugarController::class, 'eliminaraUser']);

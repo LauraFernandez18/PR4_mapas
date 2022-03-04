@@ -12,11 +12,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>adminUsuarios</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/code.js"></script>
+    <script src="js/code2.js"></script>
+    <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
 </head>
 <body>
-    <table>
-    <tr>
+    <p id="mensaje"></p>
+    <input type="text" onkeyup="leerJS()" id="filtro" placeholder="Filtrar por nombre">
+    <input type="hidden" name="adm" id="adm" value="<?php echo Session::get('nombre_admin');?>">
+    <table id="main">
+    {{-- <tr>
         <th>Nombre</th>
         <th>Email</th>
         <th>Tipo_usu</th>
@@ -25,37 +29,37 @@
     </tr>
     @foreach($users as $item)
             <tr>
+                <td>{{$item->nombre}}</td>
+                <td>{{$item->email}}</td>
+                <td>{{$item->tipo_usu}}</td>
+                <td><button onclick="modificar({{$item->id}},'{{$item->nombre}}','{{$item->email}}'); return false;">Modificar</button></td>
                 <?php
-                $id_s = Session::get('nombre_admin');
+                /* $id_s = Session::get('nombre_admin');
                 $id = "$item->email";
                 if($id_s == $id){
-                    echo "<td>$item->nombre</td>";
-                    echo "<td>$item->email</td>";
-                    echo "<td>$item->tipo_usu</td>";
-                    echo "<td><button id='myBtn'>Modificar</button></td>";
                     echo "<td><button><abbr title='No puedes eliminar tu propio usuario'><s>Eliminar</s></abbr></button></td>";
                 }else{
-                    echo "<td>$item->nombre</td>";
-                    echo "<td>$item->email</td>";
-                    echo "<td>$item->tipo_usu</td>";
-                    echo "<td><button onclick=''>Modificar</button></td>";
                     echo "<td><button onclick=''>Eliminar</button></td>";
-                }
+                } */
                 ?>
-                <!-- The Modal -->
                 <div id="myModal" class="modal">
-
-                <!-- Modal content -->
-                <div class="modal-content">
-                <span class="close">&times;</span>
-                <form>
-                    <input type="text" value="{{$item->nombre}}">
-                </form>
-                </div>
-
-                </div>
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <span id="cerrar" class="close">&times;</span>
+                      <p id="contenido"></p>
+                    </div>
+                  
+                  </div>
             </tr>
-    @endforeach
+    @endforeach --}}
     </table>
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span id="cerrar" class="close">&times;</span>
+          <p id="contenido"></p>
+        </div>
+      
+      </div>
 </body>
 </html>

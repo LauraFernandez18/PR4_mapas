@@ -86,7 +86,7 @@ class LugarController extends Controller
 
     public function login(Request $request){
         $datos= $request->except('_token','_method');
-        $user=DB::table("tbl_users")->select('*')->where('email', '=', $datos['correo_user'])->where('pwd', '=', $datos['pass_user'])->first();
+        $user=DB::table("tbl_users")->select('*')->where('email', '=', $datos['correo_user'])->where('pwd', '=', md5($datos['pass_user']))->first();
          if($user->tipo_usu=='administrador'){
            $request->session()->put('nombre_admin',$request->correo_user);
            return redirect('cPanelAdmin');
@@ -108,8 +108,55 @@ class LugarController extends Controller
         return redirect('index');
     }
 
-    public function adminUsuarios(){
-        $users=DB::table('tbl_users')->select('*')->get();
-        return view('adminUsuarios', compact('users'));
+    public function adminUsuariosvista(){
+        $datos=DB::select('select * from tbl_users');
+        return view('adminUsuarios');
+    }
+
+    public function adminUsuarios(Request $request){
+        $datos=DB::select('select * from tbl_users where nombre like ?',['%'.$request->input('filtro').'%']);
+        return response()->json($datos);
+    }
+
+    public function modificar(Request $request){
+        try {
+            $id=$request->input('id');
+            $nombre=$request->input('nombre');
+            $email=$request->input('email');
+            $pwd=$request->input('pwd');
+            $pwd_n=$request->input('pwd_n');
+            $pwd_e = DB::table('tbl_users')->select('pwd')->where('id','=',$id)->first();
+            /* $pwdd = md5($pwd);
+            return $pwdd."    ".$pwd_e->pwd; */
+             if($pwd == ""){
+                DB::table('tbl_users')
+                ->where('id', $id)
+                ->update(['nombre' => $nombre,'email' => $email]);
+                return response()->json(array('resultado'=> 'OK')); 
+            }else{
+                if(md5($pwd) == $pwd_e->pwd){
+                    DB::table('tbl_users')
+                    ->where('id', $id)
+                    ->update(['nombre' => $nombre,'email' => $email,'pwd'=>md5($pwd_n)]);
+                    return response()->json(array('resultado'=> 'OK'));
+                }else{
+                    DB::table('tbl_users')
+                    ->where('id', $id)
+                    ->update(['nombre' => $nombre,'email' => $email]);
+                    return response()->json(array('resultado'=> 'Contraseña no actualizada'));
+                }  
+            }           
+        } catch (\Throwable $th) {
+            return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
+        }
+    }
+
+    public function eliminaraUser(Request $request){
+        try {
+            DB::delete('delete from tbl_users where id = ?',[$request->input('id')]);
+            return response()->json(array('resultado'=> 'OK'));            
+        } catch (\Throwable $th) {
+            return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
+        }
     }
 }

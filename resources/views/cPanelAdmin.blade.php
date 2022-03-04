@@ -22,7 +22,7 @@
         </form>
     </div>
     <div>
-        <form action="{{url('adminUsuarios')}}" method="GET">
+        <form action="{{url('adminUsuariosvista')}}" method="GET">
                 <button type="submit" value="Enviar" class="botoncPanel">USUARIOS</button><br><br>
         </form>
         <form action="{{url('adminLugares')}}" method="GET">
