@@ -1,0 +1,26 @@
+.cabecera {
+    margin-left: 1%;
+    margin-right: 2%;
+}
+
+#map {
+    width: 1700px;
+    height: 765px;
+    float: right;
+}
+
+.btn_inicio {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    z-index: 800;
+}
+
+.btn_cabecera {
+    position: absolute;
+    top: 20px;
+    left: 140px;
+    padding: 10px;
+    z-index: 800;
+}
