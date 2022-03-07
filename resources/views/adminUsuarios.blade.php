@@ -63,7 +63,6 @@
                       <span id="cerrar" class="close">&times;</span>
                       <p id="contenido"></p>
                     </div>
-                  
                 </div>
             </tr>
     @endforeach --}}
@@ -74,7 +73,8 @@
           <span id="cerrar" class="close">&times;</span>
           <p id="contenido"></p>
         </div>
-      
+     
       </div>
 </body>
 </html>
+

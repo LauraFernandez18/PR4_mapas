@@ -120,7 +120,7 @@ class LugarController extends Controller
         }
         return redirect('');
     }
-
+  
     public function adminUsuariosvista(){
         $datos=DB::select('select * from tbl_users');
         return view('adminUsuarios');

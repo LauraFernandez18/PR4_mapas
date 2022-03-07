@@ -4,6 +4,7 @@ use App\Http\Controllers\LugarController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Animal;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,3 +37,4 @@ Route::post('crear',[LugarController::class, 'crearUser']);
 Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
 
 Route::post('registrarUser',[LugarController::class, 'registrarUsuario']);
+
