@@ -135,3 +135,9 @@ input[type='password']::placeholder {
 .register2 p {
     color: grey;
 } */
+
+#map {
+    width: 1700px;
+    height: 765px;
+    float: right;
+}
