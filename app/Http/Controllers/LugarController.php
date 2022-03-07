@@ -182,4 +182,9 @@ class LugarController extends Controller
             return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
         }
     }
+
+    public function markerMapa(){
+        $datos=DB::select('select * from tbl_lugares');
+        return response()->json($datos);
+    }
 }
