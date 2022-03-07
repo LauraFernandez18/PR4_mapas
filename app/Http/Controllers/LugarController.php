@@ -94,7 +94,7 @@ class LugarController extends Controller
             $request->session()->put('nombre_user',$request->correo_user);
             return redirect('');
         }
-        return redirect('');
+        return redirect(''); 
     }
 
     public function cPanelAdmin(){
@@ -108,6 +108,19 @@ class LugarController extends Controller
         return redirect('index');
     }
 
+    public function registrarUsuario(Request $request){
+        $datos = $request->except('_token');
+        try{
+            DB::beginTransaction();
+            DB::insert('insert into tbl_users (nombre, email, pwd, tipo_usu) values (?,?,?,?)',[$request->input('nombre'),$request->input('email'),md5($request->input('pwd')),'usuario']);
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollBack();
+            return $e->getMessage();
+        }
+        return redirect('');
+    }
+  
     public function adminUsuariosvista(){
         $datos=DB::select('select * from tbl_users');
         return view('adminUsuarios');
@@ -132,7 +145,7 @@ class LugarController extends Controller
                 DB::table('tbl_users')
                 ->where('id', $id)
                 ->update(['nombre' => $nombre,'email' => $email]);
-                return response()->json(array('resultado'=> 'OK'));
+                return response()->json(array('resultado'=> 'OK')); 
             }else{
                 if(md5($pwd) == $pwd_e->pwd){
                     DB::table('tbl_users')
@@ -144,8 +157,8 @@ class LugarController extends Controller
                     ->where('id', $id)
                     ->update(['nombre' => $nombre,'email' => $email]);
                     return response()->json(array('resultado'=> 'Contraseña no actualizada'));
-                }
-            }
+                }  
+            }           
         } catch (\Throwable $th) {
             return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
         }
@@ -155,7 +168,7 @@ class LugarController extends Controller
         try {
             DB::delete('delete from tbl_etiqueta_usuario where fk_usuario = ?', [$request->input('id')]);
             DB::delete('delete from tbl_users where id = ?', [$request->input('id')]);
-            return response()->json(array('resultado'=> 'OK'));
+            return response()->json(array('resultado'=> 'OK'));            
         } catch (\Throwable $th) {
             return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
         }
@@ -163,8 +176,8 @@ class LugarController extends Controller
 
     public function crearUser(Request $request){
         try {
-            DB::insert('insert into tbl_users (nombre, email, pwd, tipo_usu) values (?,?,?,?)',[$request->input('nombre'),$request->input('email'),$request->input('pwd'),$request->input('tipo_usu')]);
-            return response()->json(array('resultado'=> 'OK'));
+            DB::insert('insert into tbl_users (nombre, email, pwd, tipo_usu) values (?,?,?,?)',[$request->input('nombre'),$request->input('email'),md5($request->input('pwd')),$request->input('tipo_usu')]);
+            return response()->json(array('resultado'=> 'OK'));            
         } catch (\Throwable $th) {
             return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
         }
