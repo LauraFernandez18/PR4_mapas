@@ -54,19 +54,22 @@ function leerJS() {
         if (ajax.readyState == 4 && ajax.status == 200) {
             var respuesta = JSON.parse(this.responseText);
             var recarga = '';
-            recarga += '<tr><td>NOMBRE</td><td>EMAIL</td><td>TIPO</td><td>Modificar</td><td>Eliminar</td></tr>';
+            recarga += '<br>'
+            recarga += '<div class="tabla">';
+            recarga += '<tr><th>NOMBRE</th><th>EMAIL</th><th>TIPO</th><th>Modificar</th><th>Eliminar</th></th>';
             for (let i = 0; i < respuesta.length; i++) {
                 recarga += '<tr>';
                 recarga += '<td>' + respuesta[i].nombre + '</td>'
                 recarga += '<td>' + respuesta[i].email + '</td>'
                 recarga += '<td>' + respuesta[i].tipo_usu + '</td>'
-                recarga += '<td><button onclick="modificar(' + respuesta[i].id + ',\'' + respuesta[i].nombre + '\',\'' + respuesta[i].email + '\'); return false;">Modificar</button></td>'
+                recarga += '<td><button class="btn btn-info" onclick="modificar(' + respuesta[i].id + ',\'' + respuesta[i].nombre + '\',\'' + respuesta[i].email + '\'); return false;">Modificar</button></td>'
                 if (adm == respuesta[i].email) {
-                    recarga += '<td><button onclick="return false;"><s>Eliminar</s></button></td>'
+                    recarga += '<td><button class="btn btn-danger" onclick="return false;"><s>Eliminar</s></button></td>'
                 } else {
-                    recarga += '<td><button onclick="borrar(' + respuesta[i].id + '); return false;">Eliminar</button></td>'
+                    recarga += '<td><button class="btn btn-danger" onclick="borrar(' + respuesta[i].id + '); return false;">Eliminar</button></td>'
                 }
                 recarga += '</tr>';
+                recarga += '</div>'
             }
             tabla.innerHTML = recarga;
         }
