@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CRUD AJAX</title>
     <link rel="stylesheet" href="{!! asset('css/styles.css') !!}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
@@ -19,11 +20,14 @@
     <button class="btn_inicio btn btn-dark" type="button" onclick="iniciar_sesionJS()">Iniciar sesión</button>
     </div> --}}
     <div id="map">
-        <button class="btn_cabecera btn btn-dark" type="button">Gimcana</button>
-        <button type="button" class="btn_filtro btn btn-light">Light</button>
-        <button type="button" class="btn_filtro btn btn-light">Light</button>
-        <button type="button" class="btn_filtro btn btn-light">Light</button>
-        <button class="empezar btn btn-dark btn_inicio" type="button" id="myBtn"><b>Empezar</b></button>
+        <button class="btn_cabecera btn btn-dark" type="button"><b>Gimcana</b></button>
+        <div class="filtro">
+          <button class="btn_filtro" type="button"><i class="fas fa-utensils"></i><b> Restaurantes</b></button>
+          <button class="btn_filtro" type="button"><i class="fas fa-hotel"></i><b> Hoteles</b></button>
+          <button class="btn_filtro" type="button"><b>Restaurantes</b></button>
+          <button class="btn_filtro" type="button"><b>Restaurantes</b></button>
+          </div>
+        <button class="btn btn-dark btn_inicio" type="button" id="myBtn"><b>Empezar</b></button>
         <!-- MODAL INICIAR SESION Y REGISTRAR -->
         <div id="myModal" class="modal">
             <div class="modal-content">
