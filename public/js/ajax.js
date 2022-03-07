@@ -49,10 +49,20 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1IjoibGF1cmFmZXJuYW5kZXoxODIiLCJhIjoiY2wwYjg0MTRqMDhpYTNkbWp6ajlscHlkOCJ9.Cdxv8cBGcFJsPag19TXOVQ'
 }).addTo(map);
 
-// Create the geoJSON layer without using onEachFeature    
-var lightRail = L.geoJSON(lightRailStop).addTo(map);
+/* poligono */
+var polygon = L.polygon([
+    [41.357596, 2.183804],
+    [41.383637, 2.182141],
+    [41.387918, 2.195807],
+    [41.384903, 2.199920],
+    [41.380766, 2.197533],
+    [41.374282, 2.194663],
+    [41.357662, 2.185403]
+]).addTo(map);
 
-// Insert the Content into the leaflet-control-window
-var win = L.control.window(map, { title: 'Hello world!', maxWidth: 400, modal: true })
-    .prompt({ callback: function() { alert('This is called after OK click!') } })
-    .show()
+polygon.setStyle({
+    color: 'red',
+    opacity: 0.6,
+    fillColor: '#333333',
+    fillOpacity: 0.1
+});
