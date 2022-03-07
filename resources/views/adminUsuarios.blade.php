@@ -11,28 +11,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>adminUsuarios</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{!! asset('css/tabla.css') !!}">
     <script src="js/code2.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <form action="{{url('cPanelAdmin')}}" method="GET">
-        <button id="vista" type="submit" name="Crear" value="Crear">Cpanel</button>
-    </form>
+    <a class="cpanel" href="{{url('cPanelAdmin')}}"><i class="fa fa-home"></i></a>
     <p id="mensaje"></p>
     <form onsubmit="crear(); return false;">
-        <input type="text" id="nombre" placeholder="Nombre">
-        <input type="text" id="email" placeholder="Email">
-        <input type="password" id="pwd" placeholder="Contraseña">
-        <label for="tipo_usu">Tipo de Usuario:</label>
-        <select name="tipo_usu" id="tipo_usu">
-            <option value="administrador">Aministrador</option>
-            <option value="usuario">Usuario</option>
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+        <input type="text" class="form-control" id="email" placeholder="Email">
+        <input type="password" class="form-control" id="pwd" placeholder="Contraseña">
+        <select class="form-control" name="tipo_usu" id="tipo_usu">
+            <option class="form-control" value="administrador">Aministrador</option>
+            <option class="form-control" value="usuario">Usuario</option>
         </select>
-        <input type="submit" value="Crear">
+        <input type="submit" class="btn btn-success" value="Crear">
     </form>
     <br>
-    <input type="text" onkeyup="leerJS()" id="filtro" placeholder="Filtrar por nombre">
+    <input type="search" class="form-control rounded" onkeyup="leerJS()" id="filtro" placeholder="Filtrar por nombre">
     <input type="hidden" name="adm" id="adm" value="<?php echo Session::get('nombre_admin');?>">
     <table id="main">
     {{-- <tr>

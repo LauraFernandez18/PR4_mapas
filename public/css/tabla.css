@@ -1,0 +1,39 @@
+body {
+    padding: 2%;
+}
+
+.cpanel {
+    color: black;
+    font-size: 28px;
+}
+
+#main td,
+th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#main th {
+    background-color: rgb(212, 236, 243);
+}
+
+#main {
+    width: 100%;
+}
+
+#main tr:hover {
+    background-color: rgba(235, 235, 252, 0.945);
+}
+
+#nombre,
+#email,
+#pwd,
+#tipo_usu {
+    width: 15%;
+    margin-right: 5px;
+    float: left;
+}
+
+#filtro {
+    width: 30%;
+}
