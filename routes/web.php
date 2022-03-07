@@ -30,3 +30,5 @@ Route::get('adminUsuariosvista',[LugarController::class, 'adminUsuariosvista']);
 Route::put('modificar',[LugarController::class, 'modificar']);
 
 Route::delete('eliminar',[LugarController::class, 'eliminaraUser']);
+
+Route::post('crear',[LugarController::class, 'crearUser']);

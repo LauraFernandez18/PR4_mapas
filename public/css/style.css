@@ -52,7 +52,7 @@
     cursor: pointer;
 }
 
-.register {
+/* .register {
     text-align: center;
     justify-content: center;
     color: black;
@@ -133,4 +133,4 @@ input[type='password']::placeholder {
 
 .register2 p {
     color: grey;
-}
+} */

@@ -153,7 +153,17 @@ class LugarController extends Controller
 
     public function eliminaraUser(Request $request){
         try {
-            DB::delete('delete from tbl_users where id = ?',[$request->input('id')]);
+            DB::delete('delete from tbl_etiqueta_usuario where fk_usuario = ?', [$request->input('id')]);
+            DB::delete('delete from tbl_users where id = ?', [$request->input('id')]);
+            return response()->json(array('resultado'=> 'OK'));            
+        } catch (\Throwable $th) {
+            return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
+        }
+    }
+
+    public function crearUser(Request $request){
+        try {
+            DB::insert('insert into tbl_users (nombre, email, pwd, tipo_usu) values (?,?,?,?)',[$request->input('nombre'),$request->input('email'),$request->input('pwd'),$request->input('tipo_usu')]);
             return response()->json(array('resultado'=> 'OK'));            
         } catch (\Throwable $th) {
             return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));

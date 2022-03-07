@@ -17,6 +17,18 @@
 </head>
 <body>
     <p id="mensaje"></p>
+    <form onsubmit="crear(); return false;">
+        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="text" id="email" placeholder="Email">
+        <input type="password" id="pwd" placeholder="Contraseña">
+        <label for="tipo_usu">Tipo de Usuario:</label>
+        <select name="tipo_usu" id="tipo_usu">
+            <option value="administrador">Aministrador</option>
+            <option value="usuario">Usuario</option>
+        </select>
+        <input type="submit" value="Crear">
+    </form>
+    <br>
     <input type="text" onkeyup="leerJS()" id="filtro" placeholder="Filtrar por nombre">
     <input type="hidden" name="adm" id="adm" value="<?php echo Session::get('nombre_admin');?>">
     <table id="main">
@@ -49,7 +61,7 @@
                       <p id="contenido"></p>
                     </div>
                   
-                  </div>
+                </div>
             </tr>
     @endforeach --}}
     </table>

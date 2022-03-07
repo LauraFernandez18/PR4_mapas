@@ -133,3 +133,68 @@ function editar() {
 
     ajax.send(formData);
 }
+
+
+//funcion de borrar con AJAX
+function borrar(id_usr) {
+    /* Si hace falta obtenemos el elemento HTML donde introduciremos la recarga (datos o mensajes) */
+    /* Usar el objeto FormData para guardar los parámetros que se enviarán:
+       formData.append('clave', valor);
+       valor = elemento/s que se pasarán como parámetros: token, method, inputs... */
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'DELETE');
+    formData.append('id', id_usr);
+
+    /* Inicializar un objeto AJAX */
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "eliminar", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            /* Leerá la respuesta que es devuelta por el controlador: */
+            if (respuesta.resultado == 'OK') {
+                document.getElementById('mensaje').innerHTML = "Eliminacion correcta!!"
+            } else {
+                document.getElementById('mensaje').innerHTML = "Fallo en la eliminacion: " + respuesta.resultado;
+            }
+            leerJS();
+        }
+    }
+
+    ajax.send(formData);
+}
+
+/* Función implementada con AJAX que inserta un archivo */
+function crear() {
+    /* Si hace falta obtenemos el elemento HTML donde introduciremos la recarga (datos o mensajes) */
+    /* Usar el objeto FormData para guardar los parámetros que se enviarán:
+       formData.append('clave', valor);
+       valor = elemento/s que se pasarán como parámetros: token, method, inputs... */
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('nombre', document.getElementById('nombre').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('pwd', document.getElementById('pwd').value);
+    formData.append('tipo_usu', document.getElementById('tipo_usu').value);
+
+    /* Inicializar un objeto AJAX */
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "crear", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            /* Leerá la respuesta que es devuelta por el controlador: */
+            if (respuesta.resultado == 'OK') {
+                document.getElementById('mensaje').innerHTML = "Inserción correcta."
+            } else {
+                document.getElementById('mensaje').innerHTML = "Fallo en la inserción: " + respuesta.resultado;
+            }
+            leerJS();
+        }
+    }
+
+    ajax.send(formData);
+}
