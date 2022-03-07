@@ -32,3 +32,7 @@ Route::put('modificar',[LugarController::class, 'modificar']);
 Route::delete('eliminar',[LugarController::class, 'eliminaraUser']);
 
 Route::post('crear',[LugarController::class, 'crearUser']);
+
+Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
+
+Route::post('registrarUser',[LugarController::class, 'registrarUsuario']);

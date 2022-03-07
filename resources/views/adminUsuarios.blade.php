@@ -16,6 +16,9 @@
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
 </head>
 <body>
+    <form action="{{url('cPanelAdmin')}}" method="GET">
+        <button id="vista" type="submit" name="Crear" value="Crear">Cpanel</button>
+    </form>
     <p id="mensaje"></p>
     <form onsubmit="crear(); return false;">
         <input type="text" id="nombre" placeholder="Nombre">
