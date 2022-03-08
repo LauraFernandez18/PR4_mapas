@@ -1,6 +1,6 @@
 window.onload = function() {
-    leerJS();
-
+    marker_map();
+    funcionInit();
     // Get the modal
     modal = document.getElementById("myModal");
 
@@ -66,3 +66,57 @@ polygon.setStyle({
     fillColor: '#333333',
     fillOpacity: 0.1
 });
+
+/* var marker = L.marker([41.373703, 2.187467]).addTo(map);
+marker.bindPopup("<b>Hola</b>").openPopup(); */
+
+function marker_map() {
+    /* var mapa = document.getElementById("n_sitio"); */
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'get');
+    /* Inicializar un objeto AJAX */
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "markerMapa", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            recarga = "";
+            for (let i = 0; i < respuesta.length; i++) {
+                /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
+                var marker = L.marker([respuesta[i].longitud, respuesta[i].latitud]).addTo(map);
+                marker.bindPopup("<b>" + respuesta[i].nombre + "</b>").openPopup();
+            }
+            /* alert(recarga); */
+            /* mapa.innerHTML = recarga; */
+        }
+    }
+    ajax.send(formData);
+}
+
+//Coger ubicación actual
+const funcionInit = () => {
+    if (!"geolocation" in navigator) {
+        return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
+    }
+
+    const onUbicacionConcedida = ubicacion => {
+        console.log("Tengo la ubicación: ", ubicacion);
+    }
+
+    const onErrorDeUbicacion = err => {
+        console.log("Error obteniendo ubicación: ", err);
+    }
+
+    const opcionesDeSolicitud = {
+        enableHighAccuracy: true, // Alta precisión
+        maximumAge: 0, // No queremos caché
+        timeout: 5000 // Esperar solo 5 segundos
+    };
+    // Solicitar
+    navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
+
+};
+
+//Ruta mapa
