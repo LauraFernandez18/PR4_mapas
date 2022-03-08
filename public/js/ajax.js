@@ -4,8 +4,20 @@ window.onload = function() {
     // Get the modal
     modal = document.getElementById("myModal");
 
+    var btn = document.getElementById("myBtn");
+
     // Get the <span> element that closes the modal
     span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
@@ -120,3 +132,14 @@ const funcionInit = () => {
 };
 
 //Ruta mapa
+
+/* LOGIN Y REGISTRAR */
+function mostrarlog() {
+    document.getElementById("content_regis").style.display = 'none';
+    document.getElementById("content_regis2").style.display = 'block';
+}
+
+function mostrarreg() {
+    document.getElementById("content_regis").style.display = 'block';
+    document.getElementById("content_regis2").style.display = 'none';
+}
