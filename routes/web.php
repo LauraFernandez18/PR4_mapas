@@ -38,3 +38,5 @@ Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
 
 Route::post('registrarUser',[LugarController::class, 'registrarUsuario']);
 
+Route::get('markerMapa',[LugarController::class, 'markerMapa']);
+
