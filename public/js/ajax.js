@@ -1,6 +1,7 @@
 window.onload = function() {
     marker_map();
-    funcionInit();
+    /* funcionInit(); */
+
     // Get the modal
     modal = document.getElementById("myModal");
 
@@ -50,7 +51,7 @@ function objetoAjax() {
 }
 
 /*MOSTRAR MAPA*/
-var map = L.map('map').setView([41.373703, 2.187467], 14);
+map = L.map('map').setView([41.373703, 2.187467], 14);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -81,6 +82,13 @@ polygon.setStyle({
 
 /* var marker = L.marker([41.373703, 2.187467]).addTo(map);
 marker.bindPopup("<b>Hola</b>").openPopup(); */
+/* var routingControl = new L.Routing.Control({
+    waypoints: [
+        L.latLng(41.357596, 2.183804),
+        L.latLng(41.357662, 2.185403)
+    ],
+    show: false
+}).addTo(map); */
 
 function marker_map() {
     /* var mapa = document.getElementById("n_sitio"); */
@@ -97,8 +105,8 @@ function marker_map() {
             recarga = "";
             for (let i = 0; i < respuesta.length; i++) {
                 /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
-                var marker = L.marker([respuesta[i].longitud, respuesta[i].latitud]).addTo(map);
-                marker.bindPopup("<b>" + respuesta[i].nombre + "</b>").openPopup();
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
+                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button>").openPopup();
             }
             /* alert(recarga); */
             /* mapa.innerHTML = recarga; */
@@ -108,7 +116,7 @@ function marker_map() {
 }
 
 //Coger ubicación actual
-const funcionInit = () => {
+/* const funcionInit = () => {
     if (!"geolocation" in navigator) {
         return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
     }
@@ -129,9 +137,39 @@ const funcionInit = () => {
     // Solicitar
     navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
 
-};
+}; */
 
 //Ruta mapa
+function ruta(lat, long) {
+    if (!"geolocation" in navigator) {
+        return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
+    }
+
+    const onUbicacionConcedida = ubicacion => {
+        console.log("Tengo la ubicación: ", ubicacion);
+        console.log('direccion destino:' + lat + ',' + long);
+        console.log('direccion actual:' + ubicacion.coords.latitude + ',' + ubicacion.coords.longitude);
+        L.Routing.control({
+            waypoints: [
+                L.latLng(ubicacion.coords.latitude, ubicacion.coords.longitude),
+                L.latLng(lat, long)
+            ]
+        }).addTo(map);
+    }
+
+
+    const onErrorDeUbicacion = err => {
+        console.log("Error obteniendo ubicación: ", err);
+    }
+
+    const opcionesDeSolicitud = {
+        enableHighAccuracy: true, // Alta precisión
+        maximumAge: 0, // No queremos caché
+        timeout: 5000 // Esperar solo 5 segundos
+    };
+    // Solicitar
+    navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
+}
 
 /* LOGIN Y REGISTRAR */
 function mostrarlog() {
@@ -192,4 +230,3 @@ function validarRegistro() {
         return true;
     }
 }
-
