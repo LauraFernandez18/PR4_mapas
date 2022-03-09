@@ -1,0 +1,358 @@
+* {
+    margin: 0%;
+    font-family: 'Open Sans', sans-serif;
+    color: #333333;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.admin-logout {
+    position: absolute;
+    top: 6vh;
+    right: 5vh;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.admin-logo {
+    position: absolute;
+    top: 1vh;
+    left: 2vh;
+    cursor: pointer;
+}
+
+.admin-cpanel {
+    position: absolute;
+    top: 5vh;
+    left: 41%;
+    font-size: 50px;
+    font-weight: 900;
+    color: #333333;
+}
+
+.admin-logo img {
+    width: 18vh;
+    height: 13vh;
+    margin: 0%;
+}
+
+.admin-cpanel-crear {
+    position: absolute;
+    top: 6vh;
+    right: 25vh;
+}
+
+.admin-atras {
+    position: absolute;
+    top: 6vh;
+    right: 15vh;
+}
+
+.fas,
+.fa {
+    color: white;
+}
+
+.lugares {
+    position: absolute;
+    top: 18vh;
+    right: 5vh;
+    color: #333333;
+    font-size: 3vh;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 3%;
+    padding: 1.8%;
+}
+
+.lugares h2 {
+    margin-bottom: 10%;
+    font-weight: bold;
+}
+
+.lugares p {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lugares p:hover {
+    opacity: 0.9;
+    transition: 0.3s;
+}
+
+#map {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 101%;
+    z-index: 0;
+}
+
+.marker-nombre {
+    font-weight: bold;
+    font-size: 2.5vh;
+}
+
+.marker-text {
+    float: left;
+    width: 100%;
+    font-size: 2vh;
+}
+
+.marker-etiquetas {
+    float: left;
+    width: 50%;
+}
+
+.marker-admin {
+    float: left;
+    width: 50%;
+    margin: 0%;
+}
+
+
+/*modal*/
+
+.registrarse {
+    top: 15%;
+    left: 30%;
+    position: absolute;
+    color: black;
+    text-align: center;
+}
+
+.region-registrarse form.registrarse-form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    justify-items: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.region-registrarse {
+    height: 100vh;
+    width: 100%;
+}
+
+.region-registrarse>.registrarse {
+    height: 100%;
+}
+
+.region-registrarse form.registrarse-form {
+    background-color: white;
+    width: 85vh;
+    height: 70vh;
+    border-radius: 4px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column wrap;
+    flex-flow: column wrap;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.region-registrarse form.registrarse-form input,
+.anadir-etiqueta input {
+    width: 100%;
+    border: none;
+}
+
+.region-registrarse form.registrarse-form input:focus::placeholder,
+.anadir-etiqueta input:focus::placeholder {
+    color: transparent;
+}
+
+.anadir-etiqueta input[name="etiqueta"] {
+    cursor: pointer;
+}
+
+.anadir-etiqueta input:focus[name="etiqueta"] {
+    cursor: auto;
+}
+
+form.registrarse-form label {
+    font-weight: bold;
+}
+
+.region-registrarse form.registrarse-form input[type='submit'] {
+    margin-top: 15%;
+}
+
+.resize {
+    width: 0;
+    height: 0;
+}
+
+.modalmask:target .resize {
+    width: 63.59vh;
+    height: 31.79vh;
+}
+
+.modalmask {
+    position: fixed;
+    font-family: Arial, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99999;
+    opacity: 0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.cerrar {
+    color: white;
+    font-size: 5vh;
+    font-weight: bold;
+    top: 17%;
+    right: 32%;
+    position: absolute;
+    z-index: 1;
+    background-color: #333333;
+    line-height: 35px;
+    width: 35px;
+    text-align: center;
+    border-radius: 3px;
+    padding-bottom: 5px;
+    transition: 0.3s;
+}
+
+.cerrar:hover {
+    background-color: #262626;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.foto {
+    position: absolute;
+    bottom: 35%;
+    left: 5vh;
+}
+
+.foto img {
+    width: 15vh;
+    height: 15vh;
+    border-radius: 3%;
+    border: 3px solid #333333;
+}
+
+.info {
+    position: absolute;
+    top: 15%;
+    left: 5vh;
+    width: 30vh;
+    text-align: left;
+}
+
+.info input {
+    margin-bottom: 10%;
+}
+
+.etiquetas {
+    position: absolute;
+    top: 15%;
+    left: 40vh;
+    width: 30vh;
+    height: 25vh;
+    text-align: left;
+    overflow-y: scroll;
+}
+
+.anadir-etiqueta {
+    position: absolute;
+    bottom: 45%;
+    left: 40vh;
+    width: 30vh;
+    text-align: left;
+}
+
+.anadir-etiqueta input {
+    width: 23vh;
+    float: left;
+}
+
+.anadir-etiqueta p,
+.etiquetas p {
+    font-size: 3.5vh;
+    font-weight: bold;
+}
+
+.anadir-etiqueta-enviar {
+    position: absolute;
+    bottom: -1vh;
+    left: 25vh;
+}
+
+.guardar {
+    position: absolute;
+    bottom: 35%;
+    left: 57vh;
+    width: 30vh;
+}
+
+.eliminar {
+    position: absolute;
+    bottom: 35%;
+    left: 36vh;
+    width: 30vh;
+}
+
+#eliminar-boton,
+#guardar-boton {
+    color: white;
+}
+
+.crear {
+    position: absolute;
+    bottom: 35%;
+    left: 31vh;
+    width: 30vh;
+}
+
+.nombre {
+    position: absolute;
+    top: 4%;
+    left: 5vh;
+    width: 70vh;
+    text-align: left;
+}
+
+.nombre input {
+    border: none;
+    font-size: 4vh;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.8;
+}

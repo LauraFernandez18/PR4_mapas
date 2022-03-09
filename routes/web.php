@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\LugarController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\lugarController;
+
 use App\Models\Animal;
+
 
 
 /*
@@ -15,6 +19,12 @@ use App\Models\Animal;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/admin/mapas',[lugarController::class,'adminMapas']);
+Route::post('/admin/adminMapasAjax',[lugarController::class,'adminMapasAjax']);
+Route::post('/admin/adminEtiquetasAjax/{id}',[lugarController::class,'adminEtiquetasAjax']);
+Route::get('/admin/gincanas',[lugarController::class,'adminGincanas']);
 
 Route::get('index',[LugarController::class, 'index']);
 
@@ -39,3 +49,4 @@ Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
 Route::post('registrarUser',[LugarController::class, 'registrarUsuario']);
 
 Route::get('markerMapa',[LugarController::class, 'markerMapa']);
+
