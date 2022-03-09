@@ -23,13 +23,13 @@
     </div> --}}
     <div id="map">
         <button class="btn_cabecera btn btn-dark" type="button"><b>Gimcana</b></button>
+        <button class="btn btn-dark btn_inicio" type="button" id="myBtn"><b>Empezar</b></button>
         <div class="filtro">
           <button class="btn_filtro" type="button"><i class="fas fa-utensils"></i><b> Restaurantes</b></button>
           <button class="btn_filtro" type="button"><i class="fas fa-hotel"></i><b> Hoteles</b></button>
           <button class="btn_filtro" type="button"><b>Restaurantes</b></button>
           <button class="btn_filtro" type="button"><b>Restaurantes</b></button>
           </div>
-        <button class="btn btn-dark btn_inicio" type="button" id="myBtn"><b>Empezar</b></button>
         <!-- MODAL INICIAR SESION Y REGISTRAR -->
         <div id="myModal" class="modal">
             <div class="modal-content">
@@ -55,7 +55,7 @@
                 <span><i class="fas fa-user"></i></span>
                 <input class="inp_txt" type="text" name="nombre" id="nombre" placeholder="Introduce tu nombre"><br><br>
                 <span><i class="fas fa-envelope"></i></span>
-                <input class="inp_txt" type="email" name="email" id="correo_user" placeholder="Introduce tu correo"><br><br>
+                <input class="inp_txt" type="text" name="email" id="correo_user" placeholder="Introduce tu correo"><br><br>
                 <span><i class="fas fa-lock"></i></span>
                 <input type="password" name="pwd" id="pass_user" placeholder="Introduce tu contraseña">
                 <br><br>

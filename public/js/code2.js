@@ -216,21 +216,21 @@ function crear() {
                 icon: "error",
             });
             return false;
-        }else if(pwd.length < 8){
+        } else if (pwd.length < 8) {
             swal.fire({
                 title: "Error",
                 text: "La contraseña debe tener mas de 8 caracteres",
                 icon: "error",
             });
             return false;
-        }else if(pwd.length > 100){
+        } else if (pwd.length > 100) {
             swal.fire({
                 title: "Error",
                 text: "La contraseña debe tener menos de 100 caracteres",
                 icon: "error",
             });
             return false;
-        }else {
+        } else {
             return true;
         }
     }

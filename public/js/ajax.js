@@ -192,4 +192,3 @@ function validarRegistro() {
         return true;
     }
 }
-
