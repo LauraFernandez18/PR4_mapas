@@ -48,8 +48,11 @@
                         <div class="foto">
                             <img src="" id="foto">
                         </div>
-                        <div class="etiquetas" id="divEtiqueta">
+                        <div class="palabra-etiqueta">
                             <p>Etiquetas</p>
+                        </div>
+                        <div class="etiquetas" id="divEtiqueta">
+                            
                             
                             
                         </div>

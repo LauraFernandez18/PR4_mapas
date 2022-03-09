@@ -6,7 +6,7 @@ window.onload = function() {
         document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
         document.getElementsByTagName("html")[0].style.overflowY = "scroll"
         var divEtiqueta = document.getElementById('divEtiqueta')
-        divEtiqueta.innerHTML = "<p>Etiquetas</p>"
+        divEtiqueta.innerHTML = ""
 
     })
     var cerrar = document.getElementById('cerrar2')
@@ -42,8 +42,12 @@ function modal(id, nombre, longitud, latitud, foto) {
             var divEtiqueta = document.getElementById('divEtiqueta')
             for (let i = 0; i < respuesta.length; i++) {
                 etiquetashtml += "<div class='etiquetas-etiqueta mb-2'>"
-                etiquetashtml += "<button type='button' class='btn btn-success mr-3'>" + respuesta[i].nombre + "</button>"
-                etiquetashtml += "<button type='button' class='btn btn-danger btn-sm'><i class='fa fa-trash'></i></button>"
+                etiquetashtml += "<div class='etiquetas-etiqueta-nombre mr-3'>"
+                etiquetashtml += "<button type='button' class='btn btn-success btn-block'>" + respuesta[i].nombre + "</button>"
+                etiquetashtml += "</div>"
+                etiquetashtml += "<div class='etiquetas-etiqueta-eliminar'>"
+                etiquetashtml += "<button type='button' class='btn btn-danger'><i class='fa fa-trash'></i></button>"
+                etiquetashtml += "</div>"
                 etiquetashtml += "</div>"
             }
             divEtiqueta.innerHTML += etiquetashtml;

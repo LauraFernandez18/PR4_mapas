@@ -280,12 +280,19 @@ form.registrarse-form label {
 
 .etiquetas {
     position: absolute;
-    top: 15%;
+    top: 17%;
     left: 40vh;
     width: 30vh;
     height: 25vh;
     text-align: left;
     overflow-y: scroll;
+}
+
+.palabra-etiqueta {
+    position: absolute;
+    top: 10%;
+    left: 40vh;
+    text-align: left;
 }
 
 .anadir-etiqueta {
@@ -302,9 +309,24 @@ form.registrarse-form label {
 }
 
 .anadir-etiqueta p,
-.etiquetas p {
+.palabra-etiqueta p {
     font-size: 3.5vh;
     font-weight: bold;
+}
+
+.etiquetas-etiqueta {
+    float: left;
+    width: 100%;
+}
+
+.etiquetas-etiqueta-nombre,
+.etiquetas-etiqueta-eliminar {
+    float: left;
+    width: 50%;
+}
+
+.etiquetas-etiqueta-eliminar {
+    width: 40%;
 }
 
 .anadir-etiqueta-enviar {
