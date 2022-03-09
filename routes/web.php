@@ -19,8 +19,8 @@ use App\Models\Animal;
 
 
 // Route::get('/admin/mapas',[lugarController::class,'adminMapas']);
-// Route::post('/admin/adminMapasAjax',[lugarController::class,'adminMapasAjax']);
-// Route::post('/admin/adminEtiquetasAjax/{id}',[lugarController::class,'adminEtiquetasAjax']);
+Route::post('adminMapasAjax',[lugarController::class,'adminMapasAjax']);
+Route::post('adminEtiquetasAjax/{id}',[lugarController::class,'adminEtiquetasAjax']);
 // Route::get('/admin/gincanas',[lugarController::class,'adminGincanas']);
 
 Route::get('index',[LugarController::class, 'index']);

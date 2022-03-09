@@ -27,7 +27,7 @@ function modal(id, nombre, longitud, latitud, foto) {
     $("#nombre").val(nombre);
     $("#longitud").val(longitud);
     $("#latitud").val(latitud);
-    $("#foto").attr("src", "../storage/uploads/" + foto);
+    $("#foto").attr("src", "storage/uploads/" + foto);
 
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
