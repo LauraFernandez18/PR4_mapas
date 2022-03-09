@@ -12,93 +12,17 @@ use Illuminate\Support\Facades\Storage;
 
 class LugarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Lugar  $lugar
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Lugar $lugar)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Lugar  $lugar
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Lugar $lugar)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Lugar  $lugar
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Lugar $lugar)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Lugar  $lugar
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Lugar $lugar)
     {
         //
     }
 
-    public function admin()
-    {
-        return view('admin');
-    }
-    
-    public function adminUsuarios()
-    {
-        return view('admin_usuarios');
-    }
-
-    public function adminMapas()
+    public function adminMapasVista()
     {
         $lugaresdistinct=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
 
@@ -138,6 +62,7 @@ class LugarController extends Controller
     public function adminGincanas()
     {
         return view('admin_gincanas');
+    }
 
     public function login(Request $request){
         $datos= $request->except('_token','_method');

@@ -2,9 +2,6 @@
 
 use App\Http\Controllers\LugarController;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\lugarController;
-
 use App\Models\Animal;
 
 
@@ -21,10 +18,10 @@ use App\Models\Animal;
 */
 
 
-Route::get('/admin/mapas',[lugarController::class,'adminMapas']);
-Route::post('/admin/adminMapasAjax',[lugarController::class,'adminMapasAjax']);
-Route::post('/admin/adminEtiquetasAjax/{id}',[lugarController::class,'adminEtiquetasAjax']);
-Route::get('/admin/gincanas',[lugarController::class,'adminGincanas']);
+// Route::get('/admin/mapas',[lugarController::class,'adminMapas']);
+// Route::post('/admin/adminMapasAjax',[lugarController::class,'adminMapasAjax']);
+// Route::post('/admin/adminEtiquetasAjax/{id}',[lugarController::class,'adminEtiquetasAjax']);
+// Route::get('/admin/gincanas',[lugarController::class,'adminGincanas']);
 
 Route::get('index',[LugarController::class, 'index']);
 
@@ -37,6 +34,8 @@ Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
 Route::post('adminUsuarios',[LugarController::class, 'adminUsuarios']);
 
 Route::get('adminUsuariosvista',[LugarController::class, 'adminUsuariosvista']);
+
+Route::get('adminMapasVista',[LugarController::class, 'adminMapasVista']);
 
 Route::put('modificar',[LugarController::class, 'modificar']);
 

@@ -8,9 +8,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
         <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-        <script type="text/javascript" src="../js/iconos_g.js"></script>
-        <link rel="stylesheet" href="../css/stylesAdminMapas.css">
-        <script src="../js/jquery.js"></script>
+        <script type="text/javascript" src="js/iconos_g.js"></script>
+        <link rel="stylesheet" href="{!! asset('css/stylesAdminMapas.css') !!}">
+        <script src="js/jquery.js"></script>
         
         <title>Admin - Mapas</title>
     </head>
@@ -29,7 +29,7 @@
 
     </div>
     
-    <script language="javascript" src="../js/js.js"></script>
+    <script language="javascript" src="js/js.js"></script>
 
     <!-- Modificar -->
     <div class="region-registrarse modalmask" id="modal">
