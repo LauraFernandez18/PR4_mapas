@@ -18,4 +18,5 @@ Route::get('/admin',[lugarController::class,'admin']);
 Route::get('/logout',[lugarController::class,'logout']);
 Route::get('/admin/usuarios',[lugarController::class,'adminUsuarios']);
 Route::get('/admin/mapas',[lugarController::class,'adminMapas']);
+Route::post('/admin/adminMapasAjax',[lugarController::class,'adminMapasAjax']);
 Route::get('/admin/gincanas',[lugarController::class,'adminGincanas']);

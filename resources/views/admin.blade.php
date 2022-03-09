@@ -10,16 +10,15 @@
     <title>Admin</title>
 </head>
 <body>
-    <div class="admin-menu-top"></div>
-    <div class="admin-logo"><img src="storage/uploads/logo.png"></div>
-    <div class="admin-cpanel"><h3>C-PANEL</h3></div>
-    <div class="admin-logout"><button type="button" class="btn btn-secondary" href="{{url('logout')}}">Cerrar sesión</button></div>
+    <!-- <div class="admin-logo"><img src="storage/uploads/logo.png"></div> -->
+    <div class="admin-cpanel"><p>C-PANEL</p></div>
+    <div class="admin-logout"><button type="button" class="btn btn-danger btn-lg" href="{{url('logout')}}"><i class="fas fa-power-off"></i></button></div>
     <div class="admin-boton-administrar-users" onclick="location.href='{{url('admin/usuarios')}}';">
         <div class="admin-boton-administrar-img">
             <img src="storage/uploads/usuarios.png">
         </div>
         <div class="admin-boton-administrar-texto">
-            <h4>Usuarios</h4>
+            <p>Usuarios</p>
         </div>
     </div>
     <div class="admin-boton-administrar-mapas" onclick="location.href='{{url('admin/mapas')}}';">
@@ -27,7 +26,7 @@
             <img src="storage/uploads/mapa.png">
         </div>
         <div class="admin-boton-administrar-texto">
-            <h4>Mapas</h4>
+            <p>Mapas</p>
         </div>
     </div>
     <div class="admin-boton-administrar-gincanas" onclick="location.href='{{url('admin/gincanas')}}';">
@@ -35,7 +34,7 @@
             <img src="storage/uploads/gincana.png">
         </div>
         <div class="admin-boton-administrar-texto">
-            <h4>Gincanas</h4>
+            <p>Gincanas</p>
         </div>
     </div>
 </body>

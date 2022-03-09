@@ -14,7 +14,7 @@ body {
 
 .admin-logout {
     position: absolute;
-    top: 4vh;
+    top: 6vh;
     right: 5vh;
     cursor: pointer;
     transition: 0.3s;
@@ -30,12 +30,10 @@ body {
 .admin-cpanel {
     position: absolute;
     top: 5vh;
-    left: 20vh;
-}
-
-.admin-cpanel h3 {
-    color: white;
-    font-weight: bold;
+    left: 41%;
+    font-size: 50px;
+    font-weight: 900;
+    color: #333333;
 }
 
 .admin-logo img {
@@ -44,25 +42,21 @@ body {
     margin: 0%;
 }
 
-.admin-menu-top {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 15%;
-    background-color: #333333;
+.fas,
+.fa {
+    color: white;
 }
 
 .admin-boton-administrar-users {
     position: absolute;
     top: 40%;
-    left: 20%;
+    left: 15%;
 }
 
 .admin-boton-administrar-mapas {
     position: absolute;
     top: 40%;
-    left: 45%;
+    left: 42%;
 }
 
 .admin-boton-administrar-gincanas {
@@ -78,6 +72,8 @@ body {
     transition: 0.3s;
     cursor: pointer;
     transform: scale(1.3);
+    font-size: 3vh;
+    font-weight: bold;
 }
 
 .admin-boton-administrar-users:hover,
