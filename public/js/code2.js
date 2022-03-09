@@ -83,17 +83,18 @@ function modificar(id, nombre, email) {
     enter = document.getElementById("contenido")
     var contenido = ''
     contenido += '<form onsubmit="editar(); return false;">'
-    contenido += '<p>Nombre<p>'
-    contenido += '<input type="text" id="nombre" Value="' + nombre + '">'
-    contenido += '<p>Email<p>'
-    contenido += '<input type="text" id="email" Value="' + email + '">'
-    contenido += '<input type="hidden" id="id" Value="' + id + '"><br/>'
+    contenido += '<h3><b>Modificar</b></h3><br>'
+    contenido += '<p><b>Nombre</b><p>'
+    contenido += '<input type="text" id="nombre" class="form-control" Value="' + nombre + '"><br>'
+    contenido += '<p><b>Email</b><p>'
+    contenido += '<input type="text" id="email" class="form-control" Value="' + email + '">'
+    contenido += '<input type="hidden" id="id" Value="' + id + '"><br><br/>'
     contenido += '<p>Si no quieres modificar la contraseña deja los campos de contraseña en blanco</p>'
-    contenido += '<p>Contraseña actual</p>'
-    contenido += '<input type="password" id="pwd">'
-    contenido += '<p>Contraseña nueva</p>'
-    contenido += '<input type="password" id="pwd_nueva"><br/><br/>'
-    contenido += '<input type="submit" value="Modificar">'
+    contenido += '<p><b>Contraseña actual</b></p>'
+    contenido += '<input type="password" class="form-control" id="pwd"><br></br>'
+    contenido += '<p><b>Contraseña nueva</b></p>'
+    contenido += '<input type="password" class="form-control" id="pwd_nueva" id="modificar"><br/><br/>'
+    contenido += '<input type="submit" class="btn btn-info" value="Modificar">'
     contenido += '</form>'
     contenido += ''
     enter.innerHTML = contenido;
@@ -175,6 +176,9 @@ function crear() {
     /* Usar el objeto FormData para guardar los parámetros que se enviarán:
        formData.append('clave', valor);
        valor = elemento/s que se pasarán como parámetros: token, method, inputs... */
+    let nombre = document.getElementById('nombre').value;
+    let email = document.getElementById('email').value;
+    let pwd = document.getElementById('pwd').value;
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
     formData.append('nombre', document.getElementById('nombre').value);
@@ -196,6 +200,38 @@ function crear() {
                 document.getElementById('mensaje').innerHTML = "Fallo en la inserción: " + respuesta.resultado;
             }
             leerJS();
+        }
+        /*VALIDACION */
+        if (nombre == '' || email == '' || pwd == '') {
+            swal.fire({
+                title: "Error",
+                text: "Tienes que rellenar todos los datos",
+                icon: "error",
+            });
+            return false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            swal.fire({
+                title: "Error",
+                text: "Introduce un email correcto",
+                icon: "error",
+            });
+            return false;
+        }else if(pwd.length < 8){
+            swal.fire({
+                title: "Error",
+                text: "La contraseña debe tener mas de 8 caracteres",
+                icon: "error",
+            });
+            return false;
+        }else if(pwd.length > 100){
+            swal.fire({
+                title: "Error",
+                text: "La contraseña debe tener menos de 100 caracteres",
+                icon: "error",
+            });
+            return false;
+        }else {
+            return true;
         }
     }
 
