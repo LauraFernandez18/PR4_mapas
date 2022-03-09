@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>adminUsuarios</title>
     <link rel="stylesheet" href="{!! asset('css/tabla.css') !!}">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/code2.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
@@ -19,16 +20,17 @@
 </head>
 <body>
     <a class="cpanel" href="{{url('cPanelAdmin')}}"><i class="fa fa-home"></i></a>
+    <h3><b>Usuarios</b></h3>
     <p id="mensaje"></p>
     <form onsubmit="crear(); return false;">
-        <input type="text" class="form-control" id="nombre" placeholder="Nombre">
-        <input type="text" class="form-control" id="email" placeholder="Email">
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre" value="{{old('nombre')}}">
+        <input type="email" class="form-control" id="email" placeholder="Email">
         <input type="password" class="form-control" id="pwd" placeholder="Contraseña">
         <select class="form-control" name="tipo_usu" id="tipo_usu">
-            <option class="form-control" value="administrador">Aministrador</option>
+            <option class="form-control" value="administrador">Administrador</option>
             <option class="form-control" value="usuario">Usuario</option>
         </select>
-        <input type="submit" class="btn btn-success" value="Crear">
+        <input type="submit" class="btn btn-info" value="Crear">
     </form>
     <br>
     <input type="search" class="form-control rounded" onkeyup="leerJS()" id="filtro" placeholder="Filtrar por nombre">
@@ -72,7 +74,7 @@
           <span id="cerrar" class="close">&times;</span>
           <p id="contenido"></p>
         </div>
-     
+
       </div>
 </body>
 </html>

@@ -92,7 +92,7 @@ class LugarController extends Controller
            return redirect('cPanelAdmin');
         }if($user->tipo_usu=='usuario'){
             $request->session()->put('nombre_user',$request->correo_user);
-            return redirect('');
+            return redirect('index');
         }
         return redirect('');
     }
@@ -118,7 +118,7 @@ class LugarController extends Controller
             DB::rollBack();
             return $e->getMessage();
         }
-        return redirect('');
+        return redirect('index');
     }
 
     public function adminUsuariosvista(){
@@ -179,7 +179,7 @@ class LugarController extends Controller
             DB::insert('insert into tbl_users (nombre, email, pwd, tipo_usu) values (?,?,?,?)',[$request->input('nombre'),$request->input('email'),md5($request->input('pwd')),$request->input('tipo_usu')]);
             return response()->json(array('resultado'=> 'OK'));
         } catch (\Throwable $th) {
-            return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
+            //return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
         }
     }
 
