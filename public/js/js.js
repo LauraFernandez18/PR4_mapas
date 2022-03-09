@@ -5,6 +5,8 @@ window.onload = function() {
         document.getElementsByClassName("modalmask")[0].style.opacity = 0
         document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
         document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+        var divEtiqueta = document.getElementById('divEtiqueta')
+        divEtiqueta.innerHTML = "<p>Etiquetas</p>"
 
     })
     var cerrar = document.getElementById('cerrar2')
@@ -26,6 +28,29 @@ function modal(id, nombre, longitud, latitud, foto) {
     $("#longitud").val(longitud);
     $("#latitud").val(latitud);
     $("#foto").attr("src", "../storage/uploads/" + foto);
+
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'post');
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "adminEtiquetasAjax/" + id, true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            var etiquetashtml = '';
+            var divEtiqueta = document.getElementById('divEtiqueta')
+            for (let i = 0; i < respuesta.length; i++) {
+                etiquetashtml += "<div class='etiquetas-etiqueta mb-2'>"
+                etiquetashtml += "<button type='button' class='btn btn-success mr-3'>" + respuesta[i].nombre + "</button>"
+                etiquetashtml += "<button type='button' class='btn btn-danger btn-sm'><i class='fa fa-trash'></i></button>"
+                etiquetashtml += "</div>"
+            }
+            divEtiqueta.innerHTML += etiquetashtml;
+
+        }
+    }
+    ajax.send(formData);
 }
 
 function modal2() {

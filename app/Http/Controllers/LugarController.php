@@ -125,6 +125,13 @@ class LugarController extends Controller
         return response()->json($lugaresdistinct);
     }
 
+    public function adminEtiquetasAjax($id)
+    {
+        $etiquetas=DB::select('SELECT tbl_etiquetas.fk_lugar,tbl_etiquetas.nombre from tbl_etiquetas INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" AND tbl_etiquetas.fk_lugar=?',[$id]);
+
+        return response()->json($etiquetas);
+    }
+
     public function adminGincanas()
     {
         return view('admin_gincanas');

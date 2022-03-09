@@ -48,12 +48,9 @@
                         <div class="foto">
                             <img src="" id="foto">
                         </div>
-                        <div class="etiquetas">
+                        <div class="etiquetas" id="divEtiqueta">
                             <p>Etiquetas</p>
-                            <div class="etiquetas-etiqueta mb-2">
-                                <button type="button" class="btn btn-success mr-3">Caluroso</button>
-                                <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                            </div>
+                            
                             
                         </div>
                         <div class="guardar">
