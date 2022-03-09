@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\LugarController;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\lugarController;
+
+use App\Models\Animal;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +20,33 @@ use App\Http\Controllers\lugarController;
 |
 */
 
-Route::get('/admin',[lugarController::class,'admin']);
-Route::get('/logout',[lugarController::class,'logout']);
-Route::get('/admin/usuarios',[lugarController::class,'adminUsuarios']);
+
 Route::get('/admin/mapas',[lugarController::class,'adminMapas']);
 Route::post('/admin/adminMapasAjax',[lugarController::class,'adminMapasAjax']);
 Route::post('/admin/adminEtiquetasAjax/{id}',[lugarController::class,'adminEtiquetasAjax']);
 Route::get('/admin/gincanas',[lugarController::class,'adminGincanas']);
+
+Route::get('index',[LugarController::class, 'index']);
+
+Route::post('login', [LugarController::class, 'login']);
+
+Route::get('logout', [LugarController::class, 'logout']);
+
+Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
+
+Route::post('adminUsuarios',[LugarController::class, 'adminUsuarios']);
+
+Route::get('adminUsuariosvista',[LugarController::class, 'adminUsuariosvista']);
+
+Route::put('modificar',[LugarController::class, 'modificar']);
+
+Route::delete('eliminar',[LugarController::class, 'eliminaraUser']);
+
+Route::post('crear',[LugarController::class, 'crearUser']);
+
+Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
+
+Route::post('registrarUser',[LugarController::class, 'registrarUsuario']);
+
+Route::get('markerMapa',[LugarController::class, 'markerMapa']);
+
