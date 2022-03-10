@@ -29,9 +29,15 @@ class LugarController extends Controller
 
     public function adminMapasVista()
     {
+        return view('admin_mapas');
+    }
+
+
+    public function MenuDerechaLugares()
+    {
         $lugaresdistinct=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
 
-        return view('admin_mapas', compact('lugaresdistinct'));
+        return response()->json($lugaresdistinct);
     }
 
     public function adminMapasAjax()
@@ -59,10 +65,62 @@ class LugarController extends Controller
 
     public function adminEtiquetasAjax($id)
     {
-        $etiquetas=DB::select('SELECT tbl_etiquetas.fk_lugar,tbl_etiquetas.nombre from tbl_etiquetas INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" AND tbl_etiquetas.fk_lugar=?',[$id]);
+        $etiquetas=DB::select('SELECT tbl_etiquetas.id, tbl_etiquetas.fk_lugar,tbl_etiquetas.nombre from tbl_etiquetas INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" AND tbl_etiquetas.fk_lugar=?',[$id]);
 
         return response()->json($etiquetas);
     }
+
+    public function crearEtiqueta(Request $request)
+    {
+        $datos = $request->except('_token');
+        $etiquetas=DB::table('tbl_etiquetas')->insertGetId(["nombre"=>$datos['etiqueta'],"fk_lugar"=>$datos['lugar']]);
+        $etiquetasUser=DB::table('tbl_etiqueta_usuario')->insertGetId(["fk_usuario"=>'1',"fk_etiqueta"=>$etiquetas]);
+        $lugar=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" and tbl_lugares.id=?',[$datos['lugar']]);
+        return response()->json($lugar);
+    }
+
+    public function eliminarEtiqueta($id)
+    {
+        DB::table('tbl_etiqueta_usuario')->where('fk_etiqueta','=',$id)->delete();
+        DB::table('tbl_etiquetas')->where('id','=',$id)->delete();
+        return response()->json(array('resultado'=> 'OK'));
+    }
+
+    public function EliminarLugar(Request $request)
+    {
+        $datos = $request->except('_token');
+        $etiquetas=DB::table('Delete from tbl_etiqueta_usuario INNER JOIN tbl_etiquetas on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" AND tbl_etiquetas.fk_lugar=?',[$datos['id']])->delete();
+        return response()->json(array('resultado'=> 'OK'));
+    }
+
+    public function CrearLugar(Request $request)
+    {
+        $datos=$request->except('_token','_method');
+        $lugar=DB::table('tbl_lugares')->insertGetId(["nombre"=>$datos['nombre'],"longitud"=>$datos['longitud'],"latitud"=>$datos['latitud'],"foto"=>$datos['foto']]);
+        $etiqueta=DB::table('tbl_etiquetas')->insertGetId(["nombre"=>$datos['etiqueta'],"fk_lugar"=>$lugar]);
+        DB::table('tbl_etiqueta_usuario')->insertGetId(["fk_usuario"=>'1',"fk_etiqueta"=>$etiqueta]);
+        return response()->json(array('resultado'=> 'OK'));
+    }
+
+    public function UpdateLugar(Request $request)
+    {
+        $datos=$request->except('_token','_method');
+        if ($request->hasFile('foto')) {
+            $foto = DB::table('tbl_lugares')->select('foto')->where('id','=',$request['id'])->first();
+            if ($foto->foto != null) {
+                Storage::delete('public/storage/uploads'.$foto->foto);
+            }
+            $datos['foto'] = $request->file('foto')->store('uploads','public');
+        }
+        $datosLugar=$request->except('_token','_method','id');
+        DB::table('tbl_lugares')->where('id','=',$request['id'])->update($datosLugar);
+        $lugar=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" and tbl_lugares.id=?',[$request['id']]);
+
+
+        return response()->json($lugar);
+    }
+
+
 
     public function adminGincanas()
     {
