@@ -1,6 +1,7 @@
 window.onload = function() {
     marker_map();
-    funcionInit();
+    /* funcionInit(); */
+
     // Get the modal
     modal = document.getElementById("myModal");
 
@@ -50,7 +51,8 @@ function objetoAjax() {
 }
 
 /*MOSTRAR MAPA*/
-var map = L.map('map').setView([41.373703, 2.187467], 15);
+
+map = L.map('map').setView([41.373703, 2.187467], 14);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -81,8 +83,16 @@ polygon.setStyle({
 
 /* var marker = L.marker([41.373703, 2.187467]).addTo(map);
 marker.bindPopup("<b>Hola</b>").openPopup(); */
+/* var routingControl = new L.Routing.Control({
+    waypoints: [
+        L.latLng(41.357596, 2.183804),
+        L.latLng(41.357662, 2.185403)
+    ],
+    show: false
+}).addTo(map); */
 
 function marker_map() {
+    var array_cord = [];
     /* var mapa = document.getElementById("n_sitio"); */
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
@@ -96,19 +106,21 @@ function marker_map() {
             var respuesta = JSON.parse(this.responseText);
             recarga = "";
             for (let i = 0; i < respuesta.length; i++) {
+                array_cord.push([respuesta[i].latitud,respuesta[i].longitud]);
                 /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
-                var marker = L.marker([respuesta[i].longitud, respuesta[i].latitud]).addTo(map);
-                marker.bindPopup("<b>" + respuesta[i].nombre + "</b>").openPopup();
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
+                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "," + array_cord + "); return false;'>Ir</button>").openPopup();
             }
             /* alert(recarga); */
             /* mapa.innerHTML = recarga; */
         }
     }
     ajax.send(formData);
+    console.log(array_cord);
 }
 
 //Coger ubicación actual
-const funcionInit = () => {
+/* const funcionInit = () => {
     if (!"geolocation" in navigator) {
         return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
     }
@@ -129,9 +141,72 @@ const funcionInit = () => {
     // Solicitar
     navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
 
-};
+}; */
 
 //Ruta mapa
+function ruta(lat, long, coordenadas) {
+    limpiarRuta(coordenadas);
+    if (!"geolocation" in navigator) {
+        return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
+    }
+
+    const onUbicacionConcedida = ubicacion => {
+        console.log("Tengo la ubicación: ", ubicacion);
+        /* console.log('direccion destino:' + lat + ',' + long);
+        console.log('direccion actual:' + ubicacion.coords.latitude + ',' + ubicacion.coords.longitude); */
+        L.Routing.control({
+            waypoints: [
+                L.latLng(ubicacion.coords.latitude, ubicacion.coords.longitude),
+                L.latLng(lat, long)
+            ]
+        }).addTo(map);
+    }
+
+    const onErrorDeUbicacion = err => {
+        console.log("Error obteniendo ubicación: ", err);
+    }
+
+    const opcionesDeSolicitud = {
+        enableHighAccuracy: true, // Alta precisión
+        maximumAge: 0, // No queremos caché
+        timeout: 5000 // Esperar solo 5 segundos
+    };
+    // Solicitar
+    navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
+}
+
+function limpiarRuta(coordenadas){
+    console.log('cordenadas:'+coordenadas)
+    if (!"geolocation" in navigator) {
+        return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
+    }
+
+    const onUbicacionConcedida = ubicacion => {
+        /* console.log("Tengo la ubicación: ", ubicacion);
+        console.log('direccion destino:' + lat + ',' + long);
+        console.log('direccion actual:' + ubicacion.coords.latitude + ',' + ubicacion.coords.longitude); */
+        for (let i = 0; i < coordenadas.length; i++) {
+            L.Routing.control({
+                waypoints: [
+                    L.latLng(ubicacion.coords.latitude, ubicacion.coords.longitude),
+                    L.latLng(coordenadas[i])
+                ]
+            }).remove();               
+        }
+    }
+
+    const onErrorDeUbicacion = err => {
+        console.log("Error obteniendo ubicación: ", err);
+    }
+
+    const opcionesDeSolicitud = {
+        enableHighAccuracy: true, // Alta precisión
+        maximumAge: 0, // No queremos caché
+        timeout: 5000 // Esperar solo 5 segundos
+    };
+    // Solicitar
+    navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
+}
 
 /* LOGIN Y REGISTRAR */
 function mostrarlog() {
@@ -142,4 +217,53 @@ function mostrarlog() {
 function mostrarreg() {
     document.getElementById("content_regis").style.display = 'block';
     document.getElementById("content_regis2").style.display = 'none';
+}
+
+/*VALIDACIÓN LOGIN*/
+function validarLogin() {
+    let correo_user = document.getElementById('correo_user').value;
+    let pass_user = document.getElementById('pass_user').value;
+
+    if (correo_user == '' || pass_user == '') {
+        swal.fire({
+            title: "Error",
+            text: "Tienes que rellenar todos los datos",
+            icon: "error",
+        });
+        return false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo_user)) {
+        swal.fire({
+            title: "Error",
+            text: "Introduce un email correcto",
+            icon: "error",
+        });
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/*VALIDACIÓN REGISTRO*/
+function validarRegistro() {
+    let nombre = document.getElementById('nombre').value;
+    let correo_user = document.getElementById('correo_user').value;
+    let pass_user = document.getElementById('pass_user').value;
+
+    if (nombre == '' || correo_user == '' || pass_user == '') {
+        swal.fire({
+            title: "Error",
+            text: "Tienes que rellenar todos los datos",
+            icon: "error",
+        });
+        return false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo_user)) {
+        swal.fire({
+            title: "Error",
+            text: "Introduce un email correcto",
+            icon: "error",
+        });
+        return false;
+    } else {
+        return true;
+    }
 }

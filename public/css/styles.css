@@ -1,12 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap');
+
 .cabecera {
     margin-left: 1%;
     margin-right: 2%;
 }
 
 #map {
-    width: 100%;
     height: 100vh;
-    float: right;
+    width: 100%;
 }
 
 .btn_inicio {
@@ -104,6 +105,12 @@
     justify-content: center;
     color: black;
     display: block;
+}
+
+.register h1,
+.register2 h1 {
+    font-family: 'Fredoka', sans-serif;
+    color: #69bad3;
 }
 
 .register2 {
