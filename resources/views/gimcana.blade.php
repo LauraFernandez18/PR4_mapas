@@ -13,8 +13,10 @@
 </head>
 <body>
     <div id="map">
-        <button class="btn_cabecera btn btn-dark" type="button">Mapa</button>
-        <button class="btn_inicio btn btn-dark" type="button" onclick="iniciar_sesion()">Iniciar sesión</button>
+        <form action="{{url('index')}}" method="GET">
+            <button type="submit" class="btn_cabecera btn btn-dark" value="Enviar"><b>Mapa</b></button>
+          </form>
+        <button class="btn_inicio btn btn-dark" type="button" onclick="iniciar_sesion()"><b>Iniciar sesión</b></button>
     </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="

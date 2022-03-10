@@ -18,6 +18,15 @@
     z-index: 600;
 }
 
+.btn_logout {
+    position: absolute;
+    top: 20px;
+    float: right;
+    right: 20px;
+    padding: 10px;
+    z-index: 600;
+}
+
 .btn_cabecera {
     position: absolute;
     top: 20px;
@@ -29,7 +38,6 @@
 
 .filtro {
     position: absolute;
-    position: center;
     top: 20px;
     z-index: 500;
     width: 100%;
