@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Animal;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +17,15 @@ use App\Models\Animal;
 |
 */
 
+
+// Route::get('/admin/mapas',[lugarController::class,'adminMapas']);
+Route::post('adminMapasAjax',[lugarController::class,'adminMapasAjax']);
+Route::post('adminEtiquetasAjax/{id}',[lugarController::class,'adminEtiquetasAjax']);
+// Route::get('/admin/gincanas',[lugarController::class,'adminGincanas']);
+
 Route::get('index',[LugarController::class, 'index']);
+
+Route::get('index_inicio',[LugarController::class, 'index_inicio']);
 
 Route::post('login', [LugarController::class, 'login']);
 
@@ -28,6 +37,8 @@ Route::post('adminUsuarios',[LugarController::class, 'adminUsuarios']);
 
 Route::get('adminUsuariosvista',[LugarController::class, 'adminUsuariosvista']);
 
+Route::get('adminMapasVista',[LugarController::class, 'adminMapasVista']);
+
 Route::put('modificar',[LugarController::class, 'modificar']);
 
 Route::delete('eliminar',[LugarController::class, 'eliminaraUser']);
@@ -36,6 +47,9 @@ Route::post('crear',[LugarController::class, 'crearUser']);
 
 Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
 
+Route::get('gimcana', [LugarController::class, 'gimcana']);
+
 Route::post('registrarUser',[LugarController::class, 'registrarUsuario']);
 
 Route::get('markerMapa',[LugarController::class, 'markerMapa']);
+

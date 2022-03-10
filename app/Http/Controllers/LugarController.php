@@ -5,94 +5,83 @@ namespace App\Http\Controllers;
 use App\Models\Lugar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class LugarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function index_inicio()
     {
-        //
+        return view('index_inicio');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Lugar  $lugar
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Lugar $lugar)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Lugar  $lugar
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Lugar $lugar)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Lugar  $lugar
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Lugar $lugar)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Lugar  $lugar
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Lugar $lugar)
     {
         //
     }
 
+    public function adminMapasVista()
+    {
+        $lugaresdistinct=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
+
+        return view('admin_mapas', compact('lugaresdistinct'));
+    }
+
+    public function adminMapasAjax()
+    {
+        $lugaresdistinct=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
+        $lugares=DB::select('SELECT tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
+        $etiquetas=DB::select('SELECT tbl_etiquetas.fk_lugar,tbl_etiquetas.nombre from tbl_etiquetas INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
+        $lugares_etiquetas = array();
+        $etiquetas2 = array();
+        foreach ($lugares as $lugar) {
+            //array_push($lugares_etiquetas,$lugar->nombre);
+            //$lugares_etiquetas=$lugar->nombre;
+            foreach ($etiquetas as $etiqueta) {
+                if ($lugar->id==$etiqueta->fk_lugar) {
+                    array_push($etiquetas2,$etiqueta->nombre);
+                    //array_push($lugares_etiquetas[$lugar->nombre],$etiqueta->nombre);
+                }
+            }
+            $lugares_etiquetas[$lugar->nombre]=$etiquetas2;
+            $etiquetas2=[];
+        }
+        //print_r( $lugares_etiquetas);
+        return response()->json($lugaresdistinct);
+    }
+
+    public function adminEtiquetasAjax($id)
+    {
+        $etiquetas=DB::select('SELECT tbl_etiquetas.fk_lugar,tbl_etiquetas.nombre from tbl_etiquetas INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" AND tbl_etiquetas.fk_lugar=?',[$id]);
+
+        return response()->json($etiquetas);
+    }
+
+    public function adminGincanas()
+    {
+        return view('admin_gincanas');
+    }
+
     public function login(Request $request){
         $datos= $request->except('_token','_method');
+        $users=DB::table("tbl_users")->select('*')->where('email', '=', $datos['correo_user'])->where('pwd', '=', md5($datos['pass_user']))->count();
         $user=DB::table("tbl_users")->select('*')->where('email', '=', $datos['correo_user'])->where('pwd', '=', md5($datos['pass_user']))->first();
-         if($user->tipo_usu=='administrador'){
+        if($users==0){
+            return redirect('index');
+        } 
+        if($user->tipo_usu=='administrador'){
            $request->session()->put('nombre_admin',$request->correo_user);
            return redirect('cPanelAdmin');
         }if($user->tipo_usu=='usuario'){
             $request->session()->put('nombre_user',$request->correo_user);
-            return redirect('index');
+            return redirect('index_inicio');
         }
         return redirect('');
     }
@@ -129,6 +118,10 @@ class LugarController extends Controller
     public function adminUsuarios(Request $request){
         $datos=DB::select('select * from tbl_users where nombre like ?',['%'.$request->input('filtro').'%']);
         return response()->json($datos);
+    }
+
+    public function gimcana(){
+        return view('gimcana');
     }
 
     public function modificar(Request $request){
@@ -186,5 +179,6 @@ class LugarController extends Controller
     public function markerMapa(){
         $datos=DB::select('select * from tbl_lugares');
         return response()->json($datos);
+
     }
 }

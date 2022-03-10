@@ -30,9 +30,12 @@
         <form action="{{url('adminUsuariosvista')}}" method="GET">
                 <button type="submit" value="Enviar" class="botoncPanel"><i class="fa fa-user" aria-hidden="true"></i> USUARIOS</button><br><br>
         </form>
-        <form action="{{url('adminLugares')}}" method="GET">
+        <form action="{{url('adminMapasVista')}}" method="GET">
                 <button type="submit" class="botoncPanel" value="Enviar"><i class="fa fa-map" aria-hidden="true"></i> LUGARES</button><br><br>
         </form>
+        <form action="{{url('adminMapasVista')}}" method="GET">
+            <button type="submit" class="botoncPanel" value="Enviar"><i class="fa fa-map-pin" aria-hidden="true"></i> GIMCANA</button><br><br>
+    </form>
     </div>
     </div>
 </body>
