@@ -171,25 +171,18 @@ function validarLogin() {
 /*VALIDACIÓN REGISTRO*/
 function validarRegistro() {
     let nombre = document.getElementById('nombre').value;
-    let correo_user = document.getElementById('correo_user').value;
-    let pass_user = document.getElementById('pass_user').value;
+    let email = document.getElementById('email').value;
+    let pwd = document.getElementById('pwd').value;
 
-    if (nombre == '' || correo_user == '' || pass_user == '') {
+    if (nombre == '' || email == '' || pwd == '') {
         swal.fire({
             title: "Error",
             text: "Tienes que rellenar todos los datos",
             icon: "error",
         });
         return false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo_user)) {
-        swal.fire({
-            title: "Error",
-            text: "Introduce un email correcto",
-            icon: "error",
-        });
-        return false;
     } else {
         return true;
     }
-}
 
+}

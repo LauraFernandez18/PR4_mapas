@@ -25,6 +25,8 @@ Route::post('adminEtiquetasAjax/{id}',[lugarController::class,'adminEtiquetasAja
 
 Route::get('index',[LugarController::class, 'index']);
 
+Route::get('index_inicio',[LugarController::class, 'index_inicio']);
+
 Route::post('login', [LugarController::class, 'login']);
 
 Route::get('logout', [LugarController::class, 'logout']);
@@ -44,6 +46,8 @@ Route::delete('eliminar',[LugarController::class, 'eliminaraUser']);
 Route::post('crear',[LugarController::class, 'crearUser']);
 
 Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
+
+Route::get('gimcana', [LugarController::class, 'gimcana']);
 
 Route::post('registrarUser',[LugarController::class, 'registrarUsuario']);
 
