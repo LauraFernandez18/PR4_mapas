@@ -7,6 +7,8 @@ window.onload = function() {
         document.getElementsByTagName("html")[0].style.overflowY = "scroll"
         var divEtiqueta = document.getElementById('divEtiqueta')
         divEtiqueta.innerHTML = ""
+        marker_map()
+        menuDerecha()
 
     })
     var cerrar = document.getElementById('cerrar2')
@@ -14,9 +16,64 @@ window.onload = function() {
         document.getElementsByClassName("modalmask")[1].style.opacity = 0
         document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
         document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+        marker_map()
+        menuDerecha()
 
     })
+
+    var crearEtiqueta = document.getElementById('btn-crear-etiqueta')
+    crearEtiqueta.addEventListener("click", function() {
+        var etiqueta = document.getElementById("etiqueta").value;
+        var lugar = document.getElementById("nombre").getAttribute('data-id')
+
+        var formData = new FormData();
+        formData.append('_token', document.getElementById('token').getAttribute("content"));
+        formData.append('_method', 'post');
+        formData.append('etiqueta', etiqueta);
+        formData.append('lugar', lugar);
+        var ajax = objetoAjax();
+
+        ajax.open("POST", "crearEtiqueta", true);
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                var respuesta = JSON.parse(this.responseText);
+                divEtiqueta.innerHTML = ""
+                modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto)
+            }
+        }
+        ajax.send(formData);
+
+    })
+
+    $("#guardar-boton").click(function() {
+        var id = document.getElementById("nombre").getAttribute('data-id')
+        var nombre = $("#nombre").val();
+        var longitud = $("#longitud").val();
+        var latitud = $("#latitud").val();
+        var formData = new FormData();
+        formData.append('_token', document.getElementById('token').getAttribute("content"));
+        formData.append('_method', 'post');
+        formData.append('id', id);
+        formData.append('nombre', nombre);
+        formData.append('longitud', longitud);
+        formData.append('latitud', latitud);
+        formData.append('foto', document.getElementById('foto-Input').files[0]);
+        var ajax = objetoAjax();
+
+        ajax.open("POST", "UpdateLugar", true);
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                var respuesta = JSON.parse(this.responseText);
+                divLugar.innerHTML = ""
+                modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto)
+            }
+        }
+        ajax.send(formData);
+    })
+
+    menuDerecha();
     marker_map();
+
 };
 
 
@@ -24,37 +81,65 @@ function modal(id, nombre, longitud, latitud, foto) {
     document.getElementsByClassName("modalmask")[0].style.opacity = 1
     document.getElementsByClassName("modalmask")[0].style.pointerEvents = "auto"
         //document.getElementsByTagName("html")[0].style.overflow = "hidden"
+    $("#nombre").attr("data-id", id);
     $("#nombre").val(nombre);
     $("#longitud").val(longitud);
     $("#latitud").val(latitud);
     $("#foto").attr("src", "storage/uploads/" + foto);
+    etiquetasAjax()
 
-    var formData = new FormData();
-    formData.append('_token', document.getElementById('token').getAttribute("content"));
-    formData.append('_method', 'post');
-    var ajax = objetoAjax();
+    function etiquetasAjax() {
+        var formData = new FormData();
+        formData.append('_token', document.getElementById('token').getAttribute("content"));
+        formData.append('_method', 'post');
+        var ajax = objetoAjax();
 
-    ajax.open("POST", "adminEtiquetasAjax/" + id, true);
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-            var respuesta = JSON.parse(this.responseText);
-            var etiquetashtml = '';
-            var divEtiqueta = document.getElementById('divEtiqueta')
-            for (let i = 0; i < respuesta.length; i++) {
-                etiquetashtml += "<div class='etiquetas-etiqueta mb-2'>"
-                etiquetashtml += "<div class='etiquetas-etiqueta-nombre mr-3'>"
-                etiquetashtml += "<button type='button' class='btn btn-success btn-block'>" + respuesta[i].nombre + "</button>"
-                etiquetashtml += "</div>"
-                etiquetashtml += "<div class='etiquetas-etiqueta-eliminar'>"
-                etiquetashtml += "<button type='button' class='btn btn-danger'><i class='fa fa-trash'></i></button>"
-                etiquetashtml += "</div>"
-                etiquetashtml += "</div>"
+        ajax.open("POST", "adminEtiquetasAjax/" + id, true);
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                var respuesta = JSON.parse(this.responseText);
+                var etiquetashtml = '';
+                var divEtiqueta = document.getElementById('divEtiqueta')
+                for (let i = 0; i < respuesta.length; i++) {
+                    etiquetashtml += "<div class='etiquetas-etiqueta mb-2'>"
+                    etiquetashtml += "<div class='etiquetas-etiqueta-nombre mr-3'>"
+                    etiquetashtml += "<button type='button' class='btn btn-success btn-block'>" + respuesta[i].nombre + "</button>"
+                    etiquetashtml += "</div>"
+                    etiquetashtml += "<div class='etiquetas-etiqueta-eliminar'>"
+                    etiquetashtml += "<button type='button' class='btn btn-danger btn-eliminar-etiq' data-id='" + respuesta[i].id + "'><i class='fa fa-trash'></i></button>"
+                    etiquetashtml += "</div>"
+                    etiquetashtml += "</div>"
+                }
+                divEtiqueta.innerHTML += etiquetashtml;
+                eliminarEtiqueta()
+                    /*boton eliminar etiqueta*/
+                function eliminarEtiqueta() {
+                    $(".btn-eliminar-etiq").click(function() {
+                        var idEtiqueta = this.getAttribute('data-id')
+
+                        var formData = new FormData();
+                        formData.append('_token', document.getElementById('token').getAttribute("content"));
+                        formData.append('_method', 'post');
+                        var ajax = objetoAjax();
+
+                        ajax.open("POST", "eliminarEtiqueta/" + idEtiqueta, true);
+                        ajax.onreadystatechange = function() {
+                            if (ajax.readyState == 4 && ajax.status == 200) {
+                                var respuesta = JSON.parse(this.responseText);
+                                divEtiqueta.innerHTML = ""
+                                etiquetasAjax()
+                                marker_map()
+                            }
+                        }
+                        ajax.send(formData);
+                    });
+                }
+
             }
-            divEtiqueta.innerHTML += etiquetashtml;
-
         }
+        ajax.send(formData);
     }
-    ajax.send(formData);
+
 }
 
 function modal2() {
@@ -152,8 +237,8 @@ polygon.setStyle({
     fillOpacity: 0.1
 });
 
-
-$(document).ready(function() {
+/*menu derecha*/
+function menuDerechaClick() {
     $(".lugar-jquery").click(function() {
         var id = $(this).attr('data-id');
         var nombre = $(this).attr('data-nombre');
@@ -164,4 +249,27 @@ $(document).ready(function() {
     });
 
 
-});
+};
+
+function menuDerecha() {
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'post');
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "MenuDerechaLugares", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            var divLugar = document.getElementById('lugares')
+            divLugar.innerHTML = ''
+            var divLugarhtml = '<h2>Lugares de interés</h2>';
+            for (let i = 0; i < respuesta.length; i++) {
+                divLugarhtml += "<p class='lugar-jquery' data-id='" + respuesta[i].id + "' data-nombre='" + respuesta[i].nombre + "' data-long='" + respuesta[i].longitud + "' data-lat='" + respuesta[i].latitud + "' data-foto='" + respuesta[i].foto + "'>• " + respuesta[i].nombre + "</p>"
+            }
+            divLugar.innerHTML += divLugarhtml;
+        }
+        menuDerechaClick()
+    }
+    ajax.send(formData);
+}

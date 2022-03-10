@@ -282,7 +282,7 @@ form.registrarse-form label {
     position: absolute;
     top: 17%;
     left: 40vh;
-    width: 30vh;
+    width: 40vh;
     height: 25vh;
     text-align: left;
     overflow-y: scroll;
@@ -322,11 +322,11 @@ form.registrarse-form label {
 .etiquetas-etiqueta-nombre,
 .etiquetas-etiqueta-eliminar {
     float: left;
-    width: 50%;
+    width: 70%;
 }
 
 .etiquetas-etiqueta-eliminar {
-    width: 40%;
+    width: 20%;
 }
 
 .anadir-etiqueta-enviar {
