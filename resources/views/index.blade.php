@@ -24,9 +24,6 @@
     <button class="btn_inicio btn btn-dark" type="button" onclick="iniciar_sesionJS()">Iniciar sesión</button>
     </div> --}}
     <div id="map">
-        <form action="{{url('gimcana')}}" method="GET">
-          <button type="submit" class="btn_cabecera btn btn-dark" value="Enviar"><b>Gimcana</b></button>
-        </form>
         <button class="btn btn-dark btn_inicio" type="button" id="myBtn"><b>Empezar</b></button>
         <div class="filtro">
           <button class="btn_filtro" type="button"><i class="fas fa-utensils"></i><b> Restaurantes</b></button>
