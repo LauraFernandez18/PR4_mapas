@@ -1,6 +1,10 @@
 window.onload = function() {
+    array_cord = [];
     marker_map();
-    funcionInit();
+    ruta_elim = null;
+    /* limpiarRuta(); */
+    /* funcionInit(); */
+
     // Get the modal
     modal = document.getElementById("myModal");
 
@@ -50,7 +54,8 @@ function objetoAjax() {
 }
 
 /*MOSTRAR MAPA*/
-var map = L.map('map').setView([41.373703, 2.187467], 14);
+
+map = L.map('map').setView([41.373703, 2.187467], 14);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -81,6 +86,13 @@ polygon.setStyle({
 
 /* var marker = L.marker([41.373703, 2.187467]).addTo(map);
 marker.bindPopup("<b>Hola</b>").openPopup(); */
+/* var routingControl = new L.Routing.Control({
+    waypoints: [
+        L.latLng(41.357596, 2.183804),
+        L.latLng(41.357662, 2.185403)
+    ],
+    show: false
+}).addTo(map); */
 
 function marker_map() {
     /* var mapa = document.getElementById("n_sitio"); */
@@ -95,10 +107,12 @@ function marker_map() {
         if (ajax.readyState == 4 && ajax.status == 200) {
             var respuesta = JSON.parse(this.responseText);
             recarga = "";
+            /* var array_cord = []; */
             for (let i = 0; i < respuesta.length; i++) {
+                /* array_cord.push([respuesta[i].latitud, respuesta[i].longitud]); */
                 /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
-                var marker = L.marker([respuesta[i].longitud, respuesta[i].latitud]).addTo(map);
-                marker.bindPopup("<b>" + respuesta[i].nombre + "</b>").openPopup();
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
+                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button>").openPopup();
             }
             /* alert(recarga); */
             /* mapa.innerHTML = recarga; */
@@ -108,7 +122,7 @@ function marker_map() {
 }
 
 //Coger ubicación actual
-const funcionInit = () => {
+/* const funcionInit = () => {
     if (!"geolocation" in navigator) {
         return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
     }
@@ -129,9 +143,105 @@ const funcionInit = () => {
     // Solicitar
     navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
 
-};
+}; */
 
 //Ruta mapa
+function ruta(lat, long) {
+    /* limpiarRuta(); */
+    if (ruta_elim != null) {
+        map.removeControl(ruta_elim);
+    }
+    if (!"geolocation" in navigator) {
+        return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
+    }
+
+    const onUbicacionConcedida = ubicacion => {
+        console.log("Tengo la ubicación: ", ubicacion);
+        /* console.log('direccion destino:' + lat + ',' + long);
+        console.log('direccion actual:' + ubicacion.coords.latitude + ',' + ubicacion.coords.longitude); */
+        ruta_elim = L.Routing.control({
+            waypoints: [
+                L.latLng(ubicacion.coords.latitude, ubicacion.coords.longitude),
+                L.latLng(lat, long)
+            ],
+            language: 'es',
+            routeWhileDragging: true
+        });
+        ruta_elim.addTo(map);
+    }
+
+    const onErrorDeUbicacion = err => {
+        console.log("Error obteniendo ubicación: ", err);
+    }
+
+    const opcionesDeSolicitud = {
+        enableHighAccuracy: true, // Alta precisión
+        maximumAge: 0, // No queremos caché
+        timeout: 5000 // Esperar solo 5 segundos
+    };
+    // Solicitar
+    navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
+}
+
+function limpiarRuta() {
+    if (!"geolocation" in navigator) {
+        return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
+    }
+    console.log('Cordenada1s: ' + array_cord);
+
+    /* var mapa = document.getElementById("n_sitio"); */
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'get');
+    /* Inicializar un objeto AJAX */
+    var ajax = objetoAjax();
+    ajax.open("POST", "markerMapa", true);
+
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            for (let i = 0; i < respuesta.length; i++) {
+                /* if (respuesta[i] == array_cord[i]) {
+
+                } else {
+                    array_cord.push([respuesta[i].latitud, respuesta[i].longitud]);
+                } */
+                array_cord.push([respuesta[i].latitud, respuesta[i].longitud]);
+            }
+            console.log('este: ' + array_cord);
+        }
+    }
+    ajax.send(formData);
+
+    const onUbicacionConcedida = ubicacion => {
+        /* console.log("Tengo la ubicación: ", ubicacion);
+        console.log('direccion destino:' + lat + ',' + long);
+        console.log('direccion actual:' + ubicacion.coords.latitude + ',' + ubicacion.coords.longitude); */
+        for (let i = 0; i < array_cord.length; i++) {
+            console.log('Elim' + i + ': ' + array_cord[i])
+            console.log(L.latLng(array_cord[i]));
+            var ruta_done = L.Routing.control({
+                waypoints: [
+                    L.latLng(ubicacion.coords.latitude, ubicacion.coords.longitude),
+                    L.latLng(array_cord[i])
+                ]
+            });
+            ruta_done.remove();
+        }
+    }
+
+    const onErrorDeUbicacion = err => {
+        console.log("Error obteniendo ubicación: ", err);
+    }
+
+    const opcionesDeSolicitud = {
+        enableHighAccuracy: true, // Alta precisión
+        maximumAge: 0, // No queremos caché
+        timeout: 5000 // Esperar solo 5 segundos
+    };
+    // Solicitar
+    navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
+}
 
 /* LOGIN Y REGISTRAR */
 function mostrarlog() {
@@ -184,5 +294,5 @@ function validarRegistro() {
     } else {
         return true;
     }
-
 }
+
