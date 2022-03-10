@@ -76,14 +76,14 @@
         <a href="#cerrar" class="cerrar" id="cerrar2">x</a>
                 <div class="registrarse resize">
                     <form action="" method="POST" class="registrarse-form" onsubmit="return false" id="form">
-                        <div class="nombre"><input type="text" name="nombre" value="Nombre lugar"></div>
+                        <div class="nombre"><input type="text" name="nombre" value="Nombre lugar" id="nombre-crear"></div>
                         <div class="info">
                             <label>Longitud</label>
-                            <input type="text" name="longitud">
+                            <input type="text" name="longitud" id="longitud-crear">
                             <label>Latitud</label>
-                            <input type="text" name="latitud">
+                            <input type="text" name="latitud" id="latitud-crear">
                             <label>Foto</label>
-                            <input type="file" name="file" class="upload" accept="image/*">
+                            <input type="file" name="file" class="upload" accept="image/*" id="foto-crear">
                         </div>
                         <div class="palabra-etiqueta">
                             <p>Etiquetas</p>
@@ -91,12 +91,12 @@
                         <div class="etiquetas">
                             
                         </div>
-                        <div class="anadir-etiqueta disabled">
+                        <div class="anadir-etiqueta">
                             <p>Añadir etiquetas</p>
-                            <input type="text" name="etiqueta" placeholder="+ Nueva etiqueta">
+                            <input type="text" name="etiqueta" placeholder="+ Nueva etiqueta" id="etiqueta-crear">
                         </div>
                         <div class="crear">
-                            <button class="btn bg-info btn-lg" id="guardar-boton" type="submit">Crear</button>
+                            <button class="btn bg-info btn-lg" id="guardar-boton-crear">Crear</button>
                         </div>
                     </form>
                     

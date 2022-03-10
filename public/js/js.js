@@ -46,26 +46,77 @@ window.onload = function() {
     })
 
     $("#guardar-boton").click(function() {
+            var id = document.getElementById("nombre").getAttribute('data-id')
+            var nombre = $("#nombre").val();
+            var longitud = $("#longitud").val();
+            var latitud = $("#latitud").val();
+            var formData = new FormData();
+            formData.append('_token', document.getElementById('token').getAttribute("content"));
+            formData.append('_method', 'post');
+            formData.append('id', id);
+            formData.append('nombre', nombre);
+            formData.append('longitud', longitud);
+            formData.append('latitud', latitud);
+            formData.append('foto', document.getElementById('foto-Input').files[0]);
+            var ajax = objetoAjax();
+
+            ajax.open("POST", "UpdateLugar", true);
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var respuesta = JSON.parse(this.responseText);
+                    divLugar.innerHTML = ""
+                    modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto)
+                }
+            }
+            ajax.send(formData);
+        })
+        /*crear lugar*/
+    $("#guardar-boton-crear").click(function() {
+        var nombre = $("#nombre-crear").val();
+        var longitud = $("#longitud-crear").val();
+        var latitud = $("#latitud-crear").val();
+        var etiqueta = $("#etiqueta-crear").val();
+        var formData = new FormData();
+        formData.append('_token', document.getElementById('token').getAttribute("content"));
+        formData.append('_method', 'post');
+        formData.append('nombre', nombre);
+        formData.append('longitud', longitud);
+        formData.append('latitud', latitud);
+        formData.append('etiqueta', etiqueta);
+        formData.append('foto', document.getElementById('foto-crear').files[0]);
+        var ajax = objetoAjax();
+
+        ajax.open("POST", "CrearLugar", true);
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                var respuesta = JSON.parse(this.responseText);
+                document.getElementsByClassName("modalmask")[1].style.opacity = 0
+                document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
+                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                marker_map()
+                menuDerecha()
+            }
+        }
+        ajax.send(formData);
+    })
+
+    $("#eliminar-boton").click(function() {
         var id = document.getElementById("nombre").getAttribute('data-id')
-        var nombre = $("#nombre").val();
-        var longitud = $("#longitud").val();
-        var latitud = $("#latitud").val();
         var formData = new FormData();
         formData.append('_token', document.getElementById('token').getAttribute("content"));
         formData.append('_method', 'post');
         formData.append('id', id);
-        formData.append('nombre', nombre);
-        formData.append('longitud', longitud);
-        formData.append('latitud', latitud);
-        formData.append('foto', document.getElementById('foto-Input').files[0]);
         var ajax = objetoAjax();
 
-        ajax.open("POST", "UpdateLugar", true);
+        ajax.open("POST", "EliminarLugar", true);
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var respuesta = JSON.parse(this.responseText);
-                divLugar.innerHTML = ""
-                modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto)
+                document.getElementsByClassName("modalmask")[1].style.opacity = 0
+                document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
+                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                marker_map()
+                menuDerecha()
             }
         }
         ajax.send(formData);

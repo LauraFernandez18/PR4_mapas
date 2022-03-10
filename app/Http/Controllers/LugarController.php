@@ -81,6 +81,22 @@ class LugarController extends Controller
         return response()->json(array('resultado'=> 'OK'));
     }
 
+    public function EliminarLugar(Request $request)
+    {
+        $datos = $request->except('_token');
+        $etiquetas=DB::table('Delete from tbl_etiqueta_usuario INNER JOIN tbl_etiquetas on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" AND tbl_etiquetas.fk_lugar=?',[$datos['id']])->delete();
+        return response()->json(array('resultado'=> 'OK'));
+    }
+
+    public function CrearLugar(Request $request)
+    {
+        $datos=$request->except('_token','_method');
+        $lugar=DB::table('tbl_lugares')->insertGetId(["nombre"=>$datos['nombre'],"longitud"=>$datos['longitud'],"latitud"=>$datos['latitud'],"foto"=>$datos['foto']]);
+        $etiqueta=DB::table('tbl_etiquetas')->insertGetId(["nombre"=>$datos['etiqueta'],"fk_lugar"=>$lugar]);
+        DB::table('tbl_etiqueta_usuario')->insertGetId(["fk_usuario"=>'1',"fk_etiqueta"=>$etiqueta]);
+        return response()->json(array('resultado'=> 'OK'));
+    }
+
     public function UpdateLugar(Request $request)
     {
         $datos=$request->except('_token','_method');
