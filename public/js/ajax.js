@@ -153,8 +153,7 @@ function ruta(lat, long) {
     }
     if (!"geolocation" in navigator) {
         return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
-    }
-
+    };
     const onUbicacionConcedida = ubicacion => {
         console.log("Tengo la ubicación: ", ubicacion);
         /* console.log('direccion destino:' + lat + ',' + long);
@@ -180,7 +179,7 @@ function ruta(lat, long) {
         timeout: 5000 // Esperar solo 5 segundos
     };
     // Solicitar
-    navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
+    setInterval(navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud), 1000);
 }
 
 function limpiarRuta() {
@@ -295,4 +294,3 @@ function validarRegistro() {
         return true;
     }
 }
-
