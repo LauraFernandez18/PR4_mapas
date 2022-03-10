@@ -76,7 +76,7 @@ class LugarController extends Controller
         }
         return redirect('');
     }
-    
+
     public function cPanelAdmin(){
         return view('cPanelAdmin');
     }

@@ -55,9 +55,9 @@
                 <span><i class="fas fa-user"></i></span>
                 <input class="inp_txt" type="text" name="nombre" id="nombre" placeholder="Introduce tu nombre"><br><br>
                 <span><i class="fas fa-envelope"></i></span>
-                <input class="inp_txt" type="text" name="email" id="correo_user" placeholder="Introduce tu correo"><br><br>
+                <input class="inp_txt" type="text" name="email" id="email" placeholder="Introduce tu correo"><br><br>
                 <span><i class="fas fa-lock"></i></span>
-                <input type="password" name="pwd" id="pass_user" placeholder="Introduce tu contraseña">
+                <input type="password" name="pwd" id="pwd" placeholder="Introduce tu contraseña">
                 <br><br>
                 <button class="btn_regis" type="submit" value="register">Registrarme</button><br><br>
               </form>
