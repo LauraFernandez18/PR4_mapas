@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap');
-
 .cabecera {
     margin-left: 1%;
     margin-right: 2%;
@@ -13,16 +12,38 @@
 .btn_inicio {
     position: absolute;
     top: 20px;
+    float: right;
     right: 20px;
     padding: 10px;
-    z-index: 800;
+    z-index: 600;
+}
+
+.btn_logout {
+    position: absolute;
+    top: 20px;
+    float: right;
+    right: 20px;
+    padding: 10px;
+    z-index: 600;
+}
+
+.btn_cabecera {
+    position: absolute;
+    top: 20px;
+    float: left;
+    left: 65px;
+    padding: 10px;
+    z-index: 600;
 }
 
 .filtro {
     position: absolute;
     top: 20px;
-    z-index: 800;
-    right: 500px;
+    z-index: 500;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn_filtro {
@@ -34,19 +55,10 @@
     text-align: center;
     cursor: pointer;
     box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
-    margin: 0;
 }
 
 .btn_filtro:hover {
     background-color: rgb(241, 241, 241);
-}
-
-.btn_cabecera {
-    position: absolute;
-    top: 20px;
-    left: 140px;
-    padding: 10px;
-    z-index: 800;
 }
 
 .modal {

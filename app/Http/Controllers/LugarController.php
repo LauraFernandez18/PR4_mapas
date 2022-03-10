@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lugar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -15,6 +15,11 @@ class LugarController extends Controller
     public function index()
     {
         return view('index');
+    }
+
+    public function index_inicio()
+    {
+        return view('index_inicio');
     }
 
     public function destroy(Lugar $lugar)
@@ -124,13 +129,17 @@ class LugarController extends Controller
 
     public function login(Request $request){
         $datos= $request->except('_token','_method');
+        $users=DB::table("tbl_users")->select('*')->where('email', '=', $datos['correo_user'])->where('pwd', '=', md5($datos['pass_user']))->count();
         $user=DB::table("tbl_users")->select('*')->where('email', '=', $datos['correo_user'])->where('pwd', '=', md5($datos['pass_user']))->first();
-         if($user->tipo_usu=='administrador'){
+        if($users==0){
+            return redirect('index');
+        } 
+        if($user->tipo_usu=='administrador'){
            $request->session()->put('nombre_admin',$request->correo_user);
            return redirect('cPanelAdmin');
         }if($user->tipo_usu=='usuario'){
             $request->session()->put('nombre_user',$request->correo_user);
-            return redirect('index');
+            return redirect('index_inicio');
         }
         return redirect('');
     }
@@ -167,6 +176,10 @@ class LugarController extends Controller
     public function adminUsuarios(Request $request){
         $datos=DB::select('select * from tbl_users where nombre like ?',['%'.$request->input('filtro').'%']);
         return response()->json($datos);
+    }
+
+    public function gimcana(){
+        return view('gimcana');
     }
 
     public function modificar(Request $request){

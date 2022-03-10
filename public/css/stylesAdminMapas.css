@@ -23,14 +23,6 @@ body {
     }
 }
 
-.admin-logout {
-    position: absolute;
-    top: 6vh;
-    right: 5vh;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
 .admin-logo {
     position: absolute;
     top: 1vh;
@@ -56,13 +48,15 @@ body {
 .admin-cpanel-crear {
     position: absolute;
     top: 6vh;
-    right: 25vh;
+    right: 20vh;
 }
 
 .admin-atras {
     position: absolute;
     top: 6vh;
-    right: 15vh;
+    right: 10vh;
+    color: black !important;
+    font-size: 28px;
 }
 
 .fas,
