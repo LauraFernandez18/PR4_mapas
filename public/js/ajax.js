@@ -321,6 +321,14 @@ function validarRegistro() {
     }
 }
 
+function indexGimcana() {
+    swal.fire({
+        title: "Error",
+        text: "Tienes que iniciar sesión para utilizar la Gimcana",
+        icon: "error",
+    });
+}
+
 function filtro_mapa(id) {
     if (arr_marker != []) {
         for (let i = 0; i < arr_marker.length; i++) {
