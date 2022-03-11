@@ -12,7 +12,9 @@
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
+
 </head>
 <body>
     {{-- <div class="cabecera">
@@ -23,8 +25,8 @@
     </div> --}}
     <div id="map">
         <button class="btn btn-dark btn_inicio" type="button" id="myBtn"><b>Empezar</b></button>
-        <button type="submit" class="btn_cabecera btn btn-secondary" onclick="return indexGimcana();" value="Enviar"><b>Gimcana</b></button>
         <div class="filtro" id="filtro_btn">
+          
         </div>
         <!-- MODAL INICIAR SESION Y REGISTRAR -->
         <div id="myModal" class="modal">
