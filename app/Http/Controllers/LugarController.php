@@ -239,4 +239,20 @@ class LugarController extends Controller
         return response()->json($datos);
 
     }
+
+    public function filtroMapa(Request $request){
+        $id = $request->input('id');
+        $datos=DB::select('SELECT tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud from tbl_lugares 
+        INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar 
+        INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta 
+        where tbl_etiquetas.id='.$id.';');
+        return response()->json($datos);
+    }
+
+    public function filtro(){
+        $datos=DB::select('SELECT tbl_etiquetas.id, tbl_etiquetas.nombre from tbl_etiquetas 
+        INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta 
+        INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
+        return response()->json($datos);
+    }
 }
