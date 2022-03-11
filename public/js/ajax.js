@@ -87,8 +87,6 @@ polygon.setStyle({
     fillOpacity: 0.1
 });
 
-/* marker.className = ''; */
-
 /* var marker = L.marker([41.373703, 2.187467]).addTo(map);
 marker.bindPopup("<b>Hola</b>").openPopup(); */
 /* var routingControl = new L.Routing.Control({
@@ -141,7 +139,7 @@ function marker_map() {
                 /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
                 marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]);
                 marker.addTo(map);
-                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
+                marker.bindPopup("<img src='" + respuesta[i].foto + "'><b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
                 arr_marker.push(marker);
             }
             /* console.log(arr_marker); */
