@@ -22,6 +22,10 @@
     <button class="btn_inicio btn btn-dark" type="button" onclick="iniciar_sesionJS()">Iniciar sesión</button>
     </div> --}}
     <div id="map">
+        <form action="{{url('logout')}}" method="GET">
+        <button class="btn btn-danger btn_logout" type="submit" id="myBtn"><b><i class="fas fa-sign-out-alt"></i></b></button>
+        </form>
+      {{-- </br> --}}
         <form action="{{url('gimcana')}}" method="GET">
           <button type="submit" class="btn_cabecera btn btn-dark" value="Enviar"><b>Gimcana</b></button>
         </form>
