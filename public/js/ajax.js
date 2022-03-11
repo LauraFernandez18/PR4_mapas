@@ -346,7 +346,7 @@ function filtro_mapa(id) {
             var respuesta = JSON.parse(this.responseText);
             for (let i = 0; i < respuesta.length; i++) {
                 var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
-                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button>").openPopup();
+                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
                 arr_marker.push(marker);
             }
         }
