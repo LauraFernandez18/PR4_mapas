@@ -139,7 +139,7 @@ function marker_map() {
                 /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
                 marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]);
                 marker.addTo(map);
-                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
+                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button class='ir btn btn-info' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
                 arr_marker.push(marker);
             }
             /* console.log(arr_marker); */
@@ -326,6 +326,13 @@ function validarRegistro() {
         return true;
     }
 }
+
+function indexGimcana() {
+    swal.fire({
+        title: "Error",
+        text: "Debes iniciar sesión para acceder a la gimcana",
+        icon: "error",
+    });
 
 function filtro_mapa(id) {
     if (arr_marker != []) {

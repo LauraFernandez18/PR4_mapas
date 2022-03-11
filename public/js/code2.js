@@ -85,9 +85,9 @@ function modificar(id, nombre, email) {
     contenido += '<form onsubmit="editar(); return false;">'
     contenido += '<h3><b>Modificar</b></h3><br>'
     contenido += '<p><b>Nombre</b><p>'
-    contenido += '<input type="text" id="nombre" class="form-control" value="' + nombre + '"><br>'
+    contenido += '<input type="text" id="nombre_modificar" class="form-control" value="' + nombre + '"><br>'
     contenido += '<p><b>Email</b><p>'
-    contenido += '<input type="text" id="email" class="form-control" value="' + email + '">'
+    contenido += '<input type="text" id="email_modificar" class="form-control" value="' + email + '">'
     contenido += '<input type="hidden" id="id" value="' + id + '"><br><br/>'
     contenido += '<p>Si no quieres modificar la contraseña deja los campos de contraseña en blanco</p>'
     contenido += '<p><b>Contraseña actual</b></p>'
@@ -108,8 +108,8 @@ function editar() {
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
     formData.append('_method', 'PUT');
-    formData.append('nombre', document.getElementById('nombre').value);
-    formData.append('email', document.getElementById('email').value);
+    formData.append('nombre', document.getElementById('nombre_modificar').value);
+    formData.append('email', document.getElementById('email_modificar').value);
     formData.append('pwd', document.getElementById('pwd').value);
     formData.append('pwd_n', document.getElementById('pwd_nueva').value);
     formData.append('id', document.getElementById('id').value);
