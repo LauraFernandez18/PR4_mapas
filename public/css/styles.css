@@ -12,8 +12,8 @@
 .btn_inicio {
     position: absolute;
     top: 20px;
-    float: right;
-    right: 20px;
+    float: left;
+    left: 65px;
     padding: 10px;
     z-index: 600;
 }
@@ -21,8 +21,8 @@
 .btn_logout {
     position: absolute;
     top: 20px;
-    float: right;
-    right: 20px;
+    float: left;
+    left: 65px;
     padding: 10px;
     z-index: 600;
 }
@@ -31,7 +31,16 @@
     position: absolute;
     top: 20px;
     float: left;
-    left: 65px;
+    left: 165px;
+    padding: 10px;
+    z-index: 600;
+}
+
+.btn_gimcana {
+    position: absolute;
+    top: 20px;
+    float: left;
+    left: 120px;
     padding: 10px;
     z-index: 600;
 }
@@ -55,6 +64,7 @@
     text-align: center;
     cursor: pointer;
     box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
+    margin-right: 8px !important;
 }
 
 .btn_filtro:hover {
@@ -205,21 +215,37 @@ input[type='password']::placeholder {
     width: 40px;
 }
 
-@media screen and (max-width:600px){
+.prueba {
+    font-size: 3vh;
+}
+
+@media screen and (max-width:700px) {
     .filtro {
-        margin-top: 50px;
+        margin-top: 65px;
+        padding-left: 15px;
+        padding-right: 15px;
         position: absolute;
+        width: 100%;
         top: 20px;
         z-index: 500;
         overflow-y: auto;
     }
-
     .btn_inicio {
         width: 25% !important;
         font-size: 1.8vh !important;
         padding: 5%;
     }
-
+    .btn_cabecera {
+        width: 25% !important;
+        font-size: 1.8vh !important;
+        padding: 5%;
+        left: 190px;
+    }
+    .btn_gimcana {
+        width: 25% !important;
+        font-size: 1.8vh !important;
+        padding: 5%;
+    }
     .btn_filtro {
         padding: 10px 10px;
         background-color: #ffffff;
@@ -230,33 +256,27 @@ input[type='password']::placeholder {
         text-align: center;
         cursor: pointer;
         box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
+        margin-right: 5px !important;
     }
-
     .modal-content {
         width: 80% !important;
     }
-
     input[type='password'] {
         width: 80%;
     }
-
     input[type='password']::placeholder {
         font-size: 2vh;
     }
-
     h1 {
         font-size: 3.5vh !important;
     }
-
     .btn_regis {
         width: 80%;
         font-size: 2vh;
     }
-
     .inp_txt {
         width: 80%;
     }
-
     .inp_txt::placeholder {
         font-size: 2vh;
     }
