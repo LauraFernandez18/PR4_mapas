@@ -13,11 +13,11 @@
 </head>
 <body>
     <div id="map">
+        <form action="{{url('logout')}}" method="GET">
+            <button class="btn btn-danger btn_logout" type="submit" id="myBtn"><b>Log Out</b></button>
+        </form>
         <form action="{{url('index_inicio')}}" method="GET">
             <button type="submit" class="btn_cabecera btn btn-dark" value="Enviar"><b>Mapa</b></button>
-        </form>
-        <form action="{{url('logout')}}" method="GET">
-            <button class="btn btn-dark btn_logout" type="submit" id="myBtn"><b>Log Out</b></button>
         </form>
     </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
