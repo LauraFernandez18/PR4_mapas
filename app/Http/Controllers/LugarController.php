@@ -127,6 +127,14 @@ class LugarController extends Controller
         return view('admin_gincanas');
     }
 
+    public function MenuDerechaGincana() {
+
+        $puntosControl=DB::select('SELECT tbl_punto_control.id, tbl_punto_control.pista, tbl_punto_control.fk_gincana, tbl_lugares.nombre, tbl_punto_control.orden FROM tbl_lugares INNER JOIN `tbl_punto_control` on tbl_lugares.id=tbl_punto_control.fk_lugar INNER JOIN tbl_gincana on tbl_punto_control.fk_gincana=tbl_gincana.id where tbl_gincana.id=1 order by tbl_punto_control.orden asc;');
+
+        return response()->json($puntosControl);
+    }
+
+
     public function login(Request $request){
         $datos= $request->except('_token','_method');
         $user=DB::table("tbl_users")->select('*')->where('email', '=', $datos['correo_user'])->where('pwd', '=', md5($datos['pass_user']))->first();

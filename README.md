@@ -25,3 +25,11 @@ SELECT tbl_etiquetas.id, tbl_etiquetas.fk_lugar,tbl_etiquetas.nombre from tbl_et
 esto me da las etiquetas del lugar
 
 delete from con inner join
+
+
+crear pista/punto control
+INSERT INTO `tbl_punto_control` (`id`, `pista`, `fk_gincana`, `fk_lugar`, `orden`) VALUES (NULL, 've al siguiente punto. Esa es la pista', '1', '4', '1');
+
+
+enseñar puntos control
+SELECT * FROM `tbl_punto_control` INNER JOIN tbl_gincana on tbl_punto_control.fk_gincana=tbl_gincana.id where tbl_gincana.id=1;
