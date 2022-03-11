@@ -296,10 +296,29 @@ function validarRegistro() {
     }
 }
 
-function indexGimcana() {
-    swal.fire({
-        title: "Error",
-        text: "Debes iniciar sesión para acceder a la gimcana",
-        icon: "error",
-    });
+function filtro_mapa(id) {
+    if (arr_marker != []) {
+        for (let i = 0; i < arr_marker.length; i++) {
+            map.removeLayer(arr_marker[i]);
+        }
+    }
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'get');
+    formData.append('id', id);
+    /* Inicializar un objeto AJAX */
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "filtroMapa", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            for (let i = 0; i < respuesta.length; i++) {
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
+                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
+                arr_marker.push(marker);
+            }
+        }
+    }
+    ajax.send(formData);
 }
