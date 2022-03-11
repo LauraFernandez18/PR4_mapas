@@ -112,3 +112,90 @@ th {
 #filtro {
     width: 30%;
 }
+
+#nombre_modificar,
+#email_modificar,
+#pwd_modificar,
+#pwd_nueva {
+    width: 35%;
+    margin-right: 5px;
+    float: left;
+}
+
+
+/*------RESPONSIVE------*/
+
+@media screen and (max-width:700px) {
+    .botoncPanel {
+        margin-top: 2%;
+        margin-left: 1%;
+    }
+    .modal_cpanel {
+        width: 90% !important;
+    }
+    h3 {
+        text-align: center;
+        font-size: 3.5vh !important;
+    }
+    /* inputs crear */
+    #nombre,
+    #email,
+    #pwd,
+    #tipo_usu,
+    #filtro {
+        width: 100%;
+        float: left;
+        margin-bottom: 5px;
+    }
+    .modal-content {
+        width: 80% !important;
+    }
+    /* inputs modificar */
+    #nombre_modificar,
+    #email_modificar,
+    #pwd_modificar,
+    #pwd_nueva {
+        width: 80%;
+        margin-right: 5px;
+        float: left;
+    }
+    .tabla {
+        width: 100%;
+    }
+    thead {
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+    tr:nth-of-type(2n) {
+        background-color: inherit;
+    }
+    tr:before {
+        content: attr(data-th);
+        display: block;
+        text-align: center;
+    }
+    td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+    td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    table td:last-child {
+        border-bottom: 0;
+    }
+}
