@@ -1,7 +1,10 @@
 window.onload = function() {
-    array_cord = [];
+    /* array_cord = []; */
+    btns_filtro();
     marker_map();
     ruta_elim = null;
+    marker = null;
+    arr_marker = [];
     /* limpiarRuta(); */
     /* funcionInit(); */
 
@@ -94,6 +97,29 @@ marker.bindPopup("<b>Hola</b>").openPopup(); */
     show: false
 }).addTo(map); */
 
+function btns_filtro() {
+    var btn_filtro = document.getElementById('filtro_btn');
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'get');
+    /* Inicializar un objeto AJAX */
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "filtro", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            recarga = "";
+            recarga += "<button class='btn_filtro' type='button' onclick='marker_map(); return false;'><b> Borrar Filtro</b></button>";
+            for (let i = 0; i < respuesta.length; i++) {
+                recarga += "<button class='btn_filtro' type='button' onclick='filtro_mapa(" + respuesta[i].id + "); return false;'><b> " + respuesta[i].nombre + "</b></button>";
+            }
+            btn_filtro.innerHTML = recarga;
+        }
+    }
+    ajax.send(formData);
+}
+
 function marker_map() {
     /* var mapa = document.getElementById("n_sitio"); */
     var formData = new FormData();
@@ -106,14 +132,17 @@ function marker_map() {
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 4 && ajax.status == 200) {
             var respuesta = JSON.parse(this.responseText);
-            recarga = "";
+            /* recarga = ""; */
             /* var array_cord = []; */
             for (let i = 0; i < respuesta.length; i++) {
                 /* array_cord.push([respuesta[i].latitud, respuesta[i].longitud]); */
                 /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
-                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
-                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button>").openPopup();
+                marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]);
+                marker.addTo(map);
+                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
+                arr_marker.push(marker);
             }
+            /* console.log(arr_marker); */
             /* alert(recarga); */
             /* mapa.innerHTML = recarga; */
         }
@@ -146,11 +175,14 @@ function marker_map() {
 }; */
 
 //Ruta mapa
-function ruta(lat, long) {
-    /* limpiarRuta(); */
+function limpiarRuta() {
     if (ruta_elim != null) {
         map.removeControl(ruta_elim);
     }
+}
+
+function ruta(lat, long) {
+    limpiarRuta();
     if (!"geolocation" in navigator) {
         return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
     };
@@ -182,41 +214,41 @@ function ruta(lat, long) {
     setInterval(navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud), 1000);
 }
 
-function limpiarRuta() {
-    if (!"geolocation" in navigator) {
-        return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
-    }
-    console.log('Cordenada1s: ' + array_cord);
+/* function limpiarRuta() { */
+/*  if (!"geolocation" in navigator) {
+     return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
+ }
+ console.log('Cordenada1s: ' + array_cord); */
 
-    /* var mapa = document.getElementById("n_sitio"); */
-    var formData = new FormData();
-    formData.append('_token', document.getElementById('token').getAttribute("content"));
-    formData.append('_method', 'get');
-    /* Inicializar un objeto AJAX */
-    var ajax = objetoAjax();
-    ajax.open("POST", "markerMapa", true);
+/* var mapa = document.getElementById("n_sitio"); */
+/* var formData = new FormData(); */
+/*  formData.append('_token', document.getElementById('token').getAttribute("content"));
+ formData.append('_method', 'get'); */
+/* Inicializar un objeto AJAX */
+/* var ajax = objetoAjax();
+ajax.open("POST", "markerMapa", true); */
 
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-            var respuesta = JSON.parse(this.responseText);
-            for (let i = 0; i < respuesta.length; i++) {
-                /* if (respuesta[i] == array_cord[i]) {
+/* ajax.onreadystatechange = function() {
+    if (ajax.readyState == 4 && ajax.status == 200) {
+        var respuesta = JSON.parse(this.responseText);
+        for (let i = 0; i < respuesta.length; i++) { */
+/* if (respuesta[i] == array_cord[i]) {
 
-                } else {
-                    array_cord.push([respuesta[i].latitud, respuesta[i].longitud]);
-                } */
-                array_cord.push([respuesta[i].latitud, respuesta[i].longitud]);
+} else {
+    array_cord.push([respuesta[i].latitud, respuesta[i].longitud]);
+} */
+/*        array_cord.push([respuesta[i].latitud, respuesta[i].longitud]);
             }
             console.log('este: ' + array_cord);
         }
     }
     ajax.send(formData);
 
-    const onUbicacionConcedida = ubicacion => {
-        /* console.log("Tengo la ubicación: ", ubicacion);
-        console.log('direccion destino:' + lat + ',' + long);
-        console.log('direccion actual:' + ubicacion.coords.latitude + ',' + ubicacion.coords.longitude); */
-        for (let i = 0; i < array_cord.length; i++) {
+    const onUbicacionConcedida = ubicacion => { */
+/* console.log("Tengo la ubicación: ", ubicacion);
+console.log('direccion destino:' + lat + ',' + long);
+console.log('direccion actual:' + ubicacion.coords.latitude + ',' + ubicacion.coords.longitude); */
+/*         for (let i = 0; i < array_cord.length; i++) {
             console.log('Elim' + i + ': ' + array_cord[i])
             console.log(L.latLng(array_cord[i]));
             var ruta_done = L.Routing.control({
@@ -240,7 +272,7 @@ function limpiarRuta() {
     };
     // Solicitar
     navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
-}
+} */
 
 /* LOGIN Y REGISTRAR */
 function mostrarlog() {
@@ -293,4 +325,31 @@ function validarRegistro() {
     } else {
         return true;
     }
+}
+
+function filtro_mapa(id) {
+    if (arr_marker != []) {
+        for (let i = 0; i < arr_marker.length; i++) {
+            map.removeLayer(arr_marker[i]);
+        }
+    }
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'get');
+    formData.append('id', id);
+    /* Inicializar un objeto AJAX */
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "filtroMapa", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            for (let i = 0; i < respuesta.length; i++) {
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
+                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button>").openPopup();
+                arr_marker.push(marker);
+            }
+        }
+    }
+    ajax.send(formData);
 }

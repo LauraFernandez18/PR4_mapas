@@ -28,12 +28,9 @@
           <button type="submit" class="btn_cabecera btn btn-dark" value="Enviar"><b>Gimcana</b></button>
         </form>
         <button class="btn btn-dark btn_inicio" type="button" id="myBtn"><b>Empezar</b></button>
-        <div class="filtro">
-          <button class="btn_filtro" type="button"><i class="fas fa-utensils"></i><b> Restaurantes</b></button>
-          <button class="btn_filtro" type="button"><i class="fas fa-hotel"></i><b> Hoteles</b></button>
-          <button class="btn_filtro" type="button"><b>Restaurantes</b></button>
-          <button class="btn_filtro" type="button"><b>Restaurantes</b></button>
-          </div>
+        <div class="filtro" id="filtro_btn">
+          
+        </div>
         <!-- MODAL INICIAR SESION Y REGISTRAR -->
         <div id="myModal" class="modal">
             <div class="modal-content">
