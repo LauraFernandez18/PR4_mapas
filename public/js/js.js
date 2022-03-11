@@ -112,11 +112,12 @@ window.onload = function() {
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var respuesta = JSON.parse(this.responseText);
-                document.getElementsByClassName("modalmask")[1].style.opacity = 0
-                document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
-                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
                 marker_map()
                 menuDerecha()
+                document.getElementsByClassName("modalmask")[0].style.opacity = 0
+                document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+
             }
         }
         ajax.send(formData);
@@ -234,7 +235,7 @@ function marker_map() {
             var respuesta = JSON.parse(this.responseText);
             recarga = "";
             for (let i = 0; i < respuesta.length; i++) {
-                var marker = L.marker([respuesta[i].longitud, respuesta[i].latitud]).addTo(map);
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
                 marker.bindPopup(respuesta[i].nombre, {
                     closeButton: false,
                     closeOnClick: false,
