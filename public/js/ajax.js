@@ -87,6 +87,8 @@ polygon.setStyle({
     fillOpacity: 0.1
 });
 
+/* marker.className = ''; */
+
 /* var marker = L.marker([41.373703, 2.187467]).addTo(map);
 marker.bindPopup("<b>Hola</b>").openPopup(); */
 /* var routingControl = new L.Routing.Control({
