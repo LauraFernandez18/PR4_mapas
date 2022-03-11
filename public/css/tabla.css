@@ -113,3 +113,74 @@ th {
 #filtro {
     width: 30%;
 }
+
+#nombre_modificar,
+#email_modificar,
+#pwd_modificar,
+#pwd_nueva {
+    width: 35%;
+    margin-right: 5px;
+    float: left;
+}
+
+/*------RESPONSIVE------*/
+
+@media screen and (max-width:600px){
+    h3 {
+        text-align: center;
+        font-size: 3.5vh !important;
+    }
+
+    /* inputs crear */
+
+    #nombre,
+    #email,
+    #pwd,
+    #tipo_usu,
+    #filtro {
+    width: 100%;
+    float: left;
+    margin-bottom: 5px;
+    }
+
+    .modal-content {
+        width: 80% !important;
+    }
+
+    /* inputs modificar */
+
+    #nombre_modificar,
+    #email_modificar,
+    #pwd_modificar,
+    #pwd_nueva {
+    width: 80%;
+    margin-right: 5px;
+    float: left;
+}
+
+    .tabla {
+        width: 100%;
+    }
+
+    tr {
+        display: block;
+        text-align:center;
+    }
+    tr:nth-of-type(2n) {
+        background-color: inherit;
+    }
+    tr:before {
+        content: attr(data-th);
+        display: block;
+        text-align:center;
+    }
+    td {
+        display: block;
+        text-align:center;
+    }
+    td:before {
+        content: attr(data-th);
+        display: block;
+        text-align:center;
+    }
+}

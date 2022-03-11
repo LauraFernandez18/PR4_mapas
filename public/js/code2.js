@@ -91,7 +91,7 @@ function modificar(id, nombre, email) {
     contenido += '<input type="hidden" id="id" value="' + id + '"><br><br/>'
     contenido += '<p>Si no quieres modificar la contraseña deja los campos de contraseña en blanco</p>'
     contenido += '<p><b>Contraseña actual</b></p>'
-    contenido += '<input type="password" class="form-control" id="pwd"><br></br>'
+    contenido += '<input type="password" class="form-control" id="pwd_modificar"><br></br>'
     contenido += '<p><b>Contraseña nueva</b></p>'
     contenido += '<input type="password" class="form-control" id="pwd_nueva"><br/><br/>'
     contenido += '<input type="submit" class="btn btn-info" value="Modificar">'
@@ -110,7 +110,7 @@ function editar() {
     formData.append('_method', 'PUT');
     formData.append('nombre', document.getElementById('nombre_modificar').value);
     formData.append('email', document.getElementById('email_modificar').value);
-    formData.append('pwd', document.getElementById('pwd').value);
+    formData.append('pwd', document.getElementById('pwd_modificar').value);
     formData.append('pwd_n', document.getElementById('pwd_nueva').value);
     formData.append('id', document.getElementById('id').value);
 

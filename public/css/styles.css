@@ -200,3 +200,64 @@ input[type='password']::placeholder {
 .register2 p {
     color: grey;
 }
+
+.ir {
+    width: 40px;
+}
+
+@media screen and (max-width:600px){
+    .filtro {
+        margin-top: 50px;
+        position: absolute;
+        top: 20px;
+        z-index: 500;
+        overflow-y: auto;
+    }
+
+    .btn_inicio {
+        width: 25% !important;
+        font-size: 1.8vh !important;
+        padding: 5%;
+    }
+
+    .btn_filtro {
+        padding: 10px 10px;
+        background-color: #ffffff;
+        width: 80vh !important;
+        font-size: 1.5vh;
+        border-radius: 100px;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
+    }
+
+    .modal-content {
+        width: 80% !important;
+    }
+
+    input[type='password'] {
+        width: 80%;
+    }
+
+    input[type='password']::placeholder {
+        font-size: 2vh;
+    }
+
+    h1 {
+        font-size: 3.5vh !important;
+    }
+
+    .btn_regis {
+        width: 80%;
+        font-size: 2vh;
+    }
+
+    .inp_txt {
+        width: 80%;
+    }
+
+    .inp_txt::placeholder {
+        font-size: 2vh;
+    }
+}

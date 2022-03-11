@@ -30,6 +30,7 @@
           <button class="btn_filtro" type="button"><i class="fas fa-hotel"></i><b> Hoteles</b></button>
           <button class="btn_filtro" type="button"><b>Restaurantes</b></button>
           <button class="btn_filtro" type="button"><b>Restaurantes</b></button>
+          <button class="btn_filtro" type="button"><b>Restaurantes</b></button>
           </div>
         <!-- MODAL INICIAR SESION Y REGISTRAR -->
         <div id="myModal" class="modal">

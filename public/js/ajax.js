@@ -112,7 +112,7 @@ function marker_map() {
                 /* array_cord.push([respuesta[i].latitud, respuesta[i].longitud]); */
                 /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
                 var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
-                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button>").openPopup();
+                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button class='ir btn btn-info' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button>").openPopup();
             }
             /* alert(recarga); */
             /* mapa.innerHTML = recarga; */
