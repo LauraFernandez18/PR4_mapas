@@ -33,7 +33,7 @@
         <a href="#cerrar" class="cerrar" id="cerrar">x</a>
                 <div class="registrarse resize">
                     <form action="" method="POST" class="registrarse-form" onsubmit="return false" id="form">
-                        <div class="nombre"><h3 id="punto-control" data-id=""></h3></div>
+                        <div class="nombre"><h3 id="punto-control" data-id="" cant-pt-cnt=""></h3></div>
                         <div class="info-punto-control">
                             <label>Pista:</label>
                             <textarea name="pista" cols="45" rows="5" id="pista"></textarea>
@@ -42,18 +42,14 @@
                             <button class="btn bg-info btn-lg" id="guardar-boton">Guardar</button>
                         </div>
                     </form>
-                    <div class="lugar">
-                        <label>Lugar:</label>
-                        <select name="lugar" id="lugar">
-                            <option value="volvo">Volvo</option>
-                          </select>
+                    <div class="lugar" id="lugar-div">
                     </div>
-                    <div class="orden">
+                    <div class="orden disabled">
                         <label>Orden:</label>
-                        <input type="number" name="orden" id="orden">
+                        <input type="number" name="orden" id="orden" max="30" min="1">
                     </div>
                     <div class="eliminar">
-                        <button class="btn bg-danger btn-lg" id="eliminar-boton">Eliminar</button>
+                        
                     </div>
                     
                 </div>
@@ -64,27 +60,21 @@
         <a href="#cerrar" class="cerrar" id="cerrar2">x</a>
                 <div class="registrarse resize">
                     <form action="" method="POST" class="registrarse-form" onsubmit="return false" id="form">
-                        <div class="nombre"><input type="text" name="nombre" value="Nombre lugar" id="nombre-crear"></div>
-                        <div class="info">
-                            <label>Longitud</label>
-                            <input type="text" name="longitud" id="longitud-crear">
-                            <label>Latitud</label>
-                            <input type="text" name="latitud" id="latitud-crear">
-                            <label>Foto</label>
-                            <input type="file" name="file" class="upload" accept="image/*" id="foto-crear">
+                        <div class="nombre"><h3 id="punto-control">Nuevo punto de control</h3></div>
+                        <div class="info-punto-control">
+                            <label>Pista:</label>
+                            <textarea name="pista" cols="45" rows="5" placeholder="Descripcion de la pista" id="pista-crear"></textarea>
                         </div>
-                        <div class="palabra-etiqueta">
-                            <p>Etiquetas</p>
+                        <div class="guardar">
+                            <button class="btn bg-info btn-lg" id="guardar-crear" >Guardar</button>
                         </div>
-                        <div class="etiquetas">
-                            
-                        </div>
-                        <div class="anadir-etiqueta">
-                            <p>Añadir etiquetas</p>
-                            <input type="text" name="etiqueta" placeholder="+ Nueva etiqueta" id="etiqueta-crear">
-                        </div>
-                        <div class="crear">
-                            <button class="btn bg-info btn-lg" id="guardar-boton-crear">Crear</button>
+                    </form>
+                    <div class="lugar" id="lugar-div">
+                    </div>
+                    <div class="orden disabled">
+                        <label>Orden:</label>
+                        <input type="number" name="orden" id="orden-crear"  max="30" min="1">
+                    </div>
                         </div>
                     </form>
                     

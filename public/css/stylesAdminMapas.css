@@ -342,6 +342,10 @@ form.registrarse-form label {
     width: 30vh;
 }
 
+#guardar-crear {
+    color: white;
+}
+
 .eliminar {
     position: absolute;
     bottom: 35%;
@@ -414,7 +418,7 @@ form.registrarse-form label {
 .lugar {
     position: absolute;
     top: 45%;
-    left: 35vh;
+    left: 30vh;
     width: 50vh;
     text-align: left;
 }
@@ -435,7 +439,7 @@ form.registrarse-form label {
 }
 
 .lugar select {
-    width: 20vh;
+    width: 38vh;
     font-size: 3vh;
     padding-left: 2%;
     border: none;

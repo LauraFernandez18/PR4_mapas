@@ -134,6 +134,37 @@ class LugarController extends Controller
         return response()->json($puntosControl);
     }
 
+    public function CountPuntoControl() {
+
+        $countPuntosControl=DB::select("SELECT count(tbl_punto_control.id) as 'count' FROM `tbl_punto_control`;");
+        return response()->json($countPuntosControl);
+
+    }
+
+    public function ModificarPuntoControl(Request $request) {
+
+        $datos=$request->except('_token','_method');
+        DB::table('tbl_punto_control')->where('id','=',$request['id'])->update($datos);
+        return response()->json(array('resultado'=> 'OK'));
+
+    }
+
+    public function CrearPuntoControl(Request $request) {
+
+        $datos=$request->except('_token','_method');
+        DB::table('tbl_punto_control')->insertGetId(["pista"=>$datos['pista'],"fk_gincana"=>1,"fk_lugar"=>$datos['fk_lugar'],"orden"=>$datos['orden']]);
+        return response()->json(array('resultado'=> 'OK'));
+
+    }
+
+    public function EliminarPuntoControl(Request $request) {
+
+        $datos=$request->except('_token','_method');
+        DB::table('tbl_punto_control')->where('id','=',[$datos['id']])->delete();
+        return response()->json(array('resultado'=> 'OK'));
+
+    }
+
 
     public function login(Request $request){
         $datos= $request->except('_token','_method');
