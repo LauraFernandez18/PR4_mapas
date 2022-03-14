@@ -165,7 +165,8 @@ class LugarController extends Controller
             DB::rollBack();
             return $e->getMessage();
         }
-        return redirect('index');
+        $request->session()->put('nombre_user',$request->input('email'));
+        return redirect('index_inicio');
     }
 
     public function adminUsuariosvista(){
@@ -227,8 +228,14 @@ class LugarController extends Controller
 
     public function crearUser(Request $request){
         try {
-            DB::insert('insert into tbl_users (nombre, email, pwd, tipo_usu) values (?,?,?,?)',[$request->input('nombre'),$request->input('email'),md5($request->input('pwd')),$request->input('tipo_usu')]);
-            return response()->json(array('resultado'=> 'OK'));
+            $long_pwd = strlen($request->input('pwd'));
+            if($long_pwd>= 8){
+                DB::insert('insert into tbl_users (nombre, email, pwd, tipo_usu) values (?,?,?,?)',[$request->input('nombre'),$request->input('email'),md5($request->input('pwd')),$request->input('tipo_usu')]);
+                return response()->json(array('resultado'=> 'OK'));
+            }else{
+                return response()->json(array('resultado'=> 'Contraseña menor de 8 caracteres'));
+            }
+            
         } catch (\Throwable $th) {
             //return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
         }
@@ -242,7 +249,7 @@ class LugarController extends Controller
 
     public function filtroMapa(Request $request){
         $id = $request->input('id');
-        $datos=DB::select('SELECT tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud from tbl_lugares 
+        $datos=DB::select('SELECT tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto, tbl_lugares.foto_icon from tbl_lugares 
         INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar 
         INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta 
         where tbl_etiquetas.id='.$id.';');
@@ -253,6 +260,16 @@ class LugarController extends Controller
         $datos=DB::select('SELECT tbl_etiquetas.id, tbl_etiquetas.nombre from tbl_etiquetas 
         INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta 
         INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
+        return response()->json($datos);
+    }
+
+    public function gimcana_preg(){
+        $datos=DB::select('SELECT tbl_punto_control.pista, tbl_punto_control.orden, tbl_lugares.nombre, tbl_lugares.latitud, 
+        tbl_lugares.longitud FROM tbl_punto_control 
+        INNER JOIN tbl_lugares ON tbl_punto_control.fk_lugar = tbl_lugares.id
+        INNER JOIN tbl_gincana ON tbl_punto_control.fk_gincana = tbl_gincana.id
+        WHERE tbl_gincana.id=1 
+        ORDER BY tbl_punto_control.pista DESC;');
         return response()->json($datos);
     }
 }
