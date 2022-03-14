@@ -444,3 +444,7 @@ form.registrarse-form label {
     padding-left: 2%;
     border: none;
 }
+
+.leaflet-routing-container {
+    display: none;
+}

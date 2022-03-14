@@ -167,6 +167,20 @@ polygon.setStyle({
     fillOpacity: 0.1
 });
 
+//Gincana
+
+L.Routing.control({
+    waypoints: [
+        L.latLng(41.37359770, 2.18727150),
+        L.latLng(41.38056230, 2.18807750),
+        L.latLng(41.38203940, 2.19074760)
+    ],
+    routeWhileDragging: true,
+    draggableWaypoints: false
+}).addTo(map).hide();
+
+
+
 
 
 //modal
