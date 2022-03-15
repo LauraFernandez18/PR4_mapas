@@ -11,13 +11,11 @@
         <script type="text/javascript" src="js/iconos_g.js"></script>
         <link rel="stylesheet" href="{!! asset('css/stylesAdminMapas.css') !!}">
         <script src="js/jquery.js"></script>
-        
         <title>Admin - Mapas</title>
     </head>
 <body>
     <div id="map"></div>
     <!-- <div class="admin-logo"><img src="../storage/uploads/logo.png"></div> -->
-    <div class="admin-cpanel"><p>C-PANEL</p></div>
     <div class="admin-cpanel-crear"><button class="btn btn-dark btn-lg" onclick="modal2();">Crear lugar &nbsp;<i class="fas fa-map-marker-alt"></i></button></div>
     <div class="admin-logout"><a href="{{ url('/logout') }}"><button class="btn btn-danger btn-lg"><i class="fas fa-power-off"></i></button></a></div>
     <div class="admin-atras"><a href="{{ url('cPanelAdmin') }}"><button class="btn btn-info btn-lg"><i class="fa fa-arrow-circle-left"></i></button></a></div>
@@ -25,7 +23,7 @@
         
 
     </div>
-    
+
     <script language="javascript" src="js/js.js"></script>
 
     <!-- Modificar -->
@@ -49,9 +47,7 @@
                             <p>Etiquetas</p>
                         </div>
                         <div class="etiquetas" id="divEtiqueta">
-                            
-                            
-                            
+
                         </div>
                         <div class="guardar">
                             <button class="btn bg-info btn-lg" id="guardar-boton">Guardar</button>
@@ -67,9 +63,9 @@
                     <div class="eliminar">
                         <button class="btn bg-danger btn-lg" id="eliminar-boton">Eliminar lugar</button>
                     </div>
-                    
+
                 </div>
-          
+
     </div>
     <!-- Crear -->
     <div class="region-registrarse modalmask" id="modal">
@@ -99,9 +95,9 @@
                             <button class="btn bg-info btn-lg" id="guardar-boton-crear">Crear</button>
                         </div>
                     </form>
-                    
+
                 </div>
-          
+
     </div>
 </body>
 

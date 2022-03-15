@@ -37,6 +37,8 @@ Route::post('RoutingGincana',[lugarController::class,'RoutingGincana']);
 
 Route::get('index',[LugarController::class, 'index']);
 
+Route::get('index_inicio',[LugarController::class, 'index_inicio']);
+
 Route::post('login', [LugarController::class, 'login']);
 
 Route::get('logout', [LugarController::class, 'logout']);
@@ -57,7 +59,16 @@ Route::post('crear',[LugarController::class, 'crearUser']);
 
 Route::get('cPanelAdmin', [LugarController::class, 'cPanelAdmin']);
 
+Route::get('gimcana', [LugarController::class, 'gimcana']);
+
 Route::post('registrarUser',[LugarController::class, 'registrarUsuario']);
 
 Route::get('markerMapa',[LugarController::class, 'markerMapa']);
 
+Route::get('favoritos',[LugarController::class, 'favoritos']);
+
+Route::get('filtroMapa',[LugarController::class, 'filtroMapa']);
+
+Route::get('filtro',[LugarController::class, 'filtro']);
+
+Route::get('gimcana_preg',[LugarController::class, 'gimcana_preg']);

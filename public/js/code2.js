@@ -85,15 +85,15 @@ function modificar(id, nombre, email) {
     contenido += '<form onsubmit="editar(); return false;">'
     contenido += '<h3><b>Modificar</b></h3><br>'
     contenido += '<p><b>Nombre</b><p>'
-    contenido += '<input type="text" id="nombre" class="form-control" Value="' + nombre + '"><br>'
+    contenido += '<input type="text" id="nombre_modificar" class="form-control" value="' + nombre + '"><br>'
     contenido += '<p><b>Email</b><p>'
-    contenido += '<input type="text" id="email" class="form-control" Value="' + email + '">'
-    contenido += '<input type="hidden" id="id" Value="' + id + '"><br><br/>'
+    contenido += '<input type="text" id="email_modificar" class="form-control" value="' + email + '">'
+    contenido += '<input type="hidden" id="id" value="' + id + '"><br><br/>'
     contenido += '<p>Si no quieres modificar la contraseña deja los campos de contraseña en blanco</p>'
     contenido += '<p><b>Contraseña actual</b></p>'
     contenido += '<input type="password" class="form-control" id="pwd"><br></br>'
     contenido += '<p><b>Contraseña nueva</b></p>'
-    contenido += '<input type="password" class="form-control" id="pwd_nueva" id="modificar"><br/><br/>'
+    contenido += '<input type="password" class="form-control" id="pwd_nueva"><br/><br/>'
     contenido += '<input type="submit" class="btn btn-info" value="Modificar">'
     contenido += '</form>'
     contenido += ''
@@ -108,8 +108,8 @@ function editar() {
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
     formData.append('_method', 'PUT');
-    formData.append('nombre', document.getElementById('nombre').value);
-    formData.append('email', document.getElementById('email').value);
+    formData.append('nombre', document.getElementById('nombre_modificar').value);
+    formData.append('email', document.getElementById('email_modificar').value);
     formData.append('pwd', document.getElementById('pwd').value);
     formData.append('pwd_n', document.getElementById('pwd_nueva').value);
     formData.append('id', document.getElementById('id').value);
@@ -216,21 +216,21 @@ function crear() {
                 icon: "error",
             });
             return false;
-        }else if(pwd.length < 8){
+        } else if (pwd.length < 8) {
             swal.fire({
                 title: "Error",
                 text: "La contraseña debe tener mas de 8 caracteres",
                 icon: "error",
             });
             return false;
-        }else if(pwd.length > 100){
+        } else if (pwd.length > 100) {
             swal.fire({
                 title: "Error",
                 text: "La contraseña debe tener menos de 100 caracteres",
                 icon: "error",
             });
             return false;
-        }else {
+        } else {
             return true;
         }
     }

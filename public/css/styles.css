@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap');
-
 .cabecera {
     margin-left: 1%;
     margin-right: 2%;
@@ -13,40 +12,75 @@
 .btn_inicio {
     position: absolute;
     top: 20px;
-    right: 20px;
+    float: left;
+    left: 65px;
     padding: 10px;
-    z-index: 800;
+    z-index: 600;
 }
 
-.filtro {
+.btn_logout {
     position: absolute;
     top: 20px;
-    z-index: 800;
-    right: 500px;
-}
-
-.btn_filtro {
-    padding: 10px 20px;
-    background-color: #ffffff;
-    font-size: 18px;
-    border-radius: 100px;
-    border: none;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
-    margin: 0;
-}
-
-.btn_filtro:hover {
-    background-color: rgb(241, 241, 241);
+    float: left;
+    left: 65px;
+    padding: 10px;
+    z-index: 600;
 }
 
 .btn_cabecera {
     position: absolute;
     top: 20px;
-    left: 140px;
+    float: left;
+    left: 165px;
     padding: 10px;
-    z-index: 800;
+    z-index: 600;
+}
+
+.btn_gimcana {
+    position: absolute;
+    top: 20px;
+    float: left;
+    left: 120px;
+    padding: 10px;
+    z-index: 600;
+}
+
+.filtro {
+    position: absolute;
+    top: 20px;
+    z-index: 500;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn_filtro {
+    padding: 6px 15px;
+    background-color: #ffffff;
+    font-size: 14px;
+    border-radius: 100px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
+    margin-right: 8px !important;
+}
+
+.btn_borrar {
+    padding: 6px 15px;
+    background-color: rgb(226, 111, 111);
+    font-size: 14px;
+    border-radius: 100px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
+    margin-right: 8px !important;
+}
+
+.btn_filtro:hover {
+    background-color: rgb(241, 241, 241);
 }
 
 .modal {
@@ -187,4 +221,146 @@ input[type='password']::placeholder {
 
 .register2 p {
     color: grey;
+}
+
+.ir {
+    width: 40px;
+}
+
+.prueba {
+    font-size: 3vh;
+}
+
+.img_popup {
+    width: 50px;
+    height: 50px;
+    border-radius: 5%;
+}
+
+.marker_popup {
+    font-size: 22px;
+  
+@media screen and (max-width:1100px) {
+    .filtro {
+        margin-top: 65px;
+        position: absolute;
+        padding-right: 40px;
+        padding-left: 40px;
+        width: 100%;
+        top: 15px;
+    }
+    .btn_inicio {
+        width: 10% !important;
+        font-size: 1.8vh !important;
+        padding: 5%;
+    }
+    .btn_cabecera {
+        width: 10% !important;
+        font-size: 1.8vh !important;
+        padding: 5%;
+        left: 190px;
+        margin-left: -5%;
+    }
+    .btn_filtro,
+    .btn_borrar {
+        width: 80vh !important;
+        padding: 3px 10px;
+        font-size: 1.9vh;
+        margin-right: 6px !important;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .btn_cabecera {
+        width: 10% !important;
+        font-size: 1.8vh !important;
+        padding: 5%;
+        left: 190px;
+        margin-left: -7%;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .filtro {
+        margin-top: 65px;
+        padding-left: 18%;
+        padding-right: 10px;
+        position: absolute;
+        width: 100%;
+        top: 20px;
+        z-index: 500;
+        overflow-y: auto;
+    }
+    .btn_inicio {
+        width: 18% !important;
+        font-size: 100% !important;
+        padding: 5%;
+    }
+    .btn_cabecera {
+        width: 18% !important;
+        font-size: 100% !important;
+        margin-left: -20px;
+        padding: 5%;
+        left: 190px;
+    }
+    .btn_gimcana {
+        width: 18% !important;
+        font-size: 100% !important;
+        padding: 5%;
+    }
+    .btn_filtro,
+    .btn_borrar {
+        padding: 10px 10px;
+        width: 80vh !important;
+        font-size: 1.9vh;
+        border-radius: 100px;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
+        margin-right: 10px !important;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .filtro {
+        margin-top: 65px;
+        padding-left: 32%;
+        padding-right: 1%;
+        position: absolute;
+        width: 100%;
+        top: 15px;
+        z-index: 500;
+        overflow: auto;
+    }
+    .btn_inicio {
+        width: 25% !important;
+        margin-right: 20px;
+        font-size: 2vh !important;
+        padding: 5%;
+    }
+    .btn_cabecera {
+        width: 25% !important;
+        font-size: 2vh !important;
+        padding: 5%;
+        left: 190px;
+        margin-left: -4%;
+    }
+    .btn_gimcana {
+        width: 25% !important;
+        font-size: 1.8vh !important;
+        padding: 5%;
+    }
+    .btn_filtro,
+    .btn_borrar {
+        padding: 10px 10px;
+        width: 50% !important;
+        font-size: 1.7vh;
+        border-radius: 100px;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
+        margin-right: 6px !important;
+    }
 }

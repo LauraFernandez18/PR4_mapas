@@ -25,7 +25,7 @@
     <form onsubmit="crear(); return false;">
         <input type="text" class="form-control" id="nombre" placeholder="Nombre" value="{{old('nombre')}}">
         <input type="email" class="form-control" id="email" placeholder="Email">
-        <input type="password" class="form-control" id="pwd" placeholder="Contraseña">
+        <input type="password" class="form-control" id="pwd" placeholder="Contraseña" min="8">
         <select class="form-control" name="tipo_usu" id="tipo_usu">
             <option class="form-control" value="administrador">Administrador</option>
             <option class="form-control" value="usuario">Usuario</option>
@@ -74,7 +74,6 @@
           <span id="cerrar" class="close">&times;</span>
           <p id="contenido"></p>
         </div>
-
       </div>
 </body>
 </html>
