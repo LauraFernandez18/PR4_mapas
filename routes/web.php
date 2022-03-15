@@ -64,3 +64,5 @@ Route::get('favoritos',[LugarController::class, 'favoritos']);
 Route::get('filtroMapa',[LugarController::class, 'filtroMapa']);
 
 Route::get('filtro',[LugarController::class, 'filtro']);
+
+Route::get('gimcana_preg',[LugarController::class, 'gimcana_preg']);

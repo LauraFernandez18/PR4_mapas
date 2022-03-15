@@ -70,7 +70,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(map);
 
 /* poligono */
-var polygon = L.polygon([
+/* var polygon = L.polygon([
     [41.357596, 2.183804],
     [41.383637, 2.182141],
     [41.387918, 2.195807],
@@ -78,7 +78,7 @@ var polygon = L.polygon([
     [41.380766, 2.197533],
     [41.374282, 2.194663],
     [41.357662, 2.185403]
-]).addTo(map);
+]).addTo(map); */
 
 polygon.setStyle({
     color: 'red',
@@ -86,8 +86,6 @@ polygon.setStyle({
     fillColor: '#333333',
     fillOpacity: 0.1
 });
-
-/* marker.className = ''; */
 
 /* var marker = L.marker([41.373703, 2.187467]).addTo(map);
 marker.bindPopup("<b>Hola</b>").openPopup(); */
@@ -139,9 +137,13 @@ function marker_map() {
             for (let i = 0; i < respuesta.length; i++) {
                 /* array_cord.push([respuesta[i].latitud, respuesta[i].longitud]); */
                 /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
-                marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]);
+                var markerIcon = L.icon({
+                    iconUrl: src = '../public/img/' + respuesta[i].foto_icon + '',
+                    iconSize: [30, 30]
+                });
+                marker = L.marker([respuesta[i].latitud, respuesta[i].longitud], { icon: markerIcon });
                 marker.addTo(map);
-                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
+                marker.bindPopup("<img class='img_popup' src='../public/img/" + respuesta[i].foto + "'><b>" + respuesta[i].nombre + "</b><br><button class='btn btn-dark' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button class='btn btn-info' onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
                 arr_marker.push(marker);
             }
             /* console.log(arr_marker); */
@@ -188,13 +190,19 @@ function ruta(lat, long) {
         console.log("Tengo la ubicación: ", ubicacion);
         /* console.log('direccion destino:' + lat + ',' + long);
         console.log('direccion actual:' + ubicacion.coords.latitude + ',' + ubicacion.coords.longitude); */
+        /* var personIcon = L.icon({
+            iconUrl: 'https://cdn-icons-png.flaticon.com/512/57/57117.png',
+            iconSize: [30, 30]
+        });
+        L.marker(ubicacion.coords.latitude, ubicacion.coords.longitude, { icon: personIcon }).addTo(map); */
         ruta_elim = L.Routing.control({
             waypoints: [
                 L.latLng(ubicacion.coords.latitude, ubicacion.coords.longitude),
                 L.latLng(lat, long)
             ],
             language: 'es',
-            routeWhileDragging: true
+            routeWhileDragging: true,
+            createMarker: function() { return null; }
         });
         ruta_elim.addTo(map);
     }
@@ -347,8 +355,12 @@ function filtro_mapa(id) {
         if (ajax.readyState == 4 && ajax.status == 200) {
             var respuesta = JSON.parse(this.responseText);
             for (let i = 0; i < respuesta.length; i++) {
-                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
-                marker.bindPopup("<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
+                var markerIcon = L.icon({
+                    iconUrl: src = '../public/img/' + respuesta[i].foto_icon + '',
+                    iconSize: [30, 30]
+                });
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud], { icon: markerIcon }).addTo(map);
+                marker.bindPopup("<img class='img_popup' src='../public/img/" + respuesta[i].foto + "'><b>" + respuesta[i].nombre + "</b><br><button class='btn btn-dark' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button class='btn btn-info' onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
                 arr_marker.push(marker);
             }
         }
