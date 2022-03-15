@@ -134,6 +134,14 @@ class LugarController extends Controller
         return response()->json($puntosControl);
     }
 
+    public function RoutingGincana() {
+
+        $puntosControl=DB::select("SELECT tbl_punto_control.id, tbl_lugares.latitud, tbl_lugares.longitud, tbl_lugares.nombre, tbl_punto_control.orden FROM tbl_lugares INNER JOIN `tbl_punto_control` on tbl_lugares.id=tbl_punto_control.fk_lugar INNER JOIN tbl_gincana on tbl_punto_control.fk_gincana=tbl_gincana.id where tbl_gincana.id=1 order by tbl_punto_control.orden asc;");
+
+        return response()->json($puntosControl);
+    }
+
+
     public function CountPuntoControl() {
 
         $countPuntosControl=DB::select("SELECT count(tbl_punto_control.id) as 'count' FROM `tbl_punto_control`;");

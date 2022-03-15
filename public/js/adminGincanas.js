@@ -69,6 +69,7 @@ window.onload = function() {
         }
         ajax.send(formData);
     })
+    routing()
     menuDerecha()
     CountPuntoControl2()
 }
@@ -140,7 +141,7 @@ function objetoAjax() {
 
 
 //mapa
-var map = L.map('map').setView([41.37980494784771, 2.1897389511414347], 16);
+var map = L.map('map').setView([41.37980494784771, 2.1897389511414347], 15);
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -169,15 +170,56 @@ polygon.setStyle({
 
 //Gincana
 
+function routing() {
+
+    /*
+        var routeControl = L.Routing.control({
+            waypoints: [
+                null
+            ],
+            routeWhileDragging: true,
+            draggableWaypoints: false,
+            addWaypoints: false
+        }).addTo(map).hide();
+
+
+        var formData = new FormData();
+        formData.append('_token', document.getElementById('token').getAttribute("content"));
+        formData.append('_method', 'post');
+        var ajax = objetoAjax();
+        ajax.open("POST", "RoutingGincana", true);
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                var respuesta = JSON.parse(this.responseText);
+                for (let i = 0; i < respuesta.length; i++) {
+                    routeControl.setWaypoints({ latLng: L.latLng([respuesta[i].latitud, respuesta[i].longitud]) });
+                }
+
+            }
+
+        }
+        ajax.send(formData);*/
+}
+
+
+
+
 L.Routing.control({
     waypoints: [
         L.latLng(41.37359770, 2.18727150),
         L.latLng(41.38056230, 2.18807750),
-        L.latLng(41.38203940, 2.19074760)
+        L.latLng(41.37618790, 2.18315070)
     ],
     routeWhileDragging: true,
-    draggableWaypoints: false
+    draggableWaypoints: false,
+    addWaypoints: false
 }).addTo(map).hide();
+
+
+L.Routing.control.setWaypoints([
+    L.latLng(41.38056230, 2.18807750),
+    L.latLng(41.37618790, 2.18315070)
+]).addTo(map);
 
 
 

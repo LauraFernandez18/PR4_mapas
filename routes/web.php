@@ -33,6 +33,7 @@ Route::post('CountPuntoControl',[lugarController::class,'CountPuntoControl']);
 Route::post('ModificarPuntoControl',[lugarController::class,'ModificarPuntoControl']);
 Route::post('CrearPuntoControl',[lugarController::class,'CrearPuntoControl']);
 Route::post('EliminarPuntoControl',[lugarController::class,'EliminarPuntoControl']);
+Route::post('RoutingGincana',[lugarController::class,'RoutingGincana']);
 
 Route::get('index',[LugarController::class, 'index']);
 
