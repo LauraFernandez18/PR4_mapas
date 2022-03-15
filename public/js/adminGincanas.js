@@ -40,6 +40,7 @@ window.onload = function() {
             }
         }
         ajax.send(formData);
+        menuDerecha()
         routing()
     })
 
@@ -69,6 +70,7 @@ window.onload = function() {
             }
         }
         ajax.send(formData);
+        menuDerecha()
         routing()
     })
     routing()

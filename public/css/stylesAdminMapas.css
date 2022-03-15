@@ -74,6 +74,8 @@ body {
     background-color: white;
     border-radius: 3%;
     padding: 1.8%;
+    max-height: 80vh;
+    overflow-y: scroll;
 }
 
 .lugares h2 {
