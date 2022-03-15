@@ -274,7 +274,7 @@ input[type='password']::placeholder {
 @media screen and (max-width:600px) {
     .filtro {
         margin-top: 65px;
-        padding-left: 10px;
+        padding-left: 18%;
         padding-right: 10px;
         position: absolute;
         width: 100%;
@@ -283,26 +283,25 @@ input[type='password']::placeholder {
         overflow-y: auto;
     }
     .btn_inicio {
-        width: 15% !important;
-        font-size: 1.8vh !important;
+        width: 18% !important;
+        font-size: 100% !important;
         padding: 5%;
     }
     .btn_cabecera {
-        width: 15% !important;
-        font-size: 1.8vh !important;
+        width: 18% !important;
+        font-size: 100% !important;
         margin-left: -20px;
         padding: 5%;
         left: 190px;
     }
     .btn_gimcana {
-        width: 15% !important;
-        font-size: 1.8vh !important;
+        width: 18% !important;
+        font-size: 100% !important;
         padding: 5%;
     }
     .btn_filtro,
     .btn_borrar {
         padding: 10px 10px;
-        background-color: #ffffff;
         width: 80vh !important;
         font-size: 1.9vh;
         border-radius: 100px;
@@ -312,34 +311,12 @@ input[type='password']::placeholder {
         box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
         margin-right: 10px !important;
     }
-    .modal-content {
-        width: 80% !important;
-    }
-    input[type='password'] {
-        width: 80%;
-    }
-    input[type='password']::placeholder {
-        font-size: 2vh;
-    }
-    h1 {
-        font-size: 3.5vh !important;
-    }
-    .btn_regis {
-        width: 80%;
-        font-size: 2vh;
-    }
-    .inp_txt {
-        width: 80%;
-    }
-    .inp_txt::placeholder {
-        font-size: 2vh;
-    }
 }
 
 @media screen and (max-width:450px) {
     .filtro {
         margin-top: 65px;
-        padding-left: 38%;
+        padding-left: 32%;
         padding-right: 1%;
         position: absolute;
         width: 100%;
@@ -358,7 +335,7 @@ input[type='password']::placeholder {
         font-size: 2vh !important;
         padding: 5%;
         left: 190px;
-        margin-left: -15%;
+        margin-left: -4%;
     }
     .btn_gimcana {
         width: 25% !important;
@@ -368,36 +345,13 @@ input[type='password']::placeholder {
     .btn_filtro,
     .btn_borrar {
         padding: 10px 10px;
-        background-color: #ffffff;
         width: 50% !important;
-        font-size: 2vh;
+        font-size: 1.7vh;
         border-radius: 100px;
         border: none;
         text-align: center;
         cursor: pointer;
         box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
         margin-right: 6px !important;
-    }
-    .modal-content {
-        width: 80% !important;
-    }
-    input[type='password'] {
-        width: 80%;
-    }
-    input[type='password']::placeholder {
-        font-size: 2vh;
-    }
-    h1 {
-        font-size: 3.5vh !important;
-    }
-    .btn_regis {
-        width: 80%;
-        font-size: 2vh;
-    }
-    .inp_txt {
-        width: 80%;
-    }
-    .inp_txt::placeholder {
-        font-size: 2vh;
     }
 }
