@@ -61,7 +61,7 @@
                         </form>
                     </div>
                     <div class="eliminar">
-                        <button class="btn bg-danger btn-lg" id="eliminar-boton">Eliminar lugar</button>
+                        <button class="btn bg-danger btn-lg" id="eliminar-boton">Eliminar</button>
                     </div>
 
                 </div>

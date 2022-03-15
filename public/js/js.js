@@ -137,7 +137,7 @@ function modal(id, nombre, longitud, latitud, foto) {
     $("#nombre").val(nombre);
     $("#longitud").val(longitud);
     $("#latitud").val(latitud);
-    $("#foto").attr("src", "storage/uploads/" + foto);
+    $("#foto").attr("src", "../public/img/" + foto);
     etiquetasAjax()
 
     function etiquetasAjax() {
@@ -324,4 +324,11 @@ function menuDerecha() {
         menuDerechaClick()
     }
     ajax.send(formData);
+}
+
+/* -----VALIDACIONES------- */
+
+/*VALIDACIÓN CREAR LUGAR*/
+function validarCrear() {
+    alert("Hola")
 }
