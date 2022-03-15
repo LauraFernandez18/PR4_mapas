@@ -89,7 +89,12 @@ class LugarController extends Controller
     public function EliminarLugar(Request $request)
     {
         $datos = $request->except('_token');
-        $etiquetas=DB::table('Delete from tbl_etiqueta_usuario INNER JOIN tbl_etiquetas on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" AND tbl_etiquetas.fk_lugar=?',[$datos['id']])->delete();
+        $etiquetas=DB::select('SELECT tbl_etiquetas.id, tbl_etiquetas.fk_lugar,tbl_etiquetas.nombre from tbl_etiquetas INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" AND tbl_etiquetas.fk_lugar=?',[$datos['id']]);
+        foreach ($etiquetas as $i) {
+            DB::table('tbl_etiqueta_usuario')->where('fk_etiqueta','=',$i->id)->delete();
+            DB::table('tbl_etiquetas')->where('id','=',$i->id)->delete();
+        }
+        DB::table('tbl_lugares')->where('id','=',[$datos['id']])->delete();
         return response()->json(array('resultado'=> 'OK'));
     }
 
@@ -126,6 +131,53 @@ class LugarController extends Controller
     {
         return view('admin_gincanas');
     }
+
+    public function MenuDerechaGincana() {
+
+        $puntosControl=DB::select('SELECT tbl_punto_control.id, tbl_punto_control.pista, tbl_punto_control.fk_gincana, tbl_lugares.nombre, tbl_punto_control.orden FROM tbl_lugares INNER JOIN `tbl_punto_control` on tbl_lugares.id=tbl_punto_control.fk_lugar INNER JOIN tbl_gincana on tbl_punto_control.fk_gincana=tbl_gincana.id where tbl_gincana.id=1 order by tbl_punto_control.orden asc;');
+
+        return response()->json($puntosControl);
+    }
+
+    public function RoutingGincana() {
+
+        $puntosControl=DB::select("SELECT tbl_punto_control.id, tbl_lugares.latitud, tbl_lugares.longitud, tbl_lugares.nombre, tbl_punto_control.orden FROM tbl_lugares INNER JOIN `tbl_punto_control` on tbl_lugares.id=tbl_punto_control.fk_lugar INNER JOIN tbl_gincana on tbl_punto_control.fk_gincana=tbl_gincana.id where tbl_gincana.id=1 order by tbl_punto_control.orden asc;");
+
+        return response()->json($puntosControl);
+    }
+
+
+    public function CountPuntoControl() {
+
+        $countPuntosControl=DB::select("SELECT count(tbl_punto_control.id) as 'count' FROM `tbl_punto_control`;");
+        return response()->json($countPuntosControl);
+
+    }
+
+    public function ModificarPuntoControl(Request $request) {
+
+        $datos=$request->except('_token','_method');
+        DB::table('tbl_punto_control')->where('id','=',$request['id'])->update($datos);
+        return response()->json(array('resultado'=> 'OK'));
+
+    }
+
+    public function CrearPuntoControl(Request $request) {
+
+        $datos=$request->except('_token','_method');
+        DB::table('tbl_punto_control')->insertGetId(["pista"=>$datos['pista'],"fk_gincana"=>1,"fk_lugar"=>$datos['fk_lugar'],"orden"=>$datos['orden']]);
+        return response()->json(array('resultado'=> 'OK'));
+
+    }
+
+    public function EliminarPuntoControl(Request $request) {
+
+        $datos=$request->except('_token','_method');
+        DB::table('tbl_punto_control')->where('id','=',[$datos['id']])->delete();
+        return response()->json(array('resultado'=> 'OK'));
+
+    }
+
 
     public function login(Request $request){
         $datos= $request->except('_token','_method');
