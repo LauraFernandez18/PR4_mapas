@@ -80,12 +80,12 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     [41.357662, 2.185403]
 ]).addTo(map); */
 
-polygon.setStyle({
+/* polygon.setStyle({
     color: 'red',
     opacity: 0.6,
     fillColor: '#333333',
     fillOpacity: 0.1
-});
+}); */
 
 /* var marker = L.marker([41.373703, 2.187467]).addTo(map);
 marker.bindPopup("<b>Hola</b>").openPopup(); */
@@ -146,7 +146,7 @@ function marker_map() {
                 marker.bindPopup("<img class='img_popup' src='../public/img/" + respuesta[i].foto + "'><b>" + respuesta[i].nombre + "</b><br><button class='btn btn-dark' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button class='btn btn-info' onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
                 arr_marker.push(marker);
             }
-            /* console.log(arr_marker); */
+            console.log('1:' + arr_marker);
             /* alert(recarga); */
             /* mapa.innerHTML = recarga; */
         }
@@ -343,6 +343,8 @@ function filtro_mapa(id) {
             map.removeLayer(arr_marker[i]);
         }
     }
+    arr_marker = [];
+    console.log(arr_marker);
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
     formData.append('_method', 'get');
