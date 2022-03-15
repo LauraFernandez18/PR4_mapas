@@ -46,5 +46,6 @@
     <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/ajax.js"></script>
+    <script src="js/ajax.inicio.js"></script>
 </body>
 </html>

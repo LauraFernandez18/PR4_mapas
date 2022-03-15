@@ -59,6 +59,8 @@ Route::post('registrarUser',[LugarController::class, 'registrarUsuario']);
 
 Route::get('markerMapa',[LugarController::class, 'markerMapa']);
 
+Route::get('favoritos',[LugarController::class, 'favoritos']);
+
 Route::get('filtroMapa',[LugarController::class, 'filtroMapa']);
 
 Route::get('filtro',[LugarController::class, 'filtro']);

@@ -110,7 +110,7 @@ function btns_filtro() {
         if (ajax.readyState == 4 && ajax.status == 200) {
             var respuesta = JSON.parse(this.responseText);
             recarga = "";
-            recarga += "<button class='btn_filtro' type='button' onclick='marker_map(); return false;'><b> Borrar Filtro</b></button>";
+            recarga += "<button class='btn_borrar' type='button' onclick='marker_map(); return false;'><b> Borrar</b></button>";
             for (let i = 0; i < respuesta.length; i++) {
                 recarga += "<button class='btn_filtro' type='button' onclick='filtro_mapa(" + respuesta[i].id + "); return false;'><b> " + respuesta[i].nombre + "</b></button>";
             }
