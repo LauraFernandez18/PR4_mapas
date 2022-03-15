@@ -34,9 +34,9 @@
                     <form action="" method="POST" class="registrarse-form" onsubmit="return false" id="form">
                         <div class="nombre"><input type="text" name="nombre" id="nombre" value="" data-id=""></div>
                         <div class="info">
-                            <label>Longitud</label>
-                            <input type="text" name="longitud" id="longitud">
                             <label>Latitud</label>
+                            <input type="text" name="longitud" id="longitud">
+                            <label>Longitud</label>
                             <input type="text" name="latitud" id="latitud">
                             <label>Foto</label>
                             <input type="file" name="file" id="foto-Input" class="upload" accept="image/*">
@@ -75,9 +75,9 @@
                     <form action="" method="POST" class="registrarse-form" onsubmit="return false" id="form">
                         <div class="nombre"><input type="text" name="nombre" value="Nombre lugar" id="nombre-crear"></div>
                         <div class="info">
-                            <label>Longitud</label>
-                            <input type="text" name="longitud" id="longitud-crear">
                             <label>Latitud</label>
+                            <input type="text" name="longitud" id="longitud-crear">
+                            <label>Longitud</label>
                             <input type="text" name="latitud" id="latitud-crear">
                             <label>Foto</label>
                             <input type="file" name="file" class="upload" accept="image/*" id="foto-crear">
