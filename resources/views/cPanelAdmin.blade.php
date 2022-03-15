@@ -33,7 +33,7 @@
         <form action="{{url('adminMapasVista')}}" method="GET">
                 <button type="submit" class="botoncPanel" value="Enviar"><i class="fa fa-map" aria-hidden="true"></i> LUGARES</button><br><br>
         </form>
-        <form action="{{url('adminMapasVista')}}" method="GET">
+        <form action="{{url('Admingincanas')}}" method="GET">
             <button type="submit" class="botoncPanel" value="Enviar"><i class="fa fa-map-pin" aria-hidden="true"></i> GIMCANA</button><br><br>
     </form>
     </div>
