@@ -233,27 +233,18 @@ form.registrarse-form label {
 }
 
 .cerrar {
-    color: white;
-    font-size: 5vh;
+    color: #aaa;
+    font-size: 28px;
     font-weight: bold;
     top: 8%;
     right: 32%;
     position: absolute;
     z-index: 1;
-    background-color: #333333;
-    line-height: 35px;
-    width: 35px;
+    width: 10px;
     text-align: center;
     border-radius: 3px;
     padding-bottom: 5px;
     transition: 0.3s;
-}
-
-.cerrar:hover {
-    background-color: #262626;
-    cursor: pointer;
-    text-decoration: none;
-    color: white;
 }
 
 .foto {
@@ -315,7 +306,7 @@ form.registrarse-form label {
 
 .palabra-etiqueta {
     position: absolute;
-    top: 27%;
+    top: 11%;
     left: 40vh;
     text-align: left;
 }
@@ -330,12 +321,13 @@ form.registrarse-form label {
 
 .anadir-etiqueta input {
     width: 23vh;
+    font-size: 2.5vh;
     float: left;
 }
 
 .anadir-etiqueta p,
 .palabra-etiqueta p {
-    font-size: 3.5vh;
+    font-size: 2.7vh;
     font-weight: bold;
 }
 
@@ -381,6 +373,8 @@ form.registrarse-form label {
 #eliminar-boton,
 #guardar-boton {
     color: white;
+    width: 60% !important;
+    font-size: 90%;
 }
 
 .crear {
@@ -412,6 +406,8 @@ form.registrarse-form label {
     top: 4%;
     left: 5vh;
     width: 70vh;
+    font-family: 'Fredoka', sans-serif;
+    color: #69bad3;
     text-align: left;
 }
 

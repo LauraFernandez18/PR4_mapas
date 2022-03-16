@@ -341,3 +341,10 @@ function menuDerecha() {
     }
     ajax.send(formData);
 }
+
+/* -----VALIDACIONES------- */
+
+/*VALIDACIÓN CREAR LUGAR*/
+function validarCrear() {
+    alert("Hola")
+}

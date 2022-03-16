@@ -80,7 +80,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     [41.357662, 2.185403]
 ]).addTo(map); */
 
-polygon.setStyle({
+/*polygon.setStyle({
     color: 'red',
     opacity: 0.6,
     fillColor: '#333333',
@@ -110,7 +110,7 @@ function btns_filtro() {
         if (ajax.readyState == 4 && ajax.status == 200) {
             var respuesta = JSON.parse(this.responseText);
             recarga = "";
-            recarga += "<button class='btn_borrar' type='button' onclick='marker_map(); return false;'><b> Borrar</b></button>";
+            recarga += "<button class='btn_borrar' type='button' onclick='marker_map(); return false;'><b>Borrar</b></button>";
             for (let i = 0; i < respuesta.length; i++) {
                 recarga += "<button class='btn_filtro' type='button' onclick='filtro_mapa(" + respuesta[i].id + "); return false;'><b> " + respuesta[i].nombre + "</b></button>";
             }
@@ -143,7 +143,7 @@ function marker_map() {
                 });
                 marker = L.marker([respuesta[i].latitud, respuesta[i].longitud], { icon: markerIcon });
                 marker.addTo(map);
-                marker.bindPopup("<img class='img_popup' src='../public/img/" + respuesta[i].foto + "'><b>" + respuesta[i].nombre + "</b><br><button class='btn btn-dark' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button class='btn btn-info' onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
+                marker.bindPopup("<h1 class='nombre'><b>" + respuesta[i].nombre + "</b></h1>" + "<p class='descripcion'>" + respuesta[i].descripcion + "</p><img class='img_popup' src='../public/img/" + respuesta[i].foto + "'></img><br></br><button class='btn btn-dark btn_ir' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button class='btn btn-info btn_quitar' onclick='limpiarRuta(); return false;'>Quitar Ruta</button>", {maxWidth: 190}).openPopup();
                 arr_marker.push(marker);
             }
             /* console.log(arr_marker); */
@@ -360,7 +360,7 @@ function filtro_mapa(id) {
                     iconSize: [30, 30]
                 });
                 var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud], { icon: markerIcon }).addTo(map);
-                marker.bindPopup("<img class='img_popup' src='../public/img/" + respuesta[i].foto + "'><b>" + respuesta[i].nombre + "</b><br><button class='btn btn-dark' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button class='btn btn-info' onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
+                marker.bindPopup("<h1 class='nombre'><b>" + respuesta[i].nombre + "</b></h1>" + "<p class='descripcion'>" + respuesta[i].descripcion + "</p><img class='img_popup' src='../public/img/" + respuesta[i].foto + "'></img><br></br><button class='btn btn-dark btn_ir' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button class='btn btn-info btn_quitar' onclick='limpiarRuta(); return false;'>Quitar Ruta</button>", {maxWidth: 190}).openPopup();
                 arr_marker.push(marker);
             }
         }
