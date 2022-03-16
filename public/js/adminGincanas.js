@@ -186,6 +186,8 @@ function routing() {
         addWaypoints: false
     }).addTo(map);
 
+    markers = L.layerGroup();
+
 
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
@@ -198,6 +200,12 @@ function routing() {
             var puntos = []
             for (let i = 0; i < respuesta.length; i++) {
                 puntos.push(L.latLng(respuesta[i].latitud, respuesta[i].longitud))
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
+                marker.bindPopup(respuesta[i].nombre, {
+                    closeButton: false,
+                    closeOnClick: false,
+                    autoClose: false
+                }).openPopup();
             }
             route.setWaypoints(puntos);
 
@@ -370,4 +378,33 @@ function CountPuntoControl2() {
     }
     ajax.send(formData);
 
+}
+
+
+function marker_map() {
+
+    markers = L.layerGroup();
+
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'post');
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "adminMapasAjax", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            recarga = "";
+            for (let i = 0; i < respuesta.length; i++) {
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
+                marker.bindPopup(respuesta[i].nombre, {
+                    closeButton: false,
+                    closeOnClick: false,
+                    autoClose: false
+                }).openPopup();
+            }
+
+        }
+    }
+    ajax.send(formData);
 }
