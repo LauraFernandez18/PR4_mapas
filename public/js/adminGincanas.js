@@ -1,4 +1,5 @@
 window.onload = function() {
+    var route = null
     var cerrar = document.getElementById('cerrar')
     cerrar.addEventListener("click", function() {
         document.getElementsByClassName("modalmask")[0].style.opacity = 0
@@ -37,6 +38,8 @@ window.onload = function() {
                 document.getElementsByClassName("modalmask")[0].style.opacity = 0
                 document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
                 document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                menuDerecha()
+                routing()
             }
         }
         ajax.send(formData);
@@ -60,6 +63,7 @@ window.onload = function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var respuesta = JSON.parse(this.responseText);
                 menuDerecha()
+                routing()
                 document.getElementsByClassName("modalmask")[1].style.opacity = 0
                 document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
                 document.getElementsByTagName("html")[0].style.overflowY = "scroll"
@@ -172,54 +176,59 @@ polygon.setStyle({
 
 function routing() {
 
-    /*
-        var routeControl = L.Routing.control({
-            waypoints: [
-                null
-            ],
-            routeWhileDragging: true,
-            draggableWaypoints: false,
-            addWaypoints: false
-        }).addTo(map).hide();
+    route = null
+    route = L.Routing.control({
+        waypoints: [
+            null
+        ],
+        routeWhileDragging: false,
+        draggableWaypoints: false,
+        addWaypoints: false
+    }).addTo(map);
 
 
-        var formData = new FormData();
-        formData.append('_token', document.getElementById('token').getAttribute("content"));
-        formData.append('_method', 'post');
-        var ajax = objetoAjax();
-        ajax.open("POST", "RoutingGincana", true);
-        ajax.onreadystatechange = function() {
-            if (ajax.readyState == 4 && ajax.status == 200) {
-                var respuesta = JSON.parse(this.responseText);
-                for (let i = 0; i < respuesta.length; i++) {
-                    routeControl.setWaypoints({ latLng: L.latLng([respuesta[i].latitud, respuesta[i].longitud]) });
-                }
-
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'post');
+    var ajax = objetoAjax();
+    ajax.open("POST", "RoutingGincana", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            var puntos = []
+            for (let i = 0; i < respuesta.length; i++) {
+                puntos.push(L.latLng(respuesta[i].latitud, respuesta[i].longitud))
             }
+            route.setWaypoints(puntos);
 
         }
-        ajax.send(formData);*/
+
+    }
+    ajax.send(formData);
 }
 
 
-
-
-L.Routing.control({
+/*
+var route = L.Routing.control({
     waypoints: [
-        L.latLng(41.37359770, 2.18727150),
-        L.latLng(41.38056230, 2.18807750),
-        L.latLng(41.37618790, 2.18315070)
+        null
     ],
-    routeWhileDragging: true,
+    routeWhileDragging: false,
     draggableWaypoints: false,
-    addWaypoints: false
-}).addTo(map).hide();
+    addWaypoints: true
+}).addTo(map);
 
 
-L.Routing.control.setWaypoints([
-    L.latLng(41.38056230, 2.18807750),
-    L.latLng(41.37618790, 2.18315070)
-]).addTo(map);
+
+var arrPts = [L.latLng(41.37359770, 2.18727150), L.latLng(41.38056230, 2.18807750), L.latLng(41.37618790, 2.18315070), L.latLng(41.37581250, 2.19030910)];
+
+function refresh() {
+
+    route.setWaypoints(arrPts);
+
+}
+/*
+L.Routing.control.spliceWaypoints(0, 1, L.latlng(41.38056210, 2.18807740));*/
 
 
 
@@ -281,6 +290,7 @@ function modal(id, pista, gincana, lugar, orden) {
                     document.getElementsByClassName("modalmask")[0].style.opacity = 0
                     document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
                     document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                    routing()
                 }
             }
             ajax.send(formData);
@@ -288,6 +298,7 @@ function modal(id, pista, gincana, lugar, orden) {
     } else {
         divEliminar.innerHTML = ""
     }
+
 
 }
 

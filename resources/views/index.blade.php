@@ -24,8 +24,8 @@
     <button class="btn_inicio btn btn-dark" type="button" onclick="iniciar_sesionJS()">Iniciar sesión</button>
     </div> --}}
     <div id="map">
-        <button class="btn btn-info btn_inicio" type="button" id="myBtn"><b>Log In</b></button>
-        <button type="submit" class="btn_cabecera btn btn-secondary" onclick="return indexGimcana();" value="Enviar"><b>Gimcana</b></button>
+        <button class="btn btn-info btn_inicio btn-lg" type="button" id="myBtn"><b>Log In</b></button>
+        <button type="submit" class="btn_cabecera btn btn-secondary btn-lg" onclick="return indexGimcana();" value="Enviar"><b>Gimcana</b></button>
         <div class="filtro" id="filtro_btn">
           
         </div>
