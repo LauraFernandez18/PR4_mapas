@@ -66,7 +66,7 @@ function gincana() {
                 arr_pistas.push(respuesta[i]);
             }
             console.log(arr_pistas);
-            /* mapa.innerHTML = recarga; */
+            gincanaUser();
         }
     }
     ajax.send(formData);
@@ -92,6 +92,7 @@ map.on('click', onMapClick); */
 map.on('click', function(e) {
     if (!firstLatLng) {
         firstLatLng = e.latlng;
+        console.log(firstLatLng)
     }
     secondLatLng = [41.36863022, 2.19018558];
     if (firstLatLng && secondLatLng) {
@@ -123,32 +124,39 @@ map.on('click', function(e) {
 }
  */
 
-//Declaramos las variables de las tres coordenadas 
-//coordenada jugador al clicar
-firstLatLng = '';
-//coordenada lugar
-secondLatLng = '';
-//coordenada jugador recogida x el navegador cuando clica
-thirdLatLng = '';
 
-//Definimos el contador de aciertos
-cont_aciertos = 0;
 
 function gincanaUser() {
+    //Declaramos las variables de las tres coordenadas 
+    //coordenada jugador al clicar
+    firstLatLng = '';
+    //coordenada lugar
+    secondLatLng = '';
+    //coordenada jugador recogida x el navegador cuando clica
+    thirdLatLng = '';
+    distance_usr_click = '';
+    distance_usr_lgr = '';
+    //Definimos el contador de aciertos
+    cont_aciertos = 0;
     //Creamos la condicion que queremos que cumpla
     while (cont_aciertos <= arr_pistas.length) {
-        //click en el mapa para coger la ubicacion del jugador
-        map.on('click', function(e) {
-                //coordenada jugador
+        for (let i = 0; i < arr_pistas.length; i++) {
+            //click en el mapa para coger la ubicacion del jugador
+            map.on('click', function(e) {
+                //coordenada jugador donde clica
                 if (!firstLatLng) {
-                    firstLatLng = e.latlng;
+                    firstLatLng = [e.latlng.lat, e.latlng.lng];
+                    console.log('Cordenada al clicar: ' + firstLatLng)
                 }
                 //Coordenada actual del jugador por localizacion del navegador al clicar
                 if (!"geolocation" in navigator) {
                     return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
                 };
                 const onUbicacionConcedida = ubicacion => {
-                    thirdLatLng = ubicacion;
+                    thirdLatLng = [ubicacion.coords.latitude, ubicacion.coords.longitude];
+                    console.log('Cordenada jugador: ' + thirdLatLng)
+                    marker = L.marker(thirdLatLng);
+                    marker.addTo(map);
                 }
 
                 const onErrorDeUbicacion = err => {
@@ -162,29 +170,37 @@ function gincanaUser() {
                 };
                 // Solicitar
                 navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion, opcionesDeSolicitud);
-            })
-            //Calculamos la distancia de la ubi del jugador con la del lugar del click para saber si esta por la zona
-        var distance_usr_click = map.distance(firstLatLng, thirdLatLng);
-        //Comprobamos la distancia
-        if (distance_usr_click <= 100) {
-            //Si esta le permitimos jugar
-            //Creamos el bucle que recorre el array para ir mostrando las pistas
-            for (let i = 0; i < arr_pistas.length; i++) {
+                if (firstLatLng != '' && thirdLatLng != '') {
+                    //Calculamos la distancia de la ubi del jugador con la del lugar del click para saber si esta por la zona
+                    distance_usr_click = map.distance(firstLatLng, thirdLatLng);
+                    console.log('Distancia: ' + distance_usr_click);
+                }
+            });
+            //Comprobamos la distancia
+
+            if (distance_usr_click <= 100) {
+                //Si esta le permitimos jugar
+                //Creamos el bucle que recorre el array para ir mostrando las pistas
                 //Cogemos el id de donde vamos a insertar la pista
                 p_pista = document.getElementById('Pista');
                 //guardamos la pista en una variable
                 pista = arr_pistas[i].pista;
+                console.log(pista);
                 //insertamos la pista
                 p_pista.innerHTML = pista;
                 //coordenada lugar destino
                 secondLatLng = arr_pistas[i].latitud + ',' + arr_pistas[i].longitud;
-                //Calculamos la distancia de la ubi del jugador con la del lugar del click para saber si esta por la zona
-                var distance_usr_lgr = map.distance(firstLatLng, secondLatLng);
+                console.log(secondLatLng);
+                if (firstLatLng != '' && secondLatLng != '') {
+                    //Calculamos la distancia de la ubi del jugador con la del lugar del click para saber si esta por la zona
+                    distance_usr_lgr = map.distance(firstLatLng, secondLatLng);
+                    console.log(distance_usr_lgr);
+                }
                 //comprobamos si está en un rango de 50 metros respecto al lugar 
                 if (distance_usr_lgr <= 50) {
                     //si está le sumamos 1 al contador, le mostramos un alert de que ha acertado y seguimos recorriendo el array
                     cont_aciertos++;
-                    alert('Has acertado');
+                    console.log('Has acertado');
                     //Ponemos la ubi 1 a vacio para que no se pisen las diferentes ubicaciones
                     firstLatLng = '';
                     //Ponemos la ubi 2 a vacio para que no se pisen las diferentes ubicaciones
@@ -195,7 +211,7 @@ function gincanaUser() {
                     p_pista.innerHTML = '';
                 } else {
                     i--;
-                    alert('Has fallado');
+                    console.log('Has fallado');
                     //Ponemos la ubi 1 a vacio para que no se pisen las diferentes ubicaciones
                     firstLatLng = '';
                     //Ponemos la ubi 2 a vacio para que no se pisen las diferentes ubicaciones
@@ -205,11 +221,14 @@ function gincanaUser() {
                     //Vaciamos el contenido de donde esta la pista para que no se sobreescriba en la última pista
                     p_pista.innerHTML = '';
                 }
+            } else {
+                //Le decimos que no está cerca de la zona que debe ir para poder seguir jugando
+                console.log('No estás en la zona, debes ir a la zona del lugar para poder comprobar si estás en el lugar correcto.');
+                //Ponemos la ubi 1 a vacio para que no se pisen las diferentes ubicaciones
+                firstLatLng = '';
+                thirdLatLng = '';
             }
-        } else {
-            //Le decimos que no está cerca de la zona que debe ir para poder seguir jugando
-            alert('No estás en la zona, debes ir a la zona del lugar para poder comprobar si estás en el lugar correcto.');
         }
     }
-    alert('Has finalizado la gincana');
+    console.log('Has finalizado la gincana');
 }
