@@ -1,4 +1,5 @@
 window.onload = function() {
+    var route = null
     var cerrar = document.getElementById('cerrar')
     cerrar.addEventListener("click", function() {
         document.getElementsByClassName("modalmask")[0].style.opacity = 0
@@ -37,11 +38,11 @@ window.onload = function() {
                 document.getElementsByClassName("modalmask")[0].style.opacity = 0
                 document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
                 document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                menuDerecha()
+                routing()
             }
         }
         ajax.send(formData);
-        menuDerecha()
-        routing()
     })
 
     $("#guardar-crear").click(function() {
@@ -62,6 +63,7 @@ window.onload = function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var respuesta = JSON.parse(this.responseText);
                 menuDerecha()
+                routing()
                 document.getElementsByClassName("modalmask")[1].style.opacity = 0
                 document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
                 document.getElementsByTagName("html")[0].style.overflowY = "scroll"
@@ -70,8 +72,6 @@ window.onload = function() {
             }
         }
         ajax.send(formData);
-        menuDerecha()
-        routing()
     })
     routing()
     menuDerecha()
@@ -176,8 +176,8 @@ polygon.setStyle({
 
 function routing() {
 
-
-    var route = L.Routing.control({
+    route = null
+    route = L.Routing.control({
         waypoints: [
             null
         ],

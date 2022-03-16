@@ -38,7 +38,7 @@ window.onload = function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var respuesta = JSON.parse(this.responseText);
                 divEtiqueta.innerHTML = ""
-                modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto)
+                modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto, respuesta[0].descripcion, respuesta[0].foto_icon)
             }
         }
         ajax.send(formData);
@@ -50,6 +50,8 @@ window.onload = function() {
             var nombre = $("#nombre").val();
             var longitud = $("#longitud").val();
             var latitud = $("#latitud").val();
+            var foto_icon = $("#foto-icono-input").val();
+            var descripcion = $("#descripcion").val();
             var formData = new FormData();
             formData.append('_token', document.getElementById('token').getAttribute("content"));
             formData.append('_method', 'post');
@@ -58,6 +60,8 @@ window.onload = function() {
             formData.append('longitud', longitud);
             formData.append('latitud', latitud);
             formData.append('foto', document.getElementById('foto-Input').files[0]);
+            formData.append('descripcion', descripcion);
+            formData.append('foto_icon', foto_icon);
             var ajax = objetoAjax();
 
             ajax.open("POST", "UpdateLugar", true);
@@ -65,7 +69,7 @@ window.onload = function() {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     var respuesta = JSON.parse(this.responseText);
                     divLugar.innerHTML = ""
-                    modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto)
+                    modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto, respuesta[0].descripcion, respuesta[0].foto_icon)
                 }
             }
             ajax.send(formData);
@@ -76,6 +80,8 @@ window.onload = function() {
         var longitud = $("#longitud-crear").val();
         var latitud = $("#latitud-crear").val();
         var etiqueta = $("#etiqueta-crear").val();
+        var descripcion = $("#descripcion-crear").val();
+        var foto_icon = $("#foto-icono-input-crear").val();
         var formData = new FormData();
         formData.append('_token', document.getElementById('token').getAttribute("content"));
         formData.append('_method', 'post');
@@ -84,6 +90,8 @@ window.onload = function() {
         formData.append('latitud', latitud);
         formData.append('etiqueta', etiqueta);
         formData.append('foto', document.getElementById('foto-crear').files[0]);
+        formData.append('descripcion', descripcion);
+        formData.append('foto_icon', foto_icon);
         var ajax = objetoAjax();
 
         ajax.open("POST", "CrearLugar", true);
@@ -121,6 +129,7 @@ window.onload = function() {
             }
         }
         ajax.send(formData);
+
     })
 
     menuDerecha();
@@ -129,7 +138,7 @@ window.onload = function() {
 };
 
 
-function modal(id, nombre, longitud, latitud, foto) {
+function modal(id, nombre, longitud, latitud, foto, descripcion, foto_icon) {
     document.getElementsByClassName("modalmask")[0].style.opacity = 1
     document.getElementsByClassName("modalmask")[0].style.pointerEvents = "auto"
         //document.getElementsByTagName("html")[0].style.overflow = "hidden"
@@ -138,6 +147,8 @@ function modal(id, nombre, longitud, latitud, foto) {
     $("#longitud").val(longitud);
     $("#latitud").val(latitud);
     $("#foto").attr("src", "../public/img/" + foto);
+    $("#descripcion").val(descripcion);
+    $("#foto-icono-input").val(foto_icon);
     etiquetasAjax()
 
     function etiquetasAjax() {
@@ -224,6 +235,9 @@ function objetoAjax() {
 
 
 function marker_map() {
+
+    markers = L.layerGroup();
+
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
     formData.append('_method', 'post');
@@ -241,9 +255,9 @@ function marker_map() {
                     closeOnClick: false,
                     autoClose: false
                 }).openPopup();
-
+                markers.addLayer(marker);
                 marker.on('click', function(e) {
-                    modal(respuesta[i].id, respuesta[i].nombre, respuesta[i].longitud, respuesta[i].latitud, respuesta[i].foto)
+                    modal(respuesta[i].id, respuesta[i].nombre, respuesta[i].longitud, respuesta[i].latitud, respuesta[i].foto, respuesta[i].descripcion, respuesta[i].foto_icon)
                     marker_map()
                 });
 
@@ -297,7 +311,9 @@ function menuDerechaClick() {
         var longitud = $(this).attr('data-long');
         var latitud = $(this).attr('data-lat');
         var foto = $(this).attr('data-foto');
-        modal(id, nombre, longitud, latitud, foto)
+        var descripcion = $(this).attr('data-descripcion');
+        var foto_icon = $(this).attr('data-foto_icon');
+        modal(id, nombre, longitud, latitud, foto, descripcion, foto_icon)
     });
 
 
@@ -317,7 +333,7 @@ function menuDerecha() {
             divLugar.innerHTML = ''
             var divLugarhtml = '<h2>Lugares de interés</h2>';
             for (let i = 0; i < respuesta.length; i++) {
-                divLugarhtml += "<p class='lugar-jquery' data-id='" + respuesta[i].id + "' data-nombre='" + respuesta[i].nombre + "' data-long='" + respuesta[i].longitud + "' data-lat='" + respuesta[i].latitud + "' data-foto='" + respuesta[i].foto + "'>• " + respuesta[i].nombre + "</p>"
+                divLugarhtml += "<p class='lugar-jquery' data-id='" + respuesta[i].id + "' data-nombre='" + respuesta[i].nombre + "' data-long='" + respuesta[i].longitud + "' data-lat='" + respuesta[i].latitud + "' data-foto='" + respuesta[i].foto + "' data-descripcion='" + respuesta[i].descripcion + "' data-foto_icon='" + respuesta[i].foto_icon + "'>• " + respuesta[i].nombre + "</p>"
             }
             divLugar.innerHTML += divLugarhtml;
         }
