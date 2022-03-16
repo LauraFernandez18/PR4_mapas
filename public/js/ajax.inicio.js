@@ -98,7 +98,7 @@ function marker_map() {
                 /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
                 marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]);
                 marker.addTo(map);
-                marker.bindPopup("<button onclick='favoritos(); return false;'>Favoritos</button>" + "<b>" + respuesta[i].nombre + "</b><br><button onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button onclick='limpiarRuta(); return false;'>Quitar Ruta</button>").openPopup();
+                marker.bindPopup("<h1 class='nombre'><b>" + respuesta[i].nombre + "</b></h1>" + "<p class='descripcion'>" + respuesta[i].descripcion + "</p><img class='img_popup' src='../public/img/" + respuesta[i].foto + "'></img><br></br><button class='btn btn-dark btn_ir' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button class='btn btn-info btn_quitar' onclick='limpiarRuta(); return false;'>Quitar Ruta</button>", { maxWidth: 190 }).openPopup();
                 arr_marker.push(marker);
             }
             /* console.log(arr_marker); */
