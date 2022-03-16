@@ -94,7 +94,6 @@
     font-size: 1% !important;
 }
 
-
 .modal {
     display: none;
     /* Hidden by default */
@@ -287,6 +286,12 @@ input[type='password']::placeholder {
         left: 190px;
         margin-left: 4%;
     }
+    .btn_gimcana {
+        font-size: 1.8vh !important;
+    }
+    .btn_logout {
+        font-size: 1.8vh !important;
+    }
     .btn_filtro,
     .btn_borrar {
         width: 80vh !important;
@@ -441,20 +446,16 @@ input[type='password']::placeholder {
     .descripcion {
         width: 100%;
     }
-
     .nombre {
         font-size: 2vh;
     }
-
     .btn_quitar,
     .btn_ir {
         margin-right: 2%;
         font-size: 2.2vh !important;
     }
-
     .img_popup {
         width: 100%;
         border-radius: 5%;
     }
 }
-
