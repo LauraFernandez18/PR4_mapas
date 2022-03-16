@@ -48,15 +48,22 @@ body {
 .admin-cpanel-crear {
     position: absolute;
     top: 6vh;
-    right: 20vh;
+    right: 25vh;
 }
 
 .admin-atras {
     position: absolute;
     top: 6vh;
-    right: 10vh;
+    right: 15vh;
     color: black !important;
     font-size: 28px;
+}
+
+.admin-logout {
+    position: absolute;
+    top: 6vh;
+    right: 5vh;
+    color: black !important;
 }
 
 .fas,
@@ -128,7 +135,7 @@ body {
 /*modal*/
 
 .registrarse {
-    top: 15%;
+    top: 5%;
     left: 30%;
     position: absolute;
     color: black;
@@ -162,7 +169,7 @@ body {
 .region-registrarse form.registrarse-form {
     background-color: white;
     width: 85vh;
-    height: 70vh;
+    height: 90vh;
     border-radius: 4px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -229,7 +236,7 @@ form.registrarse-form label {
     color: white;
     font-size: 5vh;
     font-weight: bold;
-    top: 17%;
+    top: 8%;
     right: 32%;
     position: absolute;
     z-index: 1;
@@ -251,8 +258,12 @@ form.registrarse-form label {
 
 .foto {
     position: absolute;
-    bottom: 35%;
+    bottom: 15%;
     left: 5vh;
+}
+
+#foto-icono-input-crear option {
+    padding: 2px;
 }
 
 .foto img {
@@ -264,7 +275,7 @@ form.registrarse-form label {
 
 .info {
     position: absolute;
-    top: 15%;
+    top: 26%;
     left: 5vh;
     width: 30vh;
     text-align: left;
@@ -274,9 +285,27 @@ form.registrarse-form label {
     margin-bottom: 10%;
 }
 
+.info select {
+    width: 100%;
+    margin-bottom: 10%;
+}
+
+.descripcion {
+    position: absolute;
+    top: 12%;
+    left: 5vh;
+}
+
+.descripcion textarea {
+    border: none;
+    padding: 2%;
+    padding-left: 2%;
+    resize: none;
+}
+
 .etiquetas {
     position: absolute;
-    top: 17%;
+    top: 33%;
     left: 40vh;
     width: 40vh;
     height: 25vh;
@@ -286,14 +315,14 @@ form.registrarse-form label {
 
 .palabra-etiqueta {
     position: absolute;
-    top: 10%;
+    top: 27%;
     left: 40vh;
     text-align: left;
 }
 
 .anadir-etiqueta {
     position: absolute;
-    bottom: 45%;
+    bottom: 25%;
     left: 40vh;
     width: 30vh;
     text-align: left;
@@ -333,7 +362,7 @@ form.registrarse-form label {
 
 .guardar {
     position: absolute;
-    bottom: 35%;
+    bottom: 15%;
     left: 57vh;
     width: 30vh;
 }
@@ -344,7 +373,7 @@ form.registrarse-form label {
 
 .eliminar {
     position: absolute;
-    bottom: 35%;
+    bottom: 15%;
     left: 36vh;
     width: 30vh;
 }
@@ -356,9 +385,26 @@ form.registrarse-form label {
 
 .crear {
     position: absolute;
-    bottom: 35%;
-    left: 31vh;
+    bottom: 15%;
+    left: 51vh;
     width: 30vh;
+}
+
+#guardar-boton-crear {
+    color: white;
+}
+
+.anadir-etiqueta-crear {
+    position: absolute;
+    bottom: 25%;
+    left: 40vh;
+    width: 30vh;
+    text-align: left;
+}
+
+.anadir-etiqueta-crear p {
+    font-size: 3.5vh;
+    font-weight: bold;
 }
 
 .nombre {

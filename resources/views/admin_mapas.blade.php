@@ -1,3 +1,10 @@
+@if (!Session::get('nombre_admin'))
+    <?php
+        //Si la session no esta definida te redirige al login.
+        return redirect()->to('/index')->send();
+    ?>
+@endif
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,11 +42,23 @@
                         <div class="nombre"><input type="text" name="nombre" id="nombre" value="" data-id=""></div>
                         <div class="info">
                             <label>Latitud</label>
-                            <input type="text" name="longitud" id="longitud">
-                            <label>Longitud</label>
                             <input type="text" name="latitud" id="latitud">
+                            <label>Longitud</label>
+                            <input type="text" name="longitud" id="longitud">
+                            <label>Icono</label>
+                            <select name="foto-icono" id="foto-icono-input">
+                                <option value="hotel_icon.png">Hotel</option>
+                                <option value="rest_icon.png">Restaurante</option>
+                                <option value="museo_icon.png">Museo</option>
+                                <option value="bar_icon.png">Bar</option>
+                                <option value="playa_icon.png">Playa</option>
+                                <option value="futbol.png">Futbol</option>
+                            </select>
                             <label>Foto</label>
                             <input type="file" name="file" id="foto-Input" class="upload" accept="image/*">
+                        </div>
+                        <div class="descripcion">
+                            <textarea name="descripcion" id="descripcion" cols="56" rows="3"></textarea>
                         </div>
                         <div class="foto">
                             <img src="" id="foto">
@@ -79,16 +98,26 @@
                             <input type="text" name="longitud" id="latitud-crear">
                             <label>Longitud</label>
                             <input type="text" name="latitud" id="longitud-crear">
+                            <label>Icono</label>
+                            <select name="foto-icono" id="foto-icono-input-crear">
+                                <option value="hotel_icon.png">Hotel</option>
+                                <option value="rest_icon.png">Restaurante</option>
+                                <option value="museo_icon.png">Museo</option>
+                                <option value="bar_icon.png">Bar</option>
+                                <option value="playa_icon.png">Playa</option>
+                                <option value="futbol.png">Futbol</option>
+                            </select>
                             <label>Foto</label>
                             <input type="file" name="file" class="upload" accept="image/*" id="foto-crear">
                         </div>
-                        <div class="palabra-etiqueta">
-                            <p>Etiquetas</p>
+                        <div class="descripcion">
+                            <textarea name="descripcion" id="descripcion-crear" cols="56" rows="3" placeholder="Descripcion"></textarea>
                         </div>
+                        
                         <div class="etiquetas">
                             
                         </div>
-                        <div class="anadir-etiqueta">
+                        <div class="anadir-etiqueta-crear">
                             <p>Añadir etiquetas</p>
                             <input type="text" name="etiqueta" placeholder="+ Nueva etiqueta" id="etiqueta-crear">
                         </div>
