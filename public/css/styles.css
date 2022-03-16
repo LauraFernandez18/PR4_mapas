@@ -12,9 +12,9 @@
 .btn_inicio {
     position: absolute;
     top: 20px;
+    font-size: 100% !important;
     float: left;
     left: 65px;
-    padding: 10px;
     z-index: 600;
 }
 
@@ -23,16 +23,16 @@
     top: 20px;
     float: left;
     left: 65px;
-    padding: 10px;
+    font-size: 100% !important;
     z-index: 600;
 }
 
 .btn_cabecera {
     position: absolute;
     top: 20px;
+    font-size: 100% !important;
     float: left;
     left: 165px;
-    padding: 10px;
     z-index: 600;
     margin-left: -1%;
 }
@@ -40,9 +40,10 @@
 .btn_gimcana {
     position: absolute;
     top: 20px;
+    font-size: 100% !important;
     float: left;
     left: 120px;
-    padding: 10px;
+    margin-left: -1%;
     z-index: 600;
 }
 
