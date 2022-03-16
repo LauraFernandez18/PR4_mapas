@@ -121,6 +121,7 @@ window.onload = function() {
             }
         }
         ajax.send(formData);
+
     })
 
     menuDerecha();

@@ -37,11 +37,11 @@ window.onload = function() {
                 document.getElementsByClassName("modalmask")[0].style.opacity = 0
                 document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
                 document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                menuDerecha()
+                routing()
             }
         }
         ajax.send(formData);
-        menuDerecha()
-        routing()
     })
 
     $("#guardar-crear").click(function() {

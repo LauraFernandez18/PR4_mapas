@@ -82,6 +82,7 @@ class LugarController extends Controller
     public function eliminarEtiqueta($id)
     {
         DB::table('tbl_etiqueta_usuario')->where('fk_etiqueta','=',$id)->delete();
+        DB::table('tbl_punto_control')->where('fk_lugar','=',$id)->delete();
         DB::table('tbl_etiquetas')->where('id','=',$id)->delete();
         return response()->json(array('resultado'=> 'OK'));
     }

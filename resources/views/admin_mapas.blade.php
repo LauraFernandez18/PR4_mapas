@@ -76,9 +76,9 @@
                         <div class="nombre"><input type="text" name="nombre" value="Nombre lugar" id="nombre-crear"></div>
                         <div class="info">
                             <label>Latitud</label>
-                            <input type="text" name="longitud" id="longitud-crear">
+                            <input type="text" name="longitud" id="latitud-crear">
                             <label>Longitud</label>
-                            <input type="text" name="latitud" id="latitud-crear">
+                            <input type="text" name="latitud" id="longitud-crear">
                             <label>Foto</label>
                             <input type="file" name="file" class="upload" accept="image/*" id="foto-crear">
                         </div>
