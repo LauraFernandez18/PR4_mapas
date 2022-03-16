@@ -35,14 +35,14 @@ class LugarController extends Controller
 
     public function MenuDerechaLugares()
     {
-        $lugaresdistinct=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
+        $lugaresdistinct=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto, tbl_lugares.descripcion, tbl_lugares.foto_icon from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
 
         return response()->json($lugaresdistinct);
     }
 
     public function adminMapasAjax()
     {
-        $lugaresdistinct=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
+        $lugaresdistinct=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto, tbl_lugares.descripcion, tbl_lugares.foto_icon from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
         $lugares=DB::select('SELECT tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
         $etiquetas=DB::select('SELECT tbl_etiquetas.fk_lugar,tbl_etiquetas.nombre from tbl_etiquetas INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador";');
         $lugares_etiquetas = array();
@@ -75,13 +75,14 @@ class LugarController extends Controller
         $datos = $request->except('_token');
         $etiquetas=DB::table('tbl_etiquetas')->insertGetId(["nombre"=>$datos['etiqueta'],"fk_lugar"=>$datos['lugar']]);
         $etiquetasUser=DB::table('tbl_etiqueta_usuario')->insertGetId(["fk_usuario"=>'1',"fk_etiqueta"=>$etiquetas]);
-        $lugar=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" and tbl_lugares.id=?',[$datos['lugar']]);
+        $lugar=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto, tbl_lugares.descripcion, tbl_lugares.foto_icon from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" and tbl_lugares.id=?',[$datos['lugar']]);
         return response()->json($lugar);
     }
 
     public function eliminarEtiqueta($id)
     {
         DB::table('tbl_etiqueta_usuario')->where('fk_etiqueta','=',$id)->delete();
+        DB::table('tbl_punto_control')->where('fk_lugar','=',$id)->delete();
         DB::table('tbl_etiquetas')->where('id','=',$id)->delete();
         return response()->json(array('resultado'=> 'OK'));
     }
@@ -96,12 +97,13 @@ class LugarController extends Controller
         }
         DB::table('tbl_lugares')->where('id','=',[$datos['id']])->delete();
         return response()->json(array('resultado'=> 'OK'));
+        //el lugar no se eliminará si pertence a la gincana
     }
 
     public function CrearLugar(Request $request)
     {
         $datos=$request->except('_token','_method');
-        $lugar=DB::table('tbl_lugares')->insertGetId(["nombre"=>$datos['nombre'],"longitud"=>$datos['longitud'],"latitud"=>$datos['latitud'],"foto"=>$datos['foto']]);
+        $lugar=DB::table('tbl_lugares')->insertGetId(["nombre"=>$datos['nombre'],"longitud"=>$datos['longitud'],"latitud"=>$datos['latitud'],"foto"=>$datos['foto'],"descripcion"=>$datos['descripcion'],"foto_icon"=>$datos['foto_icon']]);
         $etiqueta=DB::table('tbl_etiquetas')->insertGetId(["nombre"=>$datos['etiqueta'],"fk_lugar"=>$lugar]);
         DB::table('tbl_etiqueta_usuario')->insertGetId(["fk_usuario"=>'1',"fk_etiqueta"=>$etiqueta]);
         return response()->json(array('resultado'=> 'OK'));
@@ -119,7 +121,7 @@ class LugarController extends Controller
         }
         $datosLugar=$request->except('_token','_method','id');
         DB::table('tbl_lugares')->where('id','=',$request['id'])->update($datosLugar);
-        $lugar=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" and tbl_lugares.id=?',[$request['id']]);
+        $lugar=DB::select('SELECT distinct tbl_lugares.id, tbl_lugares.nombre, tbl_lugares.longitud, tbl_lugares.latitud, tbl_lugares.foto, tbl_lugares.descripcion, tbl_lugares.foto_icon from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" and tbl_lugares.id=?',[$request['id']]);
 
 
         return response()->json($lugar);
