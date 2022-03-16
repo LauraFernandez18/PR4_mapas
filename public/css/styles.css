@@ -88,6 +88,13 @@
     background-color: rgb(241, 241, 241);
 }
 
+.btn_quitar,
+.btn_ir {
+    margin-right: 2%;
+    font-size: 1% !important;
+}
+
+
 .modal {
     display: none;
     /* Hidden by default */
@@ -241,17 +248,17 @@ input[type='password']::placeholder {
 }
 
 .nombre {
-    font-size: 3.3vh;
+    font-size: 2.3vh;
 }
 
 .btn_quitar,
 .btn_ir {
     margin-right: 2%;
-    font-size: 2.2vh !important;
+    font-size: 1.5vh !important;
 }
 
 .img_popup {
-    width: 100%;
+    width: 90%;
     border-radius: 5%;
 }
 
@@ -278,7 +285,7 @@ input[type='password']::placeholder {
         font-size: 1.8vh !important;
         padding: 5%;
         left: 190px;
-        margin-left: 1%;
+        margin-left: 4%;
     }
     .btn_filtro,
     .btn_borrar {
@@ -303,13 +310,10 @@ input[type='password']::placeholder {
         margin-left: -2%;
     }
     .btn_gimcana {
-        width: 25% !important;
-        font-size: 100% !important;
-        padding: 5%;
         margin-left: -1%;
     }
     .btn_logout {
-        width: 5% !important;
+        width: 7% !important;
         font-size: 1.8vh !important;
         padding: 5%;
     }
@@ -353,8 +357,7 @@ input[type='password']::placeholder {
     }
     .btn_logout {
         width: 7% !important;
-        font-size: 1.8vh !important;
-        padding: 5%;
+        font-size: 100% !important;
     }
     .btn_filtro,
     .btn_borrar {
@@ -382,7 +385,7 @@ input[type='password']::placeholder {
 @media screen and (max-width:450px) {
     .filtro {
         margin-top: 65px;
-        padding-left: 10%;
+        padding-left: 7%;
         padding-right: 1%;
         position: absolute;
         width: 100%;
@@ -405,14 +408,14 @@ input[type='password']::placeholder {
     }
     .btn_gimcana {
         width: 25% !important;
-        font-size: 100% !important;
+        font-size: 2vh !important;
         padding: 5%;
-        margin-left: -1%;
+        left: 190px;
+        margin-left: -18%;
     }
     .btn_logout {
         width: 10% !important;
-        font-size: 1.8vh !important;
-        padding: 5%;
+        font-size: 2vh !important;
     }
     .btn_filtro,
     .btn_borrar {
@@ -435,4 +438,23 @@ input[type='password']::placeholder {
     .inp_txt {
         width: 90%;
     }
+    .descripcion {
+        width: 100%;
+    }
+
+    .nombre {
+        font-size: 2vh;
+    }
+
+    .btn_quitar,
+    .btn_ir {
+        margin-right: 2%;
+        font-size: 2.2vh !important;
+    }
+
+    .img_popup {
+        width: 100%;
+        border-radius: 5%;
+    }
 }
+
