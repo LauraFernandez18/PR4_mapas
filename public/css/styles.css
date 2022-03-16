@@ -1,359 +1,461 @@
-    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap');
-    .cabecera {
-        margin-left: 1%;
-        margin-right: 2%;
-    }
-    
-    #map {
-        height: 100vh;
-        width: 100%;
-    }
-    
-    .btn_inicio {
-        position: absolute;
-        top: 20px;
-        float: left;
-        left: 65px;
-        padding: 10px;
-        z-index: 600;
-    }
-    
-    .btn_logout {
-        position: absolute;
-        top: 20px;
-        float: left;
-        left: 65px;
-        padding: 10px;
-        z-index: 600;
-    }
-    
-    .btn_cabecera {
-        position: absolute;
-        top: 20px;
-        float: left;
-        left: 165px;
-        padding: 10px;
-        z-index: 600;
-    }
-    
-    .btn_gimcana {
-        position: absolute;
-        top: 20px;
-        float: left;
-        left: 120px;
-        padding: 10px;
-        z-index: 600;
-    }
-    
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap');
+.cabecera {
+    margin-left: 1%;
+    margin-right: 2%;
+}
+
+#map {
+    height: 100vh;
+    width: 100%;
+}
+
+.btn_inicio {
+    position: absolute;
+    top: 20px;
+    float: left;
+    left: 65px;
+    padding: 10px;
+    z-index: 600;
+}
+
+.btn_logout {
+    position: absolute;
+    top: 20px;
+    float: left;
+    left: 65px;
+    padding: 10px;
+    z-index: 600;
+}
+
+.btn_cabecera {
+    position: absolute;
+    top: 20px;
+    float: left;
+    left: 165px;
+    padding: 10px;
+    z-index: 600;
+    margin-left: -1%;
+}
+
+.btn_gimcana {
+    position: absolute;
+    top: 20px;
+    float: left;
+    left: 120px;
+    padding: 10px;
+    z-index: 600;
+}
+
+.filtro {
+    position: absolute;
+    top: 20px;
+    z-index: 500;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn_filtro {
+    padding: 6px 15px;
+    background-color: #ffffff;
+    font-size: 14px;
+    border-radius: 100px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.295);
+    margin-right: 8px !important;
+}
+
+.btn_filtro:hover {
+    background-color: red;
+}
+
+.btn_borrar {
+    padding: 6px 15px;
+    background-color: rgb(226, 111, 111);
+    font-size: 14px;
+    border-radius: 100px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.295);
+    margin-right: 8px !important;
+}
+
+.btn_filtro:hover {
+    background-color: rgb(241, 241, 241);
+}
+
+.btn_quitar,
+.btn_ir {
+    margin-right: 2%;
+    font-size: 1% !important;
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 50;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    overflow: hidden;
+}
+
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50% !important;
+    /* Could be more or less, depending on screen size */
+    height: auto;
+    border-radius: 15px !important;
+}
+
+
+/* The Close Button */
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.register {
+    text-align: center;
+    justify-content: center;
+    color: black;
+    display: block;
+}
+
+.register h1,
+.register2 h1 {
+    font-family: 'Fredoka', sans-serif;
+    color: #69bad3;
+}
+
+.register2 {
+    text-align: center;
+    justify-content: center;
+    color: black;
+    display: none;
+}
+
+.inp_txt {
+    border-radius: 100px;
+    border: none;
+    width: 400px;
+    height: 45px;
+    background: #f5f5f5;
+    color: grey;
+    text-align: center;
+    font-size: 16px;
+}
+
+.inp_txt::placeholder {
+    color: grey;
+    text-align: center;
+    font-size: 16px;
+}
+
+input[type='password'] {
+    border-radius: 100px;
+    border: none;
+    width: 400px;
+    height: 45px;
+    background: #f5f5f5;
+    color: grey;
+    text-align: center;
+    font-size: 16px;
+}
+
+input[type='password']::placeholder {
+    color: grey;
+    text-align: center;
+    font-size: 16px;
+}
+
+.btn_regis {
+    text-decoration: none;
+    padding: 10px 40px;
+    color: #fff;
+    background-color: #69bad3;
+    font-size: 18px;
+    border-radius: 100px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
+    margin: 0;
+}
+
+.btn_regis:hover {
+    color: white;
+    background-color: #539bb1;
+}
+
+.btn_mostrar {
+    text-decoration: none;
+    color: #69bad3;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.register p {
+    color: grey;
+}
+
+.register2 p {
+    color: grey;
+}
+
+.ir {
+    width: 40px;
+}
+
+.prueba {
+    font-size: 3vh;
+}
+
+.descripcion {
+    width: 100%;
+}
+
+.nombre {
+    font-size: 2.3vh;
+}
+
+.btn_quitar,
+.btn_ir {
+    margin-right: 2%;
+    font-size: 1.5vh !important;
+}
+
+.img_popup {
+    width: 90%;
+    border-radius: 5%;
+}
+
+.marker_popup {
+    font-size: 22px;
+}
+
+@media screen and (max-width:1100px) {
     .filtro {
+        margin-top: 65px;
         position: absolute;
+        padding-right: 40px;
+        padding-left: 40px;
+        width: 100%;
+        top: 15px;
+    }
+    .btn_inicio {
+        width: 15% !important;
+        font-size: 1.8vh !important;
+        padding: 5%;
+    }
+    .btn_cabecera {
+        width: 15% !important;
+        font-size: 1.8vh !important;
+        padding: 5%;
+        left: 190px;
+        margin-left: 4%;
+    }
+    .btn_gimcana {
+        font-size: 1.8vh !important;
+    }
+    .btn_logout {
+        font-size: 1.8vh !important;
+    }
+    .btn_filtro,
+    .btn_borrar {
+        width: 80vh !important;
+        padding: 3px 10px;
+        font-size: 1.9vh;
+        margin-right: 6px !important;
+    }
+    .modal-content {
+        width: 60% !important;
+    }
+    input[type='password'] {
+        width: 90%;
+    }
+    .inp_txt {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .btn_cabecera {
+        margin-left: -2%;
+    }
+    .btn_gimcana {
+        margin-left: -1%;
+    }
+    .btn_logout {
+        width: 7% !important;
+        font-size: 1.8vh !important;
+        padding: 5%;
+    }
+    .modal-content {
+        width: 70% !important;
+    }
+    input[type='password'] {
+        width: 60%;
+    }
+    .inp_txt {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .filtro {
+        margin-top: 65px;
+        padding-left: 2%;
+        padding-right: 10px;
+        position: absolute;
+        width: 100%;
         top: 20px;
         z-index: 500;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        overflow-y: auto;
     }
-    
-    .btn_filtro {
-        padding: 6px 15px;
-        background-color: #ffffff;
-        font-size: 14px;
-        border-radius: 100px;
-        border: none;
-        text-align: center;
-        cursor: pointer;
-        box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
-        margin-right: 8px !important;
+    .btn_inicio {
+        width: 18% !important;
+        font-size: 100% !important;
     }
-    
+    .btn_cabecera {
+        width: 18% !important;
+        font-size: 100% !important;
+        margin-left: -20px;
+        left: 190px;
+    }
+    .btn_gimcana {
+        width: 18% !important;
+        font-size: 100% !important;
+        padding: 5%;
+        margin-left: -1%;
+    }
+    .btn_logout {
+        width: 7% !important;
+        font-size: 100% !important;
+    }
+    .btn_filtro,
     .btn_borrar {
-        padding: 6px 15px;
-        background-color: rgb(226, 111, 111);
-        font-size: 14px;
+        padding: 10px 10px;
+        width: 80vh !important;
+        font-size: 1.9vh;
         border-radius: 100px;
         border: none;
         text-align: center;
         cursor: pointer;
         box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
-        margin-right: 8px !important;
+        margin-right: 10px !important;
     }
-    
-    .btn_filtro:hover {
-        background-color: rgb(241, 241, 241);
-    }
-    
-    .modal {
-        display: none;
-        /* Hidden by default */
-        position: fixed;
-        /* Stay in place */
-        z-index: 50;
-        /* Sit on top */
-        left: 0;
-        top: 0;
-        /* Full height */
-        overflow: auto;
-        /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0);
-        /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4);
-        /* Black w/ opacity */
-        overflow: hidden;
-    }
-    /* Modal Content/Box */
-    
     .modal-content {
-        background-color: #fefefe;
-        margin: 10% auto;
-        /* 15% from the top and centered */
-        padding: 20px;
-        border: 1px solid #888;
-        width: 50% !important;
-        /* Could be more or less, depending on screen size */
-        height: auto;
-        border-radius: 15px !important;
+        width: 70% !important;
     }
-    /* The Close Button */
-    
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-    
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    
-    .register {
-        text-align: center;
-        justify-content: center;
-        color: black;
-        display: block;
-    }
-    
-    .register h1,
-    .register2 h1 {
-        font-family: 'Fredoka', sans-serif;
-        color: #69bad3;
-    }
-    
-    .register2 {
-        text-align: center;
-        justify-content: center;
-        color: black;
-        display: none;
-    }
-    
-    .inp_txt {
-        border-radius: 100px;
-        border: none;
-        width: 400px;
-        height: 45px;
-        background: #f5f5f5;
-        color: grey;
-        text-align: center;
-        font-size: 16px;
-    }
-    
-    .inp_txt::placeholder {
-        color: grey;
-        text-align: center;
-        font-size: 16px;
-    }
-    
     input[type='password'] {
-        border-radius: 100px;
-        border: none;
-        width: 400px;
-        height: 45px;
-        background: #f5f5f5;
-        color: grey;
-        text-align: center;
-        font-size: 16px;
+        width: 60%;
     }
-    
-    input[type='password']::placeholder {
-        color: grey;
-        text-align: center;
-        font-size: 16px;
+    .inp_txt {
+        width: 60%;
     }
-    
-    .btn_regis {
-        text-decoration: none;
-        padding: 10px 40px;
-        color: #fff;
-        background-color: #69bad3;
-        font-size: 18px;
+}
+
+@media screen and (max-width:450px) {
+    .filtro {
+        margin-top: 65px;
+        padding-left: 7%;
+        padding-right: 1%;
+        position: absolute;
+        width: 100%;
+        top: 15px;
+        z-index: 500;
+        overflow: auto;
+    }
+    .btn_inicio {
+        width: 25% !important;
+        margin-right: 20px;
+        font-size: 2vh !important;
+        padding: 5%;
+    }
+    .btn_cabecera {
+        width: 25% !important;
+        font-size: 2vh !important;
+        padding: 5%;
+        left: 190px;
+        margin-left: -4%;
+    }
+    .btn_gimcana {
+        width: 25% !important;
+        font-size: 2vh !important;
+        padding: 5%;
+        left: 190px;
+        margin-left: -18%;
+    }
+    .btn_logout {
+        width: 10% !important;
+        font-size: 2vh !important;
+    }
+    .btn_filtro,
+    .btn_borrar {
+        padding: 10px 10px;
+        width: 50% !important;
+        font-size: 1.7vh;
         border-radius: 100px;
         border: none;
         text-align: center;
         cursor: pointer;
         box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
-        margin: 0;
+        margin-right: 6px !important;
     }
-    
-    .btn_regis:hover {
-        color: white;
-        background-color: #539bb1;
+    .modal-content {
+        width: 80% !important;
     }
-    
-    .btn_mostrar {
-        text-decoration: none;
-        color: #69bad3;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
+    input[type='password'] {
+        width: 90%;
     }
-    
-    .register p {
-        color: grey;
+    .inp_txt {
+        width: 90%;
     }
-    
-    .register2 p {
-        color: grey;
+    .descripcion {
+        width: 100%;
     }
-    
-    .ir {
-        width: 40px;
+    .nombre {
+        font-size: 2vh;
     }
-    
-    .prueba {
-        font-size: 3vh;
+    .btn_quitar,
+    .btn_ir {
+        margin-right: 2%;
+        font-size: 2.2vh !important;
     }
-    
     .img_popup {
-        width: 50px;
-        height: 50px;
+        width: 100%;
         border-radius: 5%;
     }
-    
-    .marker_popup {
-        font-size: 22px;
-        @media screen and (max-width: 1100px) {
-            .filtro {
-                margin-top: 65px;
-                position: absolute;
-                padding-right: 40px;
-                padding-left: 40px;
-                width: 100%;
-                top: 15px;
-            }
-            .btn_inicio {
-                width: 10% !important;
-                font-size: 1.8vh !important;
-                padding: 5%;
-            }
-            .btn_cabecera {
-                width: 10% !important;
-                font-size: 1.8vh !important;
-                padding: 5%;
-                left: 190px;
-                margin-left: -5%;
-            }
-            .btn_filtro,
-            .btn_borrar {
-                width: 80vh !important;
-                padding: 3px 10px;
-                font-size: 1.9vh;
-                margin-right: 6px !important;
-            }
-        }
-        @media screen and (max-width:700px) {
-            .btn_cabecera {
-                width: 10% !important;
-                font-size: 1.8vh !important;
-                padding: 5%;
-                left: 190px;
-                margin-left: -7%;
-            }
-        }
-        @media screen and (max-width:600px) {
-            .filtro {
-                margin-top: 65px;
-                padding-left: 18%;
-                padding-right: 10px;
-                position: absolute;
-                width: 100%;
-                top: 20px;
-                z-index: 500;
-                overflow-y: auto;
-            }
-            .btn_inicio {
-                width: 18% !important;
-                font-size: 100% !important;
-                padding: 5%;
-            }
-            .btn_cabecera {
-                width: 18% !important;
-                font-size: 100% !important;
-                margin-left: -20px;
-                padding: 5%;
-                left: 190px;
-            }
-            .btn_gimcana {
-                width: 18% !important;
-                font-size: 100% !important;
-                padding: 5%;
-            }
-            .btn_filtro,
-            .btn_borrar {
-                padding: 10px 10px;
-                width: 80vh !important;
-                font-size: 1.9vh;
-                border-radius: 100px;
-                border: none;
-                text-align: center;
-                cursor: pointer;
-                box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
-                margin-right: 10px !important;
-            }
-        }
-        @media screen and (max-width:450px) {
-            .filtro {
-                margin-top: 65px;
-                padding-left: 32%;
-                padding-right: 1%;
-                position: absolute;
-                width: 100%;
-                top: 15px;
-                z-index: 500;
-                overflow: auto;
-            }
-            .btn_inicio {
-                width: 25% !important;
-                margin-right: 20px;
-                font-size: 2vh !important;
-                padding: 5%;
-            }
-            .btn_cabecera {
-                width: 25% !important;
-                font-size: 2vh !important;
-                padding: 5%;
-                left: 190px;
-                margin-left: -4%;
-            }
-            .btn_gimcana {
-                width: 25% !important;
-                font-size: 1.8vh !important;
-                padding: 5%;
-            }
-            .btn_filtro,
-            .btn_borrar {
-                padding: 10px 10px;
-                width: 50% !important;
-                font-size: 1.7vh;
-                border-radius: 100px;
-                border: none;
-                text-align: center;
-                cursor: pointer;
-                box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
-                margin-right: 6px !important;
-            }
-        }
-    }
+}
