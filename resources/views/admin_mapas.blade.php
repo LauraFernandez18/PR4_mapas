@@ -12,6 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!--mensaje error -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
         <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>

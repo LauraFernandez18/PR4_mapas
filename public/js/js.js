@@ -120,11 +120,23 @@ window.onload = function() {
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var respuesta = JSON.parse(this.responseText);
-                marker_map()
-                menuDerecha()
-                document.getElementsByClassName("modalmask")[0].style.opacity = 0
-                document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
-                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                if (respuesta[0] == 'mal') {
+                    document.getElementsByClassName("modalmask")[0].style.opacity = 0
+                    document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+                    document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                    swal.fire({
+                        title: "Error",
+                        text: "Elimina el lugar de la Gincana primero.",
+                        icon: "error",
+                    });
+                } else {
+                    marker_map()
+                    menuDerecha()
+                    document.getElementsByClassName("modalmask")[0].style.opacity = 0
+                    document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+                    document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                }
+
 
             }
         }

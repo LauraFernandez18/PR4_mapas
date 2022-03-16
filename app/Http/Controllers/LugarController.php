@@ -90,13 +90,21 @@ class LugarController extends Controller
     public function EliminarLugar(Request $request)
     {
         $datos = $request->except('_token');
-        $etiquetas=DB::select('SELECT tbl_etiquetas.id, tbl_etiquetas.fk_lugar,tbl_etiquetas.nombre from tbl_etiquetas INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" AND tbl_etiquetas.fk_lugar=?',[$datos['id']]);
-        foreach ($etiquetas as $i) {
-            DB::table('tbl_etiqueta_usuario')->where('fk_etiqueta','=',$i->id)->delete();
-            DB::table('tbl_etiquetas')->where('id','=',$i->id)->delete();
-        }
-        DB::table('tbl_lugares')->where('id','=',[$datos['id']])->delete();
-        return response()->json(array('resultado'=> 'OK'));
+        $lugar=DB::select("SELECT tbl_punto_control.id from tbl_lugares INNER JOIN tbl_punto_control on tbl_lugares.id=tbl_punto_control.fk_lugar where tbl_lugares.id=?",[$datos['id']]);
+        if (count($lugar)==0) {
+            $etiquetas=DB::select('SELECT tbl_etiquetas.id, tbl_etiquetas.fk_lugar,tbl_etiquetas.nombre from tbl_etiquetas INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.tipo_usu="administrador" AND tbl_etiquetas.fk_lugar=?',[$datos['id']]);
+            foreach ($etiquetas as $i) {
+                DB::table('tbl_etiqueta_usuario')->where('fk_etiqueta','=',$i->id)->delete();
+                DB::table('tbl_etiquetas')->where('id','=',$i->id)->delete();
+            }
+            DB::table('tbl_lugares')->where('id','=',[$datos['id']])->delete();
+            return response()->json(array('resultado'=> 'OK'));
+         }
+         else {
+             $mal= array('mal');
+            return response()->json($mal);
+         }
+        
         //el lugar no se eliminará si pertence a la gincana
     }
 
