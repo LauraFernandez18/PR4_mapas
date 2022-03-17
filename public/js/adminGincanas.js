@@ -69,6 +69,7 @@ window.onload = function() {
                 document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
                 document.getElementsByTagName("html")[0].style.overflowY = "scroll"
                 CountPuntoControl2()
+                document.getElementsByClassName('registrarse-form')[1].reset()
 
             }
         }
