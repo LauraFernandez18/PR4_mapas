@@ -192,7 +192,11 @@ function gincanadist(ubi_user) {
                 console.log('No estoy');
             }
         } else {
-            alert('Ya has acabado la gincana');
+            swal.fire({
+                title: "Ya has acabado la gincana!",
+                text: "Tienes que refrescar la pagina para volver a jugar",
+                icon: "success",
+            });
             clearInterval(ubi_tiempo);
         }
     }
