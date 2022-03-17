@@ -1,5 +1,6 @@
 //modal
 window.onload = function() {
+    var markers = null
     var cerrar = document.getElementById('cerrar')
     cerrar.addEventListener("click", function() {
         document.getElementsByClassName("modalmask")[0].style.opacity = 0
@@ -7,7 +8,7 @@ window.onload = function() {
         document.getElementsByTagName("html")[0].style.overflowY = "scroll"
         var divEtiqueta = document.getElementById('divEtiqueta')
         divEtiqueta.innerHTML = ""
-        marker_map()
+        removeMarkers()
         menuDerecha()
 
     })
@@ -16,7 +17,7 @@ window.onload = function() {
         document.getElementsByClassName("modalmask")[1].style.opacity = 0
         document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
         document.getElementsByTagName("html")[0].style.overflowY = "scroll"
-        marker_map()
+        removeMarkers()
         menuDerecha()
 
     })
@@ -68,8 +69,13 @@ window.onload = function() {
             ajax.onreadystatechange = function() {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     var respuesta = JSON.parse(this.responseText);
-                    divLugar.innerHTML = ""
-                    modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto, respuesta[0].descripcion, respuesta[0].foto_icon)
+                    //divLugar.innerHTML = ""
+                    //modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto, respuesta[0].descripcion, respuesta[0].foto_icon)
+                    document.getElementsByClassName("modalmask")[0].style.opacity = 0
+                    document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+                    document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                    removeMarkers()
+                    menuDerecha()
                 }
             }
             ajax.send(formData);
@@ -130,7 +136,8 @@ window.onload = function() {
                         icon: "error",
                     });
                 } else {
-                    marker_map()
+                    removeMarkers()
+                        //marker_map()
                     menuDerecha()
                     document.getElementsByClassName("modalmask")[0].style.opacity = 0
                     document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
@@ -175,6 +182,7 @@ function modal(id, nombre, longitud, latitud, foto, descripcion, foto_icon) {
                 var respuesta = JSON.parse(this.responseText);
                 var etiquetashtml = '';
                 var divEtiqueta = document.getElementById('divEtiqueta')
+                divEtiqueta.innerHTML = ""
                 for (let i = 0; i < respuesta.length; i++) {
                     etiquetashtml += "<div class='etiquetas-etiqueta mb-2'>"
                     etiquetashtml += "<div class='etiquetas-etiqueta-nombre mr-3'>"
@@ -248,7 +256,7 @@ function objetoAjax() {
 
 function marker_map() {
 
-    markers = L.layerGroup();
+    markers = L.layerGroup().addTo(map);
 
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
@@ -282,7 +290,10 @@ function marker_map() {
 }
 
 
-
+function removeMarkers() {
+    markers.clearLayers();
+    marker_map()
+}
 
 
 

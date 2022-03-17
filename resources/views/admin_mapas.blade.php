@@ -54,6 +54,8 @@
                                 <option value="bar_icon.png">Bar</option>
                                 <option value="playa_icon.png">Playa</option>
                                 <option value="futbol.png">Futbol</option>
+                                <option value="natacion.png">Natacion</option>
+                                <option value="parque.png">Parque</option>
                             </select>
                             <label>Foto</label>
                             <input type="file" name="file" id="foto-Input" class="upload" accept="image/*">
@@ -107,6 +109,8 @@
                                 <option value="bar_icon.png">Bar</option>
                                 <option value="playa_icon.png">Playa</option>
                                 <option value="futbol.png">Futbol</option>
+                                <option value="natacion.png">Natacion</option>
+                                <option value="parque.png">Parque</option>
                             </select>
                             <label>Foto</label>
                             <input type="file" name="file" class="upload" accept="image/*" id="foto-crear">
