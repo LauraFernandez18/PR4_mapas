@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
         <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script type="text/javascript" src="js/iconos_g.js"></script>
         <link rel="stylesheet" href="{!! asset('css/stylesAdminMapas.css') !!}">
         <script src="js/jquery.js"></script>
@@ -24,12 +25,12 @@
 <body>
     <div id="map"></div>
     <!-- <div class="admin-logo"><img src="../storage/uploads/logo.png"></div> -->
-    <div class="admin-cpanel"><p>C-PANEL</p></div>
+    {{-- <div class="admin-cpanel"><p>C-PANEL</p></div> --}}
     <div class="admin-cpanel-crear"><button class="btn btn-dark btn-lg" onclick="modal2();">Crear lugar &nbsp;<i class="fas fa-map-marker-alt"></i></button></div>
     <div class="admin-logout"><a href="{{ url('/logout') }}"><button class="btn btn-danger btn-lg"><i class="fas fa-power-off"></i></button></a></div>
     <div class="admin-atras"><a href="{{ url('cPanelAdmin') }}"><button class="btn btn-info btn-lg"><i class="fa fa-arrow-circle-left"></i></button></a></div>
-    <div class="lugares" id="lugares"> 
-        
+    <div class="lugares" id="lugares">
+
 
     </div>
 
@@ -61,7 +62,7 @@
                             <input type="file" name="file" id="foto-Input" class="upload" accept="image/*">
                         </div>
                         <div class="descripcion">
-                            <textarea name="descripcion" id="descripcion" cols="56" rows="3"></textarea>
+                            <textarea name="descripcion" id="descripcion" cols="43" rows="2"></textarea>
                         </div>
                         <div class="foto">
                             <img src="" id="foto">
@@ -116,11 +117,11 @@
                             <input type="file" name="file" class="upload" accept="image/*" id="foto-crear">
                         </div>
                         <div class="descripcion">
-                            <textarea name="descripcion" id="descripcion-crear" cols="56" rows="3" placeholder="Descripcion"></textarea>
+                            <textarea name="descripcion" id="descripcion-crear" cols="43" rows="2" placeholder="Descripcion"></textarea>
                         </div>
-                        
+
                         <div class="etiquetas">
-                            
+
                         </div>
                         <div class="anadir-etiqueta-crear">
                             <p>Añadir etiquetas</p>

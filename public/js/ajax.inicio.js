@@ -99,7 +99,11 @@ function marker_map() {
             for (let i = 0; i < respuesta.length; i++) {
                 /* array_cord.push([respuesta[i].latitud, respuesta[i].longitud]); */
                 /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
-                marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]);
+                var markerIcon = L.icon({
+                    iconUrl: src = '../public/img/' + respuesta[i].foto_icon + '',
+                    iconSize: [30, 30]
+                });
+                marker = L.marker([respuesta[i].latitud, respuesta[i].longitud], { icon: markerIcon });
                 marker.addTo(map);
                 marker.bindPopup("<h1 class='nombre'><b>" + respuesta[i].nombre + "</b></h1>" + "<p class='descripcion'>" + respuesta[i].descripcion + "</p><img class='img_popup' src='../public/img/" + respuesta[i].foto + "'></img><br></br><button class='btn btn-dark btn_ir' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button class='btn btn-info btn_quitar' onclick='limpiarRuta(); return false;'>Quitar Ruta</button>", { maxWidth: 190 }).openPopup();
                 arr_marker.push(marker);

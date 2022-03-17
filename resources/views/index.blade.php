@@ -17,12 +17,6 @@
 
 </head>
 <body>
-    {{-- <div class="cabecera">
-    <h1>Mapa</h1>
-    <button class="btn_cabecera btn btn-dark" type="button">Mapa</button>
-    <button class="btn_cabecera btn btn-dark" type="button">Gimcana</button>
-    <button class="btn_inicio btn btn-dark" type="button" onclick="iniciar_sesionJS()">Iniciar sesión</button>
-    </div> --}}
     <div id="map">
         <button class="btn btn-info btn_inicio btn-lg" type="button" id="myBtn"><b>Log In</b></button>
         <button type="submit" class="btn_cabecera btn btn-secondary btn-lg" onclick="return indexGimcana();" value="Enviar"><b>Gimcana</b></button>
@@ -38,7 +32,10 @@
               @csrf
                 <h1>Iniciar sesión</h1><br>
                 <span><i class="fas fa-envelope"></i></span>
-                <input class="inp_txt" type="email" name="correo_user" id="correo_user" placeholder="Introduce tu correo"><br><br>
+                <input class="inp_txt" type="email" name="correo_user" id="correo_user" placeholder="Introduce tu correo" value="{{old('correo_user')}}"><br><br>
+                @error('correo_user')
+                {{$message}}
+                @enderror
                 <span><i class="fas fa-lock"></i></span>
                 <input type="password" name="pass_user" id="pass_user" placeholder="Introduce tu contraseña">
                 <br><br>
