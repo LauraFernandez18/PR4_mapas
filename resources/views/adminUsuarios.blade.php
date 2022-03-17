@@ -20,11 +20,23 @@
 </head>
 <body>
     <a class="cpanel" href="{{url('cPanelAdmin')}}"><i class="fa fa-home"></i></a>
+    @if($errors->any())
+    <div>
+        <ul>
+        @foreach($errors->all() as $error)
+        <li>{{$error}}</li>
+        @endforeach
+        </ul>
+    </div>
+    @endif
     <h3><b>Usuarios</b></h3>
     <p id="mensaje"></p>
     <form onsubmit="crear(); return false;">
         <input type="text" class="form-control" id="nombre" placeholder="Nombre" value="{{old('nombre')}}">
         <input type="email" class="form-control" id="email" placeholder="Email">
+        @error('email')
+        {{$message}}
+        @enderror
         <input type="password" class="form-control" id="pwd" placeholder="Contraseña" min="8">
         <select class="form-control" name="tipo_usu" id="tipo_usu">
             <option class="form-control" value="administrador">Administrador</option>

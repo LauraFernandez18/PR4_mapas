@@ -1,5 +1,6 @@
 //modal
 window.onload = function() {
+    var markers = null
     var cerrar = document.getElementById('cerrar')
     cerrar.addEventListener("click", function() {
         document.getElementsByClassName("modalmask")[0].style.opacity = 0
@@ -7,7 +8,7 @@ window.onload = function() {
         document.getElementsByTagName("html")[0].style.overflowY = "scroll"
         var divEtiqueta = document.getElementById('divEtiqueta')
         divEtiqueta.innerHTML = ""
-        marker_map()
+        removeMarkers()
         menuDerecha()
 
     })
@@ -16,7 +17,7 @@ window.onload = function() {
         document.getElementsByClassName("modalmask")[1].style.opacity = 0
         document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
         document.getElementsByTagName("html")[0].style.overflowY = "scroll"
-        marker_map()
+        removeMarkers()
         menuDerecha()
 
     })
@@ -38,7 +39,7 @@ window.onload = function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var respuesta = JSON.parse(this.responseText);
                 divEtiqueta.innerHTML = ""
-                modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto)
+                modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto, respuesta[0].descripcion, respuesta[0].foto_icon)
             }
         }
         ajax.send(formData);
@@ -50,25 +51,46 @@ window.onload = function() {
             var nombre = $("#nombre").val();
             var longitud = $("#longitud").val();
             var latitud = $("#latitud").val();
-            var formData = new FormData();
-            formData.append('_token', document.getElementById('token').getAttribute("content"));
-            formData.append('_method', 'post');
-            formData.append('id', id);
-            formData.append('nombre', nombre);
-            formData.append('longitud', longitud);
-            formData.append('latitud', latitud);
-            formData.append('foto', document.getElementById('foto-Input').files[0]);
-            var ajax = objetoAjax();
+            var foto_icon = $("#foto-icono-input").val();
+            var descripcion = $("#descripcion").val();
+            if (nombre == '' || descripcion == '' || latitud == '' || longitud == '') {
+                document.getElementsByClassName("modalmask")[1].style.opacity = 0
+                document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
+                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                swal.fire({
+                    title: "Error",
+                    text: "Tienes que rellenar todos los datos",
+                    icon: "error",
+                });
+                return true;
+            } else {
+                var formData = new FormData();
+                formData.append('_token', document.getElementById('token').getAttribute("content"));
+                formData.append('_method', 'post');
+                formData.append('id', id);
+                formData.append('nombre', nombre);
+                formData.append('longitud', longitud);
+                formData.append('latitud', latitud);
+                formData.append('foto', document.getElementById('foto-Input').files[0]);
+                formData.append('descripcion', descripcion);
+                formData.append('foto_icon', foto_icon);
+                var ajax = objetoAjax();
 
-            ajax.open("POST", "UpdateLugar", true);
-            ajax.onreadystatechange = function() {
-                if (ajax.readyState == 4 && ajax.status == 200) {
-                    var respuesta = JSON.parse(this.responseText);
-                    divLugar.innerHTML = ""
-                    modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto)
+                ajax.open("POST", "UpdateLugar", true);
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        var respuesta = JSON.parse(this.responseText);
+                        //divLugar.innerHTML = ""
+                        //modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto, respuesta[0].descripcion, respuesta[0].foto_icon)
+                        document.getElementsByClassName("modalmask")[0].style.opacity = 0
+                        document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+                        document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                        removeMarkers()
+                        menuDerecha()
+                    }
                 }
+                ajax.send(formData);
             }
-            ajax.send(formData);
         })
         /*crear lugar*/
     $("#guardar-boton-crear").click(function() {
@@ -76,28 +98,46 @@ window.onload = function() {
         var longitud = $("#longitud-crear").val();
         var latitud = $("#latitud-crear").val();
         var etiqueta = $("#etiqueta-crear").val();
-        var formData = new FormData();
-        formData.append('_token', document.getElementById('token').getAttribute("content"));
-        formData.append('_method', 'post');
-        formData.append('nombre', nombre);
-        formData.append('longitud', longitud);
-        formData.append('latitud', latitud);
-        formData.append('etiqueta', etiqueta);
-        formData.append('foto', document.getElementById('foto-crear').files[0]);
-        var ajax = objetoAjax();
+        var descripcion = $("#descripcion-crear").val();
+        var foto_icon = $("#foto-icono-input-crear").val();
+        if (nombre == '' || descripcion == '' || latitud == '' || longitud == '') {
+            document.getElementsByClassName("modalmask")[0].style.opacity = 0
+            document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+            document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+            swal.fire({
+                title: "Error",
+                text: "Tienes que rellenar todos los datos",
+                icon: "error",
+            });
+            return true;
+        } else {
+            var formData = new FormData();
+            formData.append('_token', document.getElementById('token').getAttribute("content"));
+            formData.append('_method', 'post');
+            formData.append('nombre', nombre);
+            formData.append('longitud', longitud);
+            formData.append('latitud', latitud);
+            formData.append('etiqueta', etiqueta);
+            formData.append('foto', document.getElementById('foto-crear').files[0]);
+            formData.append('descripcion', descripcion);
+            formData.append('foto_icon', foto_icon);
+            var ajax = objetoAjax();
 
-        ajax.open("POST", "CrearLugar", true);
-        ajax.onreadystatechange = function() {
-            if (ajax.readyState == 4 && ajax.status == 200) {
-                var respuesta = JSON.parse(this.responseText);
-                document.getElementsByClassName("modalmask")[1].style.opacity = 0
-                document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
-                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
-                marker_map()
-                menuDerecha()
+            ajax.open("POST", "CrearLugar", true);
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var respuesta = JSON.parse(this.responseText);
+                    //divLugar.innerHTML = ""
+                    //modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto, respuesta[0].descripcion, respuesta[0].foto_icon)
+                    document.getElementsByClassName("modalmask")[1].style.opacity = 0
+                    document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
+                    document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                    marker_map()
+                    menuDerecha()
+                }
             }
+            ajax.send(formData);
         }
-        ajax.send(formData);
     })
 
     $("#eliminar-boton").click(function() {
@@ -112,14 +152,29 @@ window.onload = function() {
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
                 var respuesta = JSON.parse(this.responseText);
-                document.getElementsByClassName("modalmask")[1].style.opacity = 0
-                document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
-                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
-                marker_map()
-                menuDerecha()
+                if (respuesta[0] == 'mal') {
+                    document.getElementsByClassName("modalmask")[0].style.opacity = 0
+                    document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+                    document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                    swal.fire({
+                        title: "Error",
+                        text: "Elimina el lugar de la Gincana primero.",
+                        icon: "error",
+                    });
+                } else {
+                    removeMarkers()
+                        //marker_map()
+                    menuDerecha()
+                    document.getElementsByClassName("modalmask")[0].style.opacity = 0
+                    document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+                    document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                }
+
+
             }
         }
         ajax.send(formData);
+
     })
 
     menuDerecha();
@@ -128,7 +183,7 @@ window.onload = function() {
 };
 
 
-function modal(id, nombre, longitud, latitud, foto) {
+function modal(id, nombre, longitud, latitud, foto, descripcion, foto_icon) {
     document.getElementsByClassName("modalmask")[0].style.opacity = 1
     document.getElementsByClassName("modalmask")[0].style.pointerEvents = "auto"
         //document.getElementsByTagName("html")[0].style.overflow = "hidden"
@@ -136,7 +191,9 @@ function modal(id, nombre, longitud, latitud, foto) {
     $("#nombre").val(nombre);
     $("#longitud").val(longitud);
     $("#latitud").val(latitud);
-    $("#foto").attr("src", "storage/uploads/" + foto);
+    $("#foto").attr("src", "../public/img/" + foto);
+    $("#descripcion").val(descripcion);
+    $("#foto-icono-input").val(foto_icon);
     etiquetasAjax()
 
     function etiquetasAjax() {
@@ -151,6 +208,7 @@ function modal(id, nombre, longitud, latitud, foto) {
                 var respuesta = JSON.parse(this.responseText);
                 var etiquetashtml = '';
                 var divEtiqueta = document.getElementById('divEtiqueta')
+                divEtiqueta.innerHTML = ""
                 for (let i = 0; i < respuesta.length; i++) {
                     etiquetashtml += "<div class='etiquetas-etiqueta mb-2'>"
                     etiquetashtml += "<div class='etiquetas-etiqueta-nombre mr-3'>"
@@ -223,6 +281,9 @@ function objetoAjax() {
 
 
 function marker_map() {
+
+    markers = L.layerGroup().addTo(map);
+
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
     formData.append('_method', 'post');
@@ -234,16 +295,16 @@ function marker_map() {
             var respuesta = JSON.parse(this.responseText);
             recarga = "";
             for (let i = 0; i < respuesta.length; i++) {
-                var marker = L.marker([respuesta[i].longitud, respuesta[i].latitud]).addTo(map);
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
                 marker.bindPopup(respuesta[i].nombre, {
                     closeButton: false,
                     closeOnClick: false,
                     autoClose: false
                 }).openPopup();
-
+                markers.addLayer(marker);
                 marker.on('click', function(e) {
-                    modal(respuesta[i].id, respuesta[i].nombre, respuesta[i].longitud, respuesta[i].latitud, respuesta[i].foto)
-                    marker_map()
+                    modal(respuesta[i].id, respuesta[i].nombre, respuesta[i].longitud, respuesta[i].latitud, respuesta[i].foto, respuesta[i].descripcion, respuesta[i].foto_icon)
+                        //marker_map()
                 });
 
 
@@ -255,7 +316,10 @@ function marker_map() {
 }
 
 
-
+function removeMarkers() {
+    markers.clearLayers();
+    marker_map()
+}
 
 
 
@@ -296,7 +360,9 @@ function menuDerechaClick() {
         var longitud = $(this).attr('data-long');
         var latitud = $(this).attr('data-lat');
         var foto = $(this).attr('data-foto');
-        modal(id, nombre, longitud, latitud, foto)
+        var descripcion = $(this).attr('data-descripcion');
+        var foto_icon = $(this).attr('data-foto_icon');
+        modal(id, nombre, longitud, latitud, foto, descripcion, foto_icon)
     });
 
 
@@ -316,7 +382,7 @@ function menuDerecha() {
             divLugar.innerHTML = ''
             var divLugarhtml = '<h2>Lugares de interés</h2>';
             for (let i = 0; i < respuesta.length; i++) {
-                divLugarhtml += "<p class='lugar-jquery' data-id='" + respuesta[i].id + "' data-nombre='" + respuesta[i].nombre + "' data-long='" + respuesta[i].longitud + "' data-lat='" + respuesta[i].latitud + "' data-foto='" + respuesta[i].foto + "'>• " + respuesta[i].nombre + "</p>"
+                divLugarhtml += "<p class='lugar-jquery' data-id='" + respuesta[i].id + "' data-nombre='" + respuesta[i].nombre + "' data-long='" + respuesta[i].longitud + "' data-lat='" + respuesta[i].latitud + "' data-foto='" + respuesta[i].foto + "' data-descripcion='" + respuesta[i].descripcion + "' data-foto_icon='" + respuesta[i].foto_icon + "'>• " + respuesta[i].nombre + "</p>"
             }
             divLugar.innerHTML += divLugarhtml;
         }

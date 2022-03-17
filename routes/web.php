@@ -27,7 +27,14 @@ Route::post('UpdateLugar',[lugarController::class,'UpdateLugar']);
 Route::post('MenuDerechaLugares',[lugarController::class,'MenuDerechaLugares']);
 Route::post('CrearLugar',[lugarController::class,'CrearLugar']);
 Route::post('EliminarLugar',[lugarController::class,'EliminarLugar']);
-// Route::get('/admin/gincanas',[lugarController::class,'adminGincanas']);
+Route::get('Admingincanas',[lugarController::class,'adminGincanas']);
+Route::post('MenuDerechaGincana',[lugarController::class,'MenuDerechaGincana']);
+Route::post('CountPuntoControl',[lugarController::class,'CountPuntoControl']);
+Route::post('ModificarPuntoControl',[lugarController::class,'ModificarPuntoControl']);
+Route::post('CrearPuntoControl',[lugarController::class,'CrearPuntoControl']);
+Route::post('EliminarPuntoControl',[lugarController::class,'EliminarPuntoControl']);
+Route::post('RoutingGincana',[lugarController::class,'RoutingGincana']);
+Route::post('etiquetasUser',[lugarController::class,'etiquetasUser']);
 
 Route::get('index',[LugarController::class, 'index']);
 
