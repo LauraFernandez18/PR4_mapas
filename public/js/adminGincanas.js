@@ -31,30 +31,31 @@ window.onload = function() {
             });
             return true;
         } else {
-        var gincana = 1
-        var formData = new FormData();
-        formData.append('_token', document.getElementById('token').getAttribute("content"));
-        formData.append('_method', 'post');
-        formData.append('id', id);
-        formData.append('pista', pista);
-        formData.append('fk_gincana', gincana);
-        formData.append('fk_lugar', idlugar);
-        formData.append('orden', orden);
-        var ajax = objetoAjax();
+            var gincana = 1
+            var formData = new FormData();
+            formData.append('_token', document.getElementById('token').getAttribute("content"));
+            formData.append('_method', 'post');
+            formData.append('id', id);
+            formData.append('pista', pista);
+            formData.append('fk_gincana', gincana);
+            formData.append('fk_lugar', idlugar);
+            formData.append('orden', orden);
+            var ajax = objetoAjax();
 
-        ajax.open("POST", "ModificarPuntoControl", true);
-        ajax.onreadystatechange = function() {
-            if (ajax.readyState == 4 && ajax.status == 200) {
-                var respuesta = JSON.parse(this.responseText);
-                document.getElementsByClassName("modalmask")[0].style.opacity = 0
-                document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
-                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
-                menuDerecha()
-                routing()
+            ajax.open("POST", "ModificarPuntoControl", true);
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var respuesta = JSON.parse(this.responseText);
+                    document.getElementsByClassName("modalmask")[0].style.opacity = 0
+                    document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+                    document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                    menuDerecha()
+                    routing()
+                }
             }
+            ajax.send(formData);
         }
-        ajax.send(formData);
-    }})
+    })
 
     $("#guardar-crear").click(function() {
         var pista = $("#pista-crear").val();
@@ -71,30 +72,31 @@ window.onload = function() {
             });
             return true;
         } else {
-        var formData = new FormData();
-        formData.append('_token', document.getElementById('token').getAttribute("content"));
-        formData.append('_method', 'post');
-        formData.append('pista', pista);
-        formData.append('fk_lugar', idlugar);
-        formData.append('orden', orden);
-        var ajax = objetoAjax();
+            var formData = new FormData();
+            formData.append('_token', document.getElementById('token').getAttribute("content"));
+            formData.append('_method', 'post');
+            formData.append('pista', pista);
+            formData.append('fk_lugar', idlugar);
+            formData.append('orden', orden);
+            var ajax = objetoAjax();
 
-        ajax.open("POST", "CrearPuntoControl", true);
-        ajax.onreadystatechange = function() {
-            if (ajax.readyState == 4 && ajax.status == 200) {
-                var respuesta = JSON.parse(this.responseText);
-                menuDerecha()
-                routing()
-                document.getElementsByClassName("modalmask")[1].style.opacity = 0
-                document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
-                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
-                CountPuntoControl2()
-                document.getElementsByClassName('registrarse-form')[1].reset()
+            ajax.open("POST", "CrearPuntoControl", true);
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    var respuesta = JSON.parse(this.responseText);
+                    menuDerecha()
+                    routing()
+                    document.getElementsByClassName("modalmask")[1].style.opacity = 0
+                    document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
+                    document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                    CountPuntoControl2()
+                    document.getElementsByClassName('registrarse-form')[1].reset()
 
+                }
             }
+            ajax.send(formData);
         }
-        ajax.send(formData);
-    }})
+    })
     routing()
     menuDerecha()
     CountPuntoControl2()
@@ -400,24 +402,23 @@ function CountPuntoControl2() {
     ajax.send(formData);
 
 }
-    ajax.open("POST", "adminMapasAjax", true);
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-            var respuesta = JSON.parse(this.responseText);
-            recarga = "";
-            for (let i = 0; i < respuesta.length; i++) {
-                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
-                marker.bindPopup(respuesta[i].nombre, {
-                    closeButton: false,
-                    closeOnClick: false,
-                    autoClose: false
-                }).openPopup();
-            }
-
+ajax.open("POST", "adminMapasAjax", true);
+ajax.onreadystatechange = function() {
+    if (ajax.readyState == 4 && ajax.status == 200) {
+        var respuesta = JSON.parse(this.responseText);
+        recarga = "";
+        for (let i = 0; i < respuesta.length; i++) {
+            var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
+            marker.bindPopup(respuesta[i].nombre, {
+                closeButton: false,
+                closeOnClick: false,
+                autoClose: false
+            }).openPopup();
         }
+
     }
-    ajax.send(formData);
 }
+ajax.send(formData);
 
 function removeRoute() {
     var puntos = []
