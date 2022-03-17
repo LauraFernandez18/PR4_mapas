@@ -266,6 +266,26 @@ input[type='password']::placeholder {
     font-size: 22px;
 }
 
+.filtro-user {
+    position: absolute;
+    top: 20px;
+    right: 5vh;
+    z-index: 999;
+    width: 20vh;
+    font-weight: bold;
+    height: 40vh;
+    overflow-y: scroll;
+}
+
+.filtro-user::-webkit-scrollbar {
+    display: none;
+}
+
+.filtro-user {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 @media screen and (max-width:1100px) {
     .filtro {
         margin-top: 65px;

@@ -1,5 +1,6 @@
 window.onload = function() {
     /* array_cord = []; */
+    //filtroUser()
     btns_filtro();
     marker_map();
     ruta_elim = null;
@@ -33,10 +34,12 @@ window.onload = function() {
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
-    }
+        //coger correo del user
+
 }
 
 function objetoAjax() {
@@ -130,3 +133,26 @@ function favoritos() {
     }
     ajax.send(formData);
 }
+/*
+function filtroUser() {
+    var sesion = document.getElementById("sesion").textContent
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'post');
+    formData.append('sesion', sesion);
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "etiquetasUser", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            var divHtml = '';
+            var divFiltro = document.getElementById('filtro-user')
+            for (let i = 0; i < respuesta.length; i++) {
+                divHtml += "<button class='btn_filtro' style='font-weight: bold; margin-bottom: 10%'>" + respuesta[i].nombre + "</button>"
+            }
+            divFiltro.innerHTML += divHtml;
+        }
+    }
+    ajax.send(formData);
+}*/
