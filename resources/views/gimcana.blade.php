@@ -13,6 +13,8 @@
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
 </head>
 <body>
+    <!-- <input type="hidden" id="control" value="0"> -->
+    <div><p id='Pista'></p></div>
     <div id="map">
         <form action="{{url('logout')}}" method="GET">
             <button class="btn btn-danger btn_logout" type="submit" id="myBtn"><b><i class="fas fa-sign-out-alt"></i></b></button>
@@ -24,6 +26,9 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/ajax_gincana.js"></script>
 </body>
 </html>

@@ -455,6 +455,7 @@ input[type='password']::placeholder {
         box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
         margin-right: 6px !important;
     }
+
     .modal-content {
         width: 80% !important;
     }
@@ -479,4 +480,5 @@ input[type='password']::placeholder {
         width: 100%;
         border-radius: 5%;
     }
+
 }

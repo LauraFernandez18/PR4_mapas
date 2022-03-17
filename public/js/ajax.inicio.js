@@ -9,6 +9,7 @@ window.onload = function() {
     /* limpiarRuta(); */
     /* funcionInit(); */
 
+
     // Get the modal
     modal = document.getElementById("myModal");
 
@@ -39,7 +40,6 @@ window.onload = function() {
             }
         }
         //coger correo del user
-
 }
 
 function objetoAjax() {
