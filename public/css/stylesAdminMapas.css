@@ -306,12 +306,9 @@ form.registrarse-form label {
 
 .palabra-etiqueta {
     position: absolute;
-<<<<<<< HEAD
-    top: 11%;
-=======
-    top: 27%;
->>>>>>> c5b71ba3fadd0aaf1c41056337bd0ef99303d0bc
-    left: 40vh;
+    <<<<<<< HEAD top: 11%;
+    =======top: 27%;
+    >>>>>>>c5b71ba3fadd0aaf1c41056337bd0ef99303d0bc left: 40vh;
     text-align: left;
 }
 
@@ -489,4 +486,18 @@ form.registrarse-form label {
 
 .leaflet-routing-container {
     display: none;
+}
+
+.lugares::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+
+.lugares {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
