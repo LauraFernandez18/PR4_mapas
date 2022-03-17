@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap');
 * {
     margin: 0%;
     font-family: 'Open Sans', sans-serif;
@@ -75,7 +76,7 @@ body {
     position: absolute;
     top: 18vh;
     right: 5vh;
-    color: #333333;
+    box-shadow: 5px 5px 5px rgba(24, 24, 24, 0.561);
     font-size: 3vh;
     font-weight: bold;
     background-color: white;
@@ -86,17 +87,20 @@ body {
 }
 
 .lugares h2 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 90%;
     margin-bottom: 10%;
-    font-weight: bold;
+    color: #4b8fa3;
 }
 
 .lugares p {
+    font-size: 80%;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .lugares p:hover {
-    opacity: 0.9;
+    opacity: 0.7;
     transition: 0.3s;
 }
 
@@ -306,11 +310,7 @@ form.registrarse-form label {
 
 .palabra-etiqueta {
     position: absolute;
-<<<<<<< HEAD
-    top: 11%;
-=======
     top: 27%;
->>>>>>> c5b71ba3fadd0aaf1c41056337bd0ef99303d0bc
     left: 40vh;
     text-align: left;
 }
@@ -424,7 +424,6 @@ form.registrarse-form label {
     pointer-events: none;
     opacity: 0.8;
 }
-
 
 /*Admin Gincana*/
 

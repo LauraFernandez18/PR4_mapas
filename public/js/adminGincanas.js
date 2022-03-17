@@ -19,8 +19,18 @@ window.onload = function() {
         var pista = $("#pista").val();
         var idlugar = $("#lugar").val();
         var orden = $("#orden").val();
+        if (pista == '' || idlugar == '') {
+            document.getElementsByClassName("modalmask")[1].style.opacity = 0
+            document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
+            document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+            swal.fire({
+                title: "Error",
+                text: "Tienes que rellenar todos los datos",
+                icon: "error",
+            });
+            return true;
+        } else {
         var gincana = 1
-
         var formData = new FormData();
         formData.append('_token', document.getElementById('token').getAttribute("content"));
         formData.append('_method', 'post');
@@ -43,13 +53,23 @@ window.onload = function() {
             }
         }
         ajax.send(formData);
-    })
+    }})
 
     $("#guardar-crear").click(function() {
         var pista = $("#pista-crear").val();
         var idlugar = $("#lugar").val();
         var orden = $("#orden-crear").val();
-
+        if (pista == '' || idlugar == '') {
+            document.getElementsByClassName("modalmask")[1].style.opacity = 0
+            document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
+            document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+            swal.fire({
+                title: "Error",
+                text: "Tienes que rellenar todos los datos",
+                icon: "error",
+            });
+            return true;
+        } else {
         var formData = new FormData();
         formData.append('_token', document.getElementById('token').getAttribute("content"));
         formData.append('_method', 'post');
@@ -72,7 +92,7 @@ window.onload = function() {
             }
         }
         ajax.send(formData);
-    })
+    }})
     routing()
     menuDerecha()
     CountPuntoControl2()

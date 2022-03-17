@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
         <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
         <script type="text/javascript" src="js/iconos_g.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
         <!-- Routing -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
@@ -24,21 +25,21 @@
         <!-- Routing -->
         <link rel="stylesheet" href="{!! asset('css/stylesAdminMapas.css') !!}">
         <script src="js/jquery.js"></script>
-        
+
         <title>Admin - Gincana</title>
     </head>
 <body>
     <div id="map"></div>
     <!-- <div class="admin-logo"><img src="../storage/uploads/logo.png"></div> -->
-    <div class="admin-cpanel"><p>C-PANEL</p></div>
+    {{-- <div class="admin-cpanel"><p>C-PANEL</p></div> --}}
     <div class="admin-cpanel-crear"><button class="btn btn-dark btn-lg" onclick="modal2();">Crear punto control &nbsp;<i class="fas fa-map-marker-alt"></i></button></div>
     <div class="admin-logout"><a href="{{ url('/logout') }}"><button class="btn btn-danger btn-lg"><i class="fas fa-power-off"></i></button></a></div>
     <div class="admin-atras"><a href="{{ url('cPanelAdmin') }}"><button class="btn btn-info btn-lg"><i class="fa fa-arrow-circle-left"></i></button></a></div>
     <div class="lugares" id="lugares">
-        
+
 
     </div>
-    
+
     <script language="javascript" src="js/adminGincanas.js"></script>
 
     <!-- Modificar -->
@@ -62,11 +63,11 @@
                         <input type="number" name="orden" id="orden" max="30" min="1">
                     </div>
                     <div class="eliminar">
-                        
+
                     </div>
-                    
+
                 </div>
-          
+
     </div>
     <!-- Crear -->
     <div class="region-registrarse modalmask" id="modal">
@@ -90,9 +91,9 @@
                     </div>
                         </div>
                     </form>
-                    
+
                 </div>
-          
+
     </div>
 </body>
 
