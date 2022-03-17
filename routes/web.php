@@ -34,6 +34,7 @@ Route::post('ModificarPuntoControl',[lugarController::class,'ModificarPuntoContr
 Route::post('CrearPuntoControl',[lugarController::class,'CrearPuntoControl']);
 Route::post('EliminarPuntoControl',[lugarController::class,'EliminarPuntoControl']);
 Route::post('RoutingGincana',[lugarController::class,'RoutingGincana']);
+Route::post('etiquetasUser',[lugarController::class,'etiquetasUser']);
 
 Route::get('index',[LugarController::class, 'index']);
 

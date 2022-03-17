@@ -334,4 +334,10 @@ class LugarController extends Controller
         ORDER BY tbl_punto_control.pista DESC;');
         return response()->json($datos);
     }
+    /*
+    public function etiquetasUser(Request $request){
+        $datos=$request->except('_token','_method');
+        $etiquetas=DB::select("SELECT tbl_etiquetas.nombre from tbl_lugares INNER JOIN tbl_etiquetas on tbl_lugares.id=tbl_etiquetas.fk_lugar INNER JOIN tbl_etiqueta_usuario on tbl_etiquetas.id=tbl_etiqueta_usuario.fk_etiqueta INNER JOIN tbl_users on tbl_etiqueta_usuario.fk_usuario=tbl_users.id where tbl_users.email=?",[$datos['sesion']]);
+        return response()->json($etiquetas);
+    }*/
 }

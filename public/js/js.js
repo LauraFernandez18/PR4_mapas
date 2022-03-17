@@ -1,5 +1,6 @@
 //modal
 window.onload = function() {
+    var markers = null
     var cerrar = document.getElementById('cerrar')
     cerrar.addEventListener("click", function() {
         document.getElementsByClassName("modalmask")[0].style.opacity = 0
@@ -249,6 +250,7 @@ function objetoAjax() {
 function marker_map() {
 
     markers = L.layerGroup();
+    markers.clearLayers();
 
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
@@ -275,7 +277,7 @@ function marker_map() {
 
 
             }
-
+            markers.clearLayers();
         }
     }
     ajax.send(formData);
