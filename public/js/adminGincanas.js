@@ -1,6 +1,5 @@
 window.onload = function() {
     var route = null
-    var marker = null
     var cerrar = document.getElementById('cerrar')
     cerrar.addEventListener("click", function() {
         document.getElementsByClassName("modalmask")[0].style.opacity = 0
@@ -20,6 +19,7 @@ window.onload = function() {
         var pista = $("#pista").val();
         var idlugar = $("#lugar").val();
         var orden = $("#orden").val();
+<<<<<<< HEAD
         if (pista == '' || idlugar == '') {
             document.getElementsByClassName("modalmask")[1].style.opacity = 0
             document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
@@ -52,15 +52,43 @@ window.onload = function() {
                     menuDerecha()
                     routing()
                 }
+=======
+        var gincana = 1
+
+        var formData = new FormData();
+        formData.append('_token', document.getElementById('token').getAttribute("content"));
+        formData.append('_method', 'post');
+        formData.append('id', id);
+        formData.append('pista', pista);
+        formData.append('fk_gincana', gincana);
+        formData.append('fk_lugar', idlugar);
+        formData.append('orden', orden);
+        var ajax = objetoAjax();
+
+        ajax.open("POST", "ModificarPuntoControl", true);
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                var respuesta = JSON.parse(this.responseText);
+                document.getElementsByClassName("modalmask")[0].style.opacity = 0
+                document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                menuDerecha()
+                routing()
+>>>>>>> 9390189525c2d65d95c6c71aec187fc129fa36b5
             }
             ajax.send(formData);
         }
+<<<<<<< HEAD
+=======
+        ajax.send(formData);
+>>>>>>> 9390189525c2d65d95c6c71aec187fc129fa36b5
     })
 
     $("#guardar-crear").click(function() {
         var pista = $("#pista-crear").val();
         var idlugar = $("#lugar").val();
         var orden = $("#orden-crear").val();
+<<<<<<< HEAD
         if (pista == '' || idlugar == '') {
             document.getElementsByClassName("modalmask")[1].style.opacity = 0
             document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
@@ -91,11 +119,36 @@ window.onload = function() {
                     document.getElementsByTagName("html")[0].style.overflowY = "scroll"
                     CountPuntoControl2()
                     document.getElementsByClassName('registrarse-form')[1].reset()
+=======
+
+        var formData = new FormData();
+        formData.append('_token', document.getElementById('token').getAttribute("content"));
+        formData.append('_method', 'post');
+        formData.append('pista', pista);
+        formData.append('fk_lugar', idlugar);
+        formData.append('orden', orden);
+        var ajax = objetoAjax();
+
+        ajax.open("POST", "CrearPuntoControl", true);
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                var respuesta = JSON.parse(this.responseText);
+                menuDerecha()
+                routing()
+                document.getElementsByClassName("modalmask")[1].style.opacity = 0
+                document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
+                document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                CountPuntoControl2()
+>>>>>>> 9390189525c2d65d95c6c71aec187fc129fa36b5
 
                 }
             }
             ajax.send(formData);
         }
+<<<<<<< HEAD
+=======
+        ajax.send(formData);
+>>>>>>> 9390189525c2d65d95c6c71aec187fc129fa36b5
     })
     routing()
     menuDerecha()
@@ -210,6 +263,8 @@ function routing() {
         addWaypoints: false
     }).addTo(map);
 
+    markers = L.layerGroup();
+
 
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
@@ -222,8 +277,8 @@ function routing() {
             var puntos = []
             for (let i = 0; i < respuesta.length; i++) {
                 puntos.push(L.latLng(respuesta[i].latitud, respuesta[i].longitud))
-                marker = new L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
-                marker.bindPopup(i + 1 + " - " + respuesta[i].nombre, {
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
+                marker.bindPopup(respuesta[i].nombre, {
                     closeButton: false,
                     closeOnClick: false,
                     autoClose: false
@@ -317,7 +372,6 @@ function modal(id, pista, gincana, lugar, orden) {
             ajax.onreadystatechange = function() {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     menuDerecha()
-                    removeRoute()
                     document.getElementsByClassName("modalmask")[0].style.opacity = 0
                     document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
                     document.getElementsByTagName("html")[0].style.overflowY = "scroll"
@@ -402,6 +456,7 @@ function CountPuntoControl2() {
     ajax.send(formData);
 
 }
+<<<<<<< HEAD
 ajax.open("POST", "adminMapasAjax", true);
 ajax.onreadystatechange = function() {
     if (ajax.readyState == 4 && ajax.status == 200) {
@@ -414,9 +469,37 @@ ajax.onreadystatechange = function() {
                 closeOnClick: false,
                 autoClose: false
             }).openPopup();
+=======
+
+
+function marker_map() {
+
+    markers = L.layerGroup();
+
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'post');
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "adminMapasAjax", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            recarga = "";
+            for (let i = 0; i < respuesta.length; i++) {
+                var marker = L.marker([respuesta[i].latitud, respuesta[i].longitud]).addTo(map);
+                marker.bindPopup(respuesta[i].nombre, {
+                    closeButton: false,
+                    closeOnClick: false,
+                    autoClose: false
+                }).openPopup();
+            }
+
+>>>>>>> 9390189525c2d65d95c6c71aec187fc129fa36b5
         }
 
     }
+<<<<<<< HEAD
 }
 ajax.send(formData);
 
@@ -424,4 +507,7 @@ function removeRoute() {
     var puntos = []
     route.setWaypoints(puntos);
     map.removeLayer(marker) //esto no funciona wacho
+=======
+    ajax.send(formData);
+>>>>>>> 9390189525c2d65d95c6c71aec187fc129fa36b5
 }
