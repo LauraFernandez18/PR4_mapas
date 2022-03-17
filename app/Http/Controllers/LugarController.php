@@ -219,6 +219,9 @@ class LugarController extends Controller
 
     public function registrarUsuario(Request $request){
         $datos = $request->except('_token');
+        $request->validate([
+            'email'=>'required|unique:tbl_users,email|string|max:100',
+        ]);
         try{
             DB::beginTransaction();
             DB::insert('insert into tbl_users (nombre, email, pwd, tipo_usu) values (?,?,?,?)',[$request->input('nombre'),$request->input('email'),md5($request->input('pwd')),'usuario']);
@@ -246,7 +249,7 @@ class LugarController extends Controller
     }
 
     public function modificar(Request $request){
-        try {
+        //try {
             $id=$request->input('id');
             $nombre=$request->input('nombre');
             $email=$request->input('email');
@@ -273,9 +276,9 @@ class LugarController extends Controller
                     return response()->json(array('resultado'=> 'Contraseña no actualizada'));
                 }
             }
-        } catch (\Throwable $th) {
-            return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
-        }
+        //} catch (\Throwable $th) {
+            //return response()->json(array('resultado'=> 'NOK: '.$th->getMessage()));
+        //}
     }
 
     public function eliminaraUser(Request $request){
@@ -289,6 +292,9 @@ class LugarController extends Controller
     }
 
     public function crearUser(Request $request){
+        $request->validate([
+            'email'=>'required|unique:tbl_users,email|string|max:100',
+        ]);
         try {
             $long_pwd = strlen($request->input('pwd'));
             if($long_pwd>= 8){

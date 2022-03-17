@@ -61,6 +61,7 @@
                     <div class="orden disabled">
                         <label>Orden:</label>
                         <input type="number" name="orden" id="orden" max="30" min="1">
+                        
                     </div>
                     <div class="eliminar">
 

@@ -262,8 +262,8 @@ form.registrarse-form label {
 }
 
 .foto img {
-    width: 15vh;
-    height: 15vh;
+    width: 12vh;
+    height: 11vh;
     border-radius: 3%;
     border: 3px solid #333333;
 }
@@ -288,6 +288,7 @@ form.registrarse-form label {
 .descripcion {
     position: absolute;
     top: 12%;
+    width: 70%;
     left: 5vh;
 }
 
@@ -425,6 +426,7 @@ form.registrarse-form label {
     opacity: 0.8;
 }
 
+
 /*Admin Gincana*/
 
 .info-punto-control {
@@ -436,8 +438,10 @@ form.registrarse-form label {
 }
 
 #punto-control {
+    font-family: 'Fredoka', sans-serif;
     font-weight: 800;
     font-size: 4vh;
+    color: #69bad3;
 }
 
 .info-punto-control textarea {

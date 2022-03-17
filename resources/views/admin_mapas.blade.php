@@ -60,7 +60,7 @@
                             <input type="file" name="file" id="foto-Input" class="upload" accept="image/*">
                         </div>
                         <div class="descripcion">
-                            <textarea name="descripcion" id="descripcion" cols="56" rows="3"></textarea>
+                            <textarea name="descripcion" id="descripcion" cols="43" rows="2"></textarea>
                         </div>
                         <div class="foto">
                             <img src="" id="foto">
@@ -113,7 +113,7 @@
                             <input type="file" name="file" class="upload" accept="image/*" id="foto-crear">
                         </div>
                         <div class="descripcion">
-                            <textarea name="descripcion" id="descripcion-crear" cols="56" rows="3" placeholder="Descripcion"></textarea>
+                            <textarea name="descripcion" id="descripcion-crear" cols="43" rows="2" placeholder="Descripcion"></textarea>
                         </div>
 
                         <div class="etiquetas">
