@@ -80,8 +80,13 @@ window.onload = function() {
                 ajax.onreadystatechange = function() {
                     if (ajax.readyState == 4 && ajax.status == 200) {
                         var respuesta = JSON.parse(this.responseText);
-                        divLugar.innerHTML = ""
-                        modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto, respuesta[0].descripcion, respuesta[0].foto_icon)
+                        //divLugar.innerHTML = ""
+                        //modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto, respuesta[0].descripcion, respuesta[0].foto_icon)
+                        document.getElementsByClassName("modalmask")[0].style.opacity = 0
+                        document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+                        document.getElementsByTagName("html")[0].style.overflowY = "scroll"
+                        removeMarkers()
+                        menuDerecha()
                     }
                 }
                 ajax.send(formData);
@@ -96,8 +101,8 @@ window.onload = function() {
         var descripcion = $("#descripcion-crear").val();
         var foto_icon = $("#foto-icono-input-crear").val();
         if (nombre == '' || descripcion == '' || latitud == '' || longitud == '') {
-            document.getElementsByClassName("modalmask")[1].style.opacity = 0
-            document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
+            document.getElementsByClassName("modalmask")[0].style.opacity = 0
+            document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
             document.getElementsByTagName("html")[0].style.overflowY = "scroll"
             swal.fire({
                 title: "Error",
@@ -124,8 +129,8 @@ window.onload = function() {
                     var respuesta = JSON.parse(this.responseText);
                     //divLugar.innerHTML = ""
                     //modal(respuesta[0].id, respuesta[0].nombre, respuesta[0].longitud, respuesta[0].latitud, respuesta[0].foto, respuesta[0].descripcion, respuesta[0].foto_icon)
-                    document.getElementsByClassName("modalmask")[0].style.opacity = 0
-                    document.getElementsByClassName("modalmask")[0].style.pointerEvents = "none"
+                    document.getElementsByClassName("modalmask")[1].style.opacity = 0
+                    document.getElementsByClassName("modalmask")[1].style.pointerEvents = "none"
                     document.getElementsByTagName("html")[0].style.overflowY = "scroll"
                     marker_map()
                     menuDerecha()
