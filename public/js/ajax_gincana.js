@@ -120,7 +120,7 @@ distance_usr_lgr = '';
 //Definimos el contador de aciertos
 cont_aciertos = 0;
 
-function gincanaUser() {
+function ubiUser() {
     //Creamos el bucle que recorre el array para ir mostrando las pistas
     /* for (let i = 0; i < arr_pistas.length;) { */
     //Coordenada actual del jugador por localizacion del navegador
@@ -161,37 +161,39 @@ function gincanaUser() {
     /* } */
 }
 
-setInterval(gincanaUser, 5000);
+ubi_tiempo = setInterval(ubiUser, 5000);
 cont_pistas = 0;
 
+//Creamos un punto de control con un valor igual a cero
+punto_control = 0;
 function gincanadist(ubi_user) {
-    control = document.getElementById('control').value;
-    console.log('Control1' + control);
+    console.log('Punto_control1: ' + punto_control);
     for (let i = 0; i < arr_pistas.length; i++) {
         if (cont_pistas < arr_pistas.length) {
             //Cogemos el id de donde vamos a insertar la pista
             p_pista = document.getElementById('Pista');
             //guardamos la pista en una variable
-            pista = arr_pistas[control].pista;
+            pista = arr_pistas[punto_control].pista;
             p_pista.innerHTML = pista;
             //Seteamos una cordenada nueva cada x segundos que le digamos a la funcion setinterval
             //coordenada lugar destino
-            ubi_lgr = [arr_pistas[control].latitud, arr_pistas[control].longitud];
+            ubi_lgr = [arr_pistas[punto_control].latitud, arr_pistas[punto_control].longitud];
             console.log('Ubi lugar: ' + ubi_lgr);
-            console.log('Pista: ' + control + ' ' + pista);
+            console.log('Pista: ' + punto_control + ' ' + pista);
             //insertamos la pista
             p_pista.innerHTML = pista;
             distancia_lugar = map.distance(ubi_user, ubi_lgr);
             if (distancia_lugar <= 50) {
-                control++;
-                console.log('Control2' + control)
+                punto_control++;
+                console.log('punto_control2' + punto_control)
                 cont_pistas++;
                 console.log('Estoy');
             } else {
                 console.log('No estoy');
             }
         } else {
-            console.log('Has acabado');
+            alert('Ya has acabado la gincana');
+            clearInterval(ubi_tiempo);
         }
     }
 }

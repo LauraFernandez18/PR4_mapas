@@ -13,7 +13,7 @@
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
 </head>
 <body>
-    <input type="hidden" id="control" value="0">
+    <!-- <input type="hidden" id="control" value="0"> -->
     <div><p id='Pista'></p></div>
     <div id="map">
         <form action="{{url('logout')}}" method="GET">
