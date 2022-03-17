@@ -278,7 +278,7 @@ function marker_map() {
                 markers.addLayer(marker);
                 marker.on('click', function(e) {
                     modal(respuesta[i].id, respuesta[i].nombre, respuesta[i].longitud, respuesta[i].latitud, respuesta[i].foto, respuesta[i].descripcion, respuesta[i].foto_icon)
-                    marker_map()
+                        //marker_map()
                 });
 
 
