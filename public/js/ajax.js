@@ -180,7 +180,14 @@ function limpiarRuta() {
         map.removeControl(ruta_elim);
     }
 }
-
+var markerIcon = L.icon({
+    iconUrl: src = '../public/img/person.png',
+    iconSize: [30, 30]
+});
+//Lo seteamos manualmente
+marker_person = L.marker([0,0], { icon: markerIcon });
+//Lo añadimos al mapa
+marker_person.addTo(map);
 function ruta(lat, long) {
     limpiarRuta();
     if (!"geolocation" in navigator) {
@@ -188,6 +195,9 @@ function ruta(lat, long) {
     };
     const onUbicacionConcedida = ubicacion => {
         console.log("Tengo la ubicación: ", ubicacion);
+        ubi_user = [ubicacion.coords.latitude, ubicacion.coords.longitude];
+        marker_person.setLatLng(ubi_user);
+            //Definimos el marcador del usuario
         /* console.log('direccion destino:' + lat + ',' + long);
         console.log('direccion actual:' + ubicacion.coords.latitude + ',' + ubicacion.coords.longitude); */
         /* var personIcon = L.icon({
