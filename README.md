@@ -52,8 +52,8 @@ SI NO TIENES GIT + GITHUB:
 
 *COSAS IMPORTANTES A TENER EN CUENTA:*
     · Para poder acceder a la pagina y que sea totalmente funcional os muestro los usuarios:
-        · Usuario ADMINISTRADOR: laura@gmail.com Password: 12345.
-        · Usuario cliente: usuario@gmail.com Password: 12345678.
+        · Usuario ADMINISTRADOR: laura@gmail.com Password: qweQWE123.
+        · Usuario cliente: dani@dani.com Password: qweQWE123.
     · A partir de el fichero .env.example tenemos que crear un nuevo archivo llamado .env, en ese archivo pegaremos todo mismo contenido que hay en .env.example
       Después cambiamos la parte de la base de datos para poder conectarla:
         DB_CONNECTION=[tipo de base de datos]
