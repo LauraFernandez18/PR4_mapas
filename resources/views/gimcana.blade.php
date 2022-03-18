@@ -15,7 +15,7 @@
 </head>
 <body>
     <!-- <input type="hidden" id="control" value="0"> -->
-    <div><p id='Pista'></p></div>
+    <div class="pista"><p id='Pista'></p></div>
     <div id="map">
         <form action="{{url('logout')}}" method="GET">
             <button class="btn btn-danger btn_logout" type="submit" id="myBtn"><b><i class="fas fa-sign-out-alt"></i></b></button>

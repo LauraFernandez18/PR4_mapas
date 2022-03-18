@@ -1,4 +1,5 @@
 window.onload = function() {
+    marker_map();
     gincana();
     arr_pistas = [];
 }
@@ -50,6 +51,40 @@ polygon.setStyle({
     fillColor: '#333333',
     fillOpacity: 0.1
 });
+
+function marker_map() {
+    /* var mapa = document.getElementById("n_sitio"); */
+    var formData = new FormData();
+    formData.append('_token', document.getElementById('token').getAttribute("content"));
+    formData.append('_method', 'get');
+    /* Inicializar un objeto AJAX */
+    var ajax = objetoAjax();
+
+    ajax.open("POST", "markerMapa", true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            var respuesta = JSON.parse(this.responseText);
+            /* recarga = ""; */
+            /* var array_cord = []; */
+            for (let i = 0; i < respuesta.length; i++) {
+                /* array_cord.push([respuesta[i].latitud, respuesta[i].longitud]); */
+                /* recarga += '<h1>' + respuesta[i].nombre + '</h1>'; */
+                var markerIcon = L.icon({
+                    iconUrl: src = '../public/img/' + respuesta[i].foto_icon + '',
+                    iconSize: [30, 30]
+                });
+                marker = L.marker([respuesta[i].latitud, respuesta[i].longitud], { icon: markerIcon });
+                marker.addTo(map);
+                marker.bindPopup("<h1 class='nombre'><b>" + respuesta[i].nombre + "</b></h1>" + "<p class='descripcion'>" + respuesta[i].descripcion + "</p><img class='img_popup' src='../public/img/" + respuesta[i].foto + "'></img><br></br><button class='btn btn-dark btn_ir' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button class='btn btn-info btn_quitar' onclick='limpiarRuta(); return false;'>Quitar Ruta</button>", { maxWidth: 190 }).openPopup();
+                /* arr_marker.push(marker); */
+            }
+            /* console.log('1:' + arr_marker); */
+            /* alert(recarga); */
+            /* mapa.innerHTML = recarga; */
+        }
+    }
+    ajax.send(formData);
+}
 
 function gincana() {
     var formData = new FormData();
@@ -107,14 +142,14 @@ ubi_user = '';
 ubi_lgr = '';
 
 //Definimos el marcador del usuario
-var markerIcon = L.icon({
+var markerIcon2 = L.icon({
     iconUrl: src = '../public/img/person.png',
     iconSize: [30, 30]
 });
 //Lo seteamos manualmente
-marker = L.marker([41.34986253616909, 2.1073770285219604], { icon: markerIcon });
+marker2 = L.marker([41.34986253616909, 2.1073770285219604], { icon: markerIcon2 });
 //Lo añadimos al mapa
-marker.addTo(map);
+marker2.addTo(map);
 //Definimos la distancia del usuario al lugar
 distance_usr_lgr = '';
 //Definimos el contador de aciertos
@@ -129,7 +164,7 @@ function ubiUser() {
     };
     const onUbicacionConcedida = ubicacion => {
         ubi_user = [ubicacion.coords.latitude, ubicacion.coords.longitude];
-        marker.setLatLng(ubi_user);
+        marker2.setLatLng(ubi_user);
         console.log('Ubi tio: ' + ubi_user);
         //Calculamos la distancia del usuario respecto al lugar
         /* distance_usr_lgr = map.distance(ubi_user, ubi_lgr);
@@ -166,6 +201,7 @@ cont_pistas = 0;
 
 //Creamos un punto de control con un valor igual a cero
 punto_control = 0;
+
 function gincanadist(ubi_user) {
     console.log('Punto_control1: ' + punto_control);
     for (let i = 0; i < arr_pistas.length; i++) {

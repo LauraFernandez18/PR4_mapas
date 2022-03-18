@@ -354,6 +354,11 @@ input[type='password']::placeholder {
     }
 }
 
+.pista {
+    text-align: center;
+    font-weight: bold;
+}
+
 @media screen and (max-width:600px) {
     .filtro {
         margin-top: 65px;
@@ -455,7 +460,6 @@ input[type='password']::placeholder {
         box-shadow: 0 3px 5px 0 rgb(0 0 0 / 10%);
         margin-right: 6px !important;
     }
-
     .modal-content {
         width: 80% !important;
     }
@@ -480,5 +484,4 @@ input[type='password']::placeholder {
         width: 100%;
         border-radius: 5%;
     }
-
 }
