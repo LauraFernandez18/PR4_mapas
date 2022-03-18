@@ -3,9 +3,15 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+<<<<<<< HEAD:sql/visit_barcelona.sql
 -- Tiempo de generación: 17-03-2022 a las 19:26:15
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.24
+=======
+-- Tiempo de generación: 18-03-2022 a las 00:06:37
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 8.1.2
+>>>>>>> 33be2ce793b325f1f1cf19ebd43a8d838a035253:sql/db_pr04.sql
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +24,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `visit_barcelona`
+-- Base de datos: `db_pr04`
 --
 CREATE DATABASE IF NOT EXISTS `visit_barcelona` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `visit_barcelona`;
@@ -44,7 +50,21 @@ INSERT INTO `tbl_etiquetas` (`id`, `nombre`, `fk_lugar`) VALUES
 (2, 'Restaurantes', 2),
 (3, 'Museos', 3),
 (4, 'Bares', 4),
+<<<<<<< HEAD:sql/visit_barcelona.sql
 (5, 'Playas', 5);
+=======
+(5, 'Playas', 5),
+(6, 'Deportes', 7),
+(7, 'Playa', 8),
+(8, 'Fútbol', 9),
+(9, 'Parque', 10),
+(10, 'Playa', 11),
+(11, 'Restaurante', 12),
+(12, 'Plaza', 13),
+(13, 'Discoteca', 14),
+(14, 'Discoteca', 15),
+(15, 'Casino', 16);
+>>>>>>> 33be2ce793b325f1f1cf19ebd43a8d838a035253:sql/db_pr04.sql
 
 -- --------------------------------------------------------
 
@@ -67,7 +87,21 @@ INSERT INTO `tbl_etiqueta_usuario` (`id`, `fk_usuario`, `fk_etiqueta`) VALUES
 (3, 1, 2),
 (4, 1, 3),
 (5, 1, 5),
+<<<<<<< HEAD:sql/visit_barcelona.sql
 (6, 1, 4);
+=======
+(6, 1, 4),
+(7, 1, 6),
+(8, 1, 7),
+(9, 1, 8),
+(10, 1, 9),
+(11, 1, 10),
+(12, 1, 11),
+(13, 1, 12),
+(14, 1, 13),
+(15, 1, 14),
+(16, 1, 15);
+>>>>>>> 33be2ce793b325f1f1cf19ebd43a8d838a035253:sql/db_pr04.sql
 
 -- --------------------------------------------------------
 
@@ -132,11 +166,29 @@ CREATE TABLE `tbl_lugares` (
 --
 
 INSERT INTO `tbl_lugares` (`id`, `nombre`, `descripcion`, `longitud`, `latitud`, `foto`, `foto_icon`) VALUES
+<<<<<<< HEAD:sql/visit_barcelona.sql
 (1, 'Hotel W', 'Este hotel exclusivo y con vistas al mar se encuentra en el paseo marítimo de la Barceloneta, a 2 km de la estación de metro de Barceloneta y a 4 del animado bulevar de La Rambla.', '2.19018558', '41.36863022', 'hotel_w.jpg', 'hotel_icon.png'),
 (2, 'Restaurante Barceloneta', 'Restaurante exclusivo, con temática marina y vistas al puerto, que sirve paellas de marisco y otros platos típicos.', '2.18315070', '41.37618790', 'rest_bcn.webp', 'rest_icon.png'),
 (3, 'Museo Historia', 'El Museo de Historia de Cataluña, también conocido por sus siglas como MHC, se creó en 1996 por el Gobierno de la Generalidad de Cataluña.​', '2.18591591', '41.38076775', 'museo_bcn.jpg', 'museo_icon.png'),
 (4, 'Bar Leo', 'Legendario bar de tapas de barrio de ambiente flamenco decorado con recuerdos del difunto cantaor Bambino.', '2.18807750', '41.38056230', 'bar_leo.jpg', 'bar_icon.png'),
 (5, 'Sant Miquel', 'Concurrida playa urbana ideal para bañarse y tomar el sol, con socorristas, instalaciones deportivas y restaurantes.', '2.19030910', '41.37581250', 'sant_miquel.jpg', 'playa_icon.png');
+=======
+(1, 'Hotel W', 'Este hotel de lujo, situado en el paseo marítimo de la Barceloneta, con vistas al mar, se encuentra a 2 km de la parada de metro de la Barceloneta y a 4 km de la Rambla.', '2.19018558', '41.36863022', 'hotel_w.jpg', 'hotel_icon.png'),
+(2, 'Restaurante Barceloneta', 'Recetas marineras en un local con terraza decorado como un antiguo carguero de madera y ubicado en el puerto.', '2.18315070', '41.37618790', 'rest_bcn.webp', 'rest_icon.png'),
+(3, 'Museo Historia', 'Museo de ciudad que conserva, estudia, documenta, divulga y expone el patrimonio histórico y la historia de Barcelona desde sus orígenes hasta el presente.', '2.18591591', '41.38076775', 'museo_bcn.jpg', 'museo_icon.png'),
+(4, 'Bar Leo', 'Legendario bar de tapas de barrio con ambiente flamenco decorado con recuerdos del difunto cantaor Bambino.', '2.18807750', '41.38056230', 'bar_leo.jpg', 'bar_icon.png'),
+(5, 'Sant Miquel', 'La playa de Sant Miquel es una playa de la Barceloneta, situada entre las playas de Sant Sebastià y la Barceloneta', '2.19030910', '41.37581250', 'playa_bcn.jpg', 'playa_icon.png'),
+(7, 'Club natación BCN', 'Club de natació a Barcelona', '2.18884515', '41.37326099', 'clubnatabcn.jpg', 'natacion.png'),
+(8, 'L\'Estel ferit', 'Escultura moderna de 10 m d\'alçada situada a la platja, formada per 4 cubs apilats d\'acer amb finestres i signada per Rebecca Horn.', '2.19110007', '41.37649932', 'estel-ferit-playa2.jpg', 'abstracto.png'),
+(9, 'Club de Futbol La Catalana', 'Parc amb camps de futbol i pistes de bàsquet, senderes flanquejades per arbres, un bar i vistes sobre el mar.', '2.19161735', '41.38308588', 'lacatalana.jpg', 'futbol.png'),
+(10, 'Parc de la Barceloneta', 'Parc amb camps de futbol i pistes de bàsquet, senderes flanquejades per arbres, un bar i vistes sobre el mar.', '2.19251085', '41.38262453', '2016,01,AZ8Q4824.jpg', 'parque.png'),
+(11, 'Platja del Somorrostro', 'Platja urbana amb restaurants, cocteleries, discoteques i un parc amb zona de jocs.', '2.19570766', '41.38370128', '211330609111714.jpg', 'playa_icon.png'),
+(12, 'La Tagliatella', 'Iluminación cálida y adornos hogareños antiguos en cadena de restaurantes de gastronomía tradicional italiana.', '2.18533170', '41.38134632', '208_barceloneta-buscador.jpg', 'rest_icon.png'),
+(13, 'Plaça del Poeta Boscà', 'Plaça del Poeta Boscà', '2.18957504', '41.37954365', 'fcgbhw.jpg', 'plaza-bolivar.png'),
+(14, 'Pacha Barcelona', 'Discoteca de moda on se serveix cuina mediterrània i asiàtica amb una terrassa davant de la platja.', '2.19709228', '41.38573273', 'Webp.net-resizeimage-785x523.jpg', 'bola-de-discoteca.png'),
+(15, 'Shoko', 'Sushi, arrossos i còctels en un restaurant asiàtic i bar de copes amb sofàs vermells i vistes a la platja.', '2.19697090', '41.38550221', '400x300.webp', 'bola-de-discoteca.png'),
+(16, 'Casino Barcelona', 'Casino tranquil i modern amb ruleta americana, taules de pòquer, màquines escurabutxaques, restaurants i concerts en directe.', '2.19711922', '41.38666462', 'casino-barcelona.jpg', 'chip.png');
+>>>>>>> 33be2ce793b325f1f1cf19ebd43a8d838a035253:sql/db_pr04.sql
 
 -- --------------------------------------------------------
 
@@ -157,8 +209,20 @@ CREATE TABLE `tbl_punto_control` (
 --
 
 INSERT INTO `tbl_punto_control` (`id`, `pista`, `fk_gincana`, `fk_lugar`, `orden`) VALUES
+<<<<<<< HEAD:sql/visit_barcelona.sql
 (1, 'Tiene forma de vela', 1, 1, 1),
 (2, 'Puedes tomar el sol', 1, 5, 2);
+=======
+(3, 'Tutto bono a casa de mia mama', 1, 12, 1),
+(4, 'La curiosidad enmarcada en años de historia.', 1, 3, 2),
+(5, 'Plaza en honor a un poeta del renacimiento', 1, 13, 3),
+(6, 'Puedes ver toda La Barceloneta por el modico precio de un ford fiesta', 1, 1, 4),
+(7, 'Se preparan los atletas del mar', 1, 7, 5),
+(8, 'Necesita que la curen, se encuentra en el cielo(en sentido figurado)', 1, 8, 6),
+(9, 'Dicen que está la mejor comida de Barcelona.\r\nDicen que está la mejor fiesta de Barcelona.\r\nUna frase es mentira la otra verdadera.', 1, 14, 7),
+(10, 'Donde la lujuria y el desenfreno se juntan en derroche.', 1, 16, 8),
+(11, 'Puedes practicar el deporte rey al aire libre.', 1, 9, 9);
+>>>>>>> 33be2ce793b325f1f1cf19ebd43a8d838a035253:sql/db_pr04.sql
 
 -- --------------------------------------------------------
 
@@ -183,7 +247,11 @@ INSERT INTO `tbl_users` (`id`, `nombre`, `email`, `pwd`, `tipo_usu`) VALUES
 (2, 'test2', 'test2@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'usuario'),
 (9, 'dani', 'dani@gmail.com', '5bacd9f25613659b2fbd2f3a58822e5c', 'administrador'),
 (10, 'dani', 'dani@dani.com', '1fa3356b1eb65f144a367ff8560cb406', 'usuario'),
+<<<<<<< HEAD:sql/visit_barcelona.sql
 (17, 'Laura', 'laura@gmail.com', '1fa3356b1eb65f144a367ff8560cb406', 'administrador');
+=======
+(17, 'laura', 'laura@gmail.com', '1fa3356b1eb65f144a367ff8560cb406', 'administrador');
+>>>>>>> 33be2ce793b325f1f1cf19ebd43a8d838a035253:sql/db_pr04.sql
 
 -- --------------------------------------------------------
 
@@ -280,13 +348,21 @@ ALTER TABLE `tbl_usuario_lugar_favoritos`
 -- AUTO_INCREMENT de la tabla `tbl_etiquetas`
 --
 ALTER TABLE `tbl_etiquetas`
+<<<<<<< HEAD:sql/visit_barcelona.sql
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+>>>>>>> 33be2ce793b325f1f1cf19ebd43a8d838a035253:sql/db_pr04.sql
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_etiqueta_usuario`
 --
 ALTER TABLE `tbl_etiqueta_usuario`
+<<<<<<< HEAD:sql/visit_barcelona.sql
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+>>>>>>> 33be2ce793b325f1f1cf19ebd43a8d838a035253:sql/db_pr04.sql
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_gincana`
@@ -310,13 +386,21 @@ ALTER TABLE `tbl_grupo_usuario`
 -- AUTO_INCREMENT de la tabla `tbl_lugares`
 --
 ALTER TABLE `tbl_lugares`
+<<<<<<< HEAD:sql/visit_barcelona.sql
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+>>>>>>> 33be2ce793b325f1f1cf19ebd43a8d838a035253:sql/db_pr04.sql
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_punto_control`
 --
 ALTER TABLE `tbl_punto_control`
+<<<<<<< HEAD:sql/visit_barcelona.sql
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+>>>>>>> 33be2ce793b325f1f1cf19ebd43a8d838a035253:sql/db_pr04.sql
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_users`

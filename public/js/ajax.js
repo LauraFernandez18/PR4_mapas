@@ -85,7 +85,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     opacity: 0.6,
     fillColor: '#333333',
     fillOpacity: 0.1
-});
+}); */
 
 /* var marker = L.marker([41.373703, 2.187467]).addTo(map);
 marker.bindPopup("<b>Hola</b>").openPopup(); */
@@ -146,7 +146,7 @@ function marker_map() {
                 marker.bindPopup("<h1 class='nombre'><b>" + respuesta[i].nombre + "</b></h1>" + "<p class='descripcion'>" + respuesta[i].descripcion + "</p><img class='img_popup' src='../public/img/" + respuesta[i].foto + "'></img><br></br><button class='btn btn-dark btn_ir' onclick='ruta(" + respuesta[i].latitud + "," + respuesta[i].longitud + "); return false;'>Ir</button><button class='btn btn-info btn_quitar' onclick='limpiarRuta(); return false;'>Quitar Ruta</button>", { maxWidth: 190 }).openPopup();
                 arr_marker.push(marker);
             }
-            /* console.log(arr_marker); */
+            console.log('1:' + arr_marker);
             /* alert(recarga); */
             /* mapa.innerHTML = recarga; */
         }
@@ -180,7 +180,14 @@ function limpiarRuta() {
         map.removeControl(ruta_elim);
     }
 }
-
+var markerIcon = L.icon({
+    iconUrl: src = '../public/img/person.png',
+    iconSize: [30, 30]
+});
+//Lo seteamos manualmente
+marker_person = L.marker([0,0], { icon: markerIcon });
+//Lo añadimos al mapa
+marker_person.addTo(map);
 function ruta(lat, long) {
     limpiarRuta();
     if (!"geolocation" in navigator) {
@@ -188,6 +195,9 @@ function ruta(lat, long) {
     };
     const onUbicacionConcedida = ubicacion => {
         console.log("Tengo la ubicación: ", ubicacion);
+        ubi_user = [ubicacion.coords.latitude, ubicacion.coords.longitude];
+        marker_person.setLatLng(ubi_user);
+            //Definimos el marcador del usuario
         /* console.log('direccion destino:' + lat + ',' + long);
         console.log('direccion actual:' + ubicacion.coords.latitude + ',' + ubicacion.coords.longitude); */
         /* var personIcon = L.icon({
@@ -343,6 +353,8 @@ function filtro_mapa(id) {
             map.removeLayer(arr_marker[i]);
         }
     }
+    arr_marker = [];
+    console.log(arr_marker);
     var formData = new FormData();
     formData.append('_token', document.getElementById('token').getAttribute("content"));
     formData.append('_method', 'get');
