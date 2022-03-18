@@ -411,7 +411,7 @@ input[type='password']::placeholder {
 @media screen and (max-width:450px) {
     .filtro {
         margin-top: 65px;
-        padding-left: 25%;
+        padding-left: 30%;
         padding-right: 1%;
         position: absolute;
         width: 100%;

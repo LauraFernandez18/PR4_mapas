@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-03-2022 a las 16:46:46
+-- Tiempo de generación: 17-03-2022 a las 19:26:15
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.24
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `visit_barcelona`
 --
+CREATE DATABASE IF NOT EXISTS `visit_barcelona` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `visit_barcelona`;
 
 -- --------------------------------------------------------
 
@@ -38,8 +40,11 @@ CREATE TABLE `tbl_etiquetas` (
 --
 
 INSERT INTO `tbl_etiquetas` (`id`, `nombre`, `fk_lugar`) VALUES
-(1, 'feo', 5),
-(2, 'estruendoso', 3);
+(1, 'Hoteles', 1),
+(2, 'Restaurantes', 2),
+(3, 'Museos', 3),
+(4, 'Bares', 4),
+(5, 'Playas', 5);
 
 -- --------------------------------------------------------
 
@@ -58,8 +63,11 @@ CREATE TABLE `tbl_etiqueta_usuario` (
 --
 
 INSERT INTO `tbl_etiqueta_usuario` (`id`, `fk_usuario`, `fk_etiqueta`) VALUES
-(1, 2, 2),
-(2, 3, 1);
+(1, 1, 1),
+(3, 1, 2),
+(4, 1, 3),
+(5, 1, 5),
+(6, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -71,6 +79,13 @@ CREATE TABLE `tbl_gincana` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tbl_gincana`
+--
+
+INSERT INTO `tbl_gincana` (`id`, `nombre`) VALUES
+(1, 'Barceloneta_Ginacana');
 
 -- --------------------------------------------------------
 
@@ -105,21 +120,23 @@ CREATE TABLE `tbl_grupo_usuario` (
 CREATE TABLE `tbl_lugares` (
   `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
+  `descripcion` varchar(500) DEFAULT NULL,
   `longitud` decimal(10,8) NOT NULL,
   `latitud` decimal(10,8) NOT NULL,
-  `foto` varchar(100) DEFAULT NULL
+  `foto` varchar(100) DEFAULT NULL,
+  `foto_icon` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbl_lugares`
 --
 
-INSERT INTO `tbl_lugares` (`id`, `nombre`, `longitud`, `latitud`, `foto`) VALUES
-(1, 'hotel W', '41.37359770', '2.18727150', NULL),
-(2, 'Restaurante Barceloneta', '41.37618790', '2.18315070', NULL),
-(3, 'Museo historia', '41.37850650', '2.18594020', NULL),
-(4, 'Bar leo', '41.38056230', '2.18807750', NULL),
-(5, 'Sant Miquel', '41.37581250', '2.19030910', NULL);
+INSERT INTO `tbl_lugares` (`id`, `nombre`, `descripcion`, `longitud`, `latitud`, `foto`, `foto_icon`) VALUES
+(1, 'Hotel W', 'Este hotel exclusivo y con vistas al mar se encuentra en el paseo marítimo de la Barceloneta, a 2 km de la estación de metro de Barceloneta y a 4 del animado bulevar de La Rambla.', '2.19018558', '41.36863022', 'hotel_w.jpg', 'hotel_icon.png'),
+(2, 'Restaurante Barceloneta', 'Restaurante exclusivo, con temática marina y vistas al puerto, que sirve paellas de marisco y otros platos típicos.', '2.18315070', '41.37618790', 'rest_bcn.webp', 'rest_icon.png'),
+(3, 'Museo Historia', 'El Museo de Historia de Cataluña, también conocido por sus siglas como MHC, se creó en 1996 por el Gobierno de la Generalidad de Cataluña.​', '2.18591591', '41.38076775', 'museo_bcn.jpg', 'museo_icon.png'),
+(4, 'Bar Leo', 'Legendario bar de tapas de barrio de ambiente flamenco decorado con recuerdos del difunto cantaor Bambino.', '2.18807750', '41.38056230', 'bar_leo.jpg', 'bar_icon.png'),
+(5, 'Sant Miquel', 'Concurrida playa urbana ideal para bañarse y tomar el sol, con socorristas, instalaciones deportivas y restaurantes.', '2.19030910', '41.37581250', 'sant_miquel.jpg', 'playa_icon.png');
 
 -- --------------------------------------------------------
 
@@ -134,6 +151,14 @@ CREATE TABLE `tbl_punto_control` (
   `fk_lugar` int(11) NOT NULL,
   `orden` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tbl_punto_control`
+--
+
+INSERT INTO `tbl_punto_control` (`id`, `pista`, `fk_gincana`, `fk_lugar`, `orden`) VALUES
+(1, 'Tiene forma de vela', 1, 1, 1),
+(2, 'Puedes tomar el sol', 1, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -155,8 +180,10 @@ CREATE TABLE `tbl_users` (
 
 INSERT INTO `tbl_users` (`id`, `nombre`, `email`, `pwd`, `tipo_usu`) VALUES
 (1, 'raul', 'raul@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'administrador'),
-(2, 'user1', 'user1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'usuario'),
-(3, 'user2', 'user2@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'usuario');
+(2, 'test2', 'test2@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'usuario'),
+(9, 'dani', 'dani@gmail.com', '5bacd9f25613659b2fbd2f3a58822e5c', 'administrador'),
+(10, 'dani', 'dani@dani.com', '1fa3356b1eb65f144a367ff8560cb406', 'usuario'),
+(17, 'Laura', 'laura@gmail.com', '1fa3356b1eb65f144a367ff8560cb406', 'administrador');
 
 -- --------------------------------------------------------
 
@@ -253,19 +280,19 @@ ALTER TABLE `tbl_usuario_lugar_favoritos`
 -- AUTO_INCREMENT de la tabla `tbl_etiquetas`
 --
 ALTER TABLE `tbl_etiquetas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_etiqueta_usuario`
 --
 ALTER TABLE `tbl_etiqueta_usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_gincana`
 --
 ALTER TABLE `tbl_gincana`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_grupo`
@@ -283,19 +310,19 @@ ALTER TABLE `tbl_grupo_usuario`
 -- AUTO_INCREMENT de la tabla `tbl_lugares`
 --
 ALTER TABLE `tbl_lugares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_punto_control`
 --
 ALTER TABLE `tbl_punto_control`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_usuario_lugar_favoritos`
